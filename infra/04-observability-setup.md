@@ -1,12 +1,12 @@
-# Configuração da Camada de Observabilidade
+# Observability Layer Configuration
 
-Este documento detalha a instalação da *stack* de monitorização necessária para fornecer dados em tempo real ao Operador de Otimização. Estas ferramentas permitem o cálculo dos coeficientes financeiros e a monitorização do desempenho da federação.
+This document details the installation of the monitoring stack required to provide real-time data to the Optimization Operator. These tools enable the calculation of financial coefficients and the monitoring of federation performance.
 
 ---
 
-## 1. Instalação do Helm
+## 1. Helm Installation
 
-O **Helm** é o gestor de pacotes essencial para instalar e gerir a complexidade das ferramentas de observabilidade em ambiente Kubernetes. Deve ser instalado em todos os nós **Control Plane**.
+**Helm** is the essential package manager for installing and managing the complexity of observability tools in a Kubernetes environment. It must be installed on all **Control Plane** nodes.
 
 ```bash
 curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4 | bash
@@ -15,63 +15,60 @@ curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4 | bash
 
 ---
 
-## 2. Configuração do OpenCost (Nos Member Clusters)
+## 2. OpenCost Configuration (Member Clusters)
 
-O **OpenCost** é o componente responsável por detetar os tipos de instâncias e gerar os custos unitários ($c_{ij}$) por CPU e RAM por hora. Estes dados são críticos para a função objetivo do teu modelo matemático.
+**OpenCost** is the component responsible for detecting instance types and generating unit costs (c_ij​) per CPU and RAM per hour. This data is critical for your mathematical model's objective function.
 
 ```bash
-# Adicionar o repositório oficial
-helm repo add opencost https://opencost.github.io/opencost/
+# Add the official repository
+helm repo add opencost https://opencost.github.io/opencost-helm-chart
 
-# Instalar o OpenCost no namespace dedicado
-helm install opencost opencost/opencost \
-  --namespace opencost \
-  --create-namespace
+# Install OpenCost in the dedicated namespace
+helm install opencost opencost/opencost -f opencostOnPremise-values.yaml -n opencost --create-namespace
 
 ```
 
 ---
 
-## 3. Configuração do Prometheus (No CMCcluster)
+## 3. Prometheus Configuration (CMCcluster)
 
-O **Prometheus Central** atuará como o "cérebro" de métricas, agregando os dados financeiros (vindos do OpenCost) e os dados de utilização de toda a federação.
+**Prometheus Central** will act as the metrics "brain," aggregating financial data (from OpenCost) and utilization data from the entire federation.
 
 ```bash
-# Adicionar o repositório da comunidade
+# Add the community repository
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm update
 
-# Instalar a stack completa (Prometheus, Grafana, AlertManager)
-helm install prometheus prometheus-community/kube-prometheus-stack \
-  --namespace monitoring \
-  --create-namespace
+# Install the full stack (Prometheus, Grafana, AlertManager)
+helm install prometheus prometheus-community/kube-prometheus-stack -f prometheus-values.yaml -n monitoring --create-namespace
 
 ```
 
 ---
 
-## 4. Metrics Server e HPA
+## 4. Metrics Server and HPA
 
-Para que o teu Operador consiga ler o valor de $R_i$ (a âncora dinâmica de réplicas desejadas) e reagir a variações de carga, o cluster necessita do **Metrics Server**. Este componente permite que o Horizontal Pod Autoscaler (HPA) e o `kubectl top` funcionem corretamente.
+For your Operator to read the value of Ri​ (the dynamic anchor of desired replicas) and react to load variations, the cluster requires the **Metrics Server**. This component allows the Horizontal Pod Autoscaler (HPA) and `kubectl top` to function correctly.
 
 ```bash
-# Instalação do Metrics Server via Helm
-helm install metrics-server bitnami/metrics-server \
-  --namespace kube-system \
-  --set apiService.create=true \
-  --set extraArgs.kubelet-insecure-tls=true
+# Add the community repository
+helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
 
+# Install Metrics Server via Helm
+helm install metrics-server metrics-server/metrics-server \
+  -f metrics-values.yaml \
+  -n kube-system
 ```
 
-> **Nota:** O argumento `kubelet-insecure-tls` é frequentemente necessário em ambientes de laboratório/Kubeadm onde os certificados do Kubelet são self-signed.
+> **Note:** The `kubelet-insecure-tls` argument is often required in lab/Kubeadm environments where Kubelet certificates are self-signed.
 
 ---
 
-## 5. Verificação da Camada de Dados
+## 5. Data Layer Verification
 
-Após a instalação, podes validar se as métricas estão a ser expostas corretamente:
+After installation, you can validate if metrics are being exposed correctly:
 
-* **Verificar Métricas de Nós/Pods:** `kubectl top nodes`
-* **Verificar API de Métricas:** `kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes`
+* **Check Node/Pod Metrics:** `kubectl top nodes`
+* **Check Metrics API:** `kubectl get --raw /apis/metrics.k8s.io/v1beta1/nodes`
 
 ---

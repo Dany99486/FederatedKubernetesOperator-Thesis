@@ -1,6 +1,6 @@
-# Inventário do Laboratório
+# Lab Inventory
 
-| Nome da VM | Cluster | Papel (Role) | IP Interno |
+| VM Name | Cluster | Role | Internal IP |
 | :--- | :--- | :--- | :--- |
 | **CMCcluster** | CMC | Control Plane | 10.3.3.138 |
 | **cmc-worker1** | CMC | Worker Node | 10.3.3.156 |

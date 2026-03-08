@@ -1,0 +1,9 @@
+prometheus:
+  prometheusSpec:
+    # Scrape configuration for the remote cluster
+    additionalScrapeConfigs:
+      - job_name: 'opencost-member-cluster'
+        static_configs:
+          - targets: ['10.3.3.74:9003'] # Member cluster IP
+        honor_labels: true              # Preserves original node labels
+        scrape_interval: 15s            # High frequency for fast heuristic reaction

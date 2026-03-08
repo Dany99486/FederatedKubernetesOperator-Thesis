@@ -1,74 +1,76 @@
-# Inicialização dos Clusters e Rede (Flannel)
+# Cluster and Network Initialization (Flannel)
 
-Este guia descreve os comandos a executar nos nós **Master** e **Worker** de cada cluster após a execução do script inicial de configuração (`01-setup-base.sh`).
+This guide describes the commands to be executed on the **Master** and **Worker** nodes of each cluster after running the initial configuration script (`01-setup-base.sh`).
 
 ---
 
-## 1. Configuração do Cluster CMC (Consumidor)
-**Nós:** `CMCcluster` (10.3.3.138) e `cmc-worker1` (10.3.3.156)
+## 1. CMC Cluster Configuration (Consumer)
+**Nodes:** `CMCcluster` (10.3.3.138) and `cmc-worker1` (10.3.3.156)
 
-### No CMCcluster (Master):
+### On CMCcluster (Master):
 
-1.  **Inicializar o Control Plane:**
+1.  **Initialize the Control Plane:**
     ```bash
     sudo kubeadm init --pod-network-cidr=10.244.0.0/16
     ```
 
-2.  **Configurar o acesso ao kubectl:**
+2.  **Configure kubectl access:**
     ```bash
     mkdir -p $HOME/.kube
     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
     ```
 
-3.  **Instalar o Plugin de Rede Flannel:**
+3.  **Install the Flannel Network Plugin:**
     ```bash
     kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
     ```
 
-### No cmc-worker1 (Worker):
 
-1.  **Juntar ao cluster:**
-    Utilize o comando `kubeadm join` que foi gerado no ecrã do **CMCcluster** após o `init`. O comando terá este formato:
+
+### On cmc-worker1 (Worker):
+
+1.  **Join the cluster:**
+    Use the `kubeadm join` command that was generated on the **CMCcluster** screen after the `init`. The command will look like this:
     ```bash
-    sudo kubeadm join 10.3.3.138:6443 --token <TOKEN_DO_CMC> \
-        --discovery-token-ca-cert-hash sha256:<HASH_DO_CMC>
+    sudo kubeadm join 10.3.3.138:6443 --token <CMC_TOKEN> \
+        --discovery-token-ca-cert-hash sha256:<CMC_HASH>
     ```
 
 ---
 
-## 2. Configuração do Cluster Member (Fornecedor)
-**Nós:** `membercluster` (10.3.3.74) e `memberworker` (10.3.1.38)
+## 2. Member Cluster Configuration (Provider)
+**Nodes:** `membercluster` (10.3.3.74) and `memberworker` (10.3.1.38)
 
-### No membercluster (Master):
+### On membercluster (Master):
 
-1.  **Inicializar o Control Plane:**
+1.  **Initialize the Control Plane:**
     ```bash
     sudo kubeadm init --pod-network-cidr=10.244.0.0/16
     ```
 
-2.  **Configurar o acesso ao kubectl:**
+2.  **Configure kubectl access:**
     ```bash
     mkdir -p $HOME/.kube
     sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
     sudo chown $(id -u):$(id -g) $HOME/.kube/config
     ```
 
-3.  **Instalar o Plugin de Rede Flannel:**
+3.  **Install the Flannel Network Plugin:**
     ```bash
-    kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
+        kubectl apply -f https://github.com/flannel-io/flannel/releases/latest/download/kube-flannel.yml
     ```
 
-### No memberworker (Worker):
+### On memberworker (Worker):
 
-1.  **Juntar ao cluster:**
-    Utilize o comando `kubeadm join` gerado no ecrã do **membercluster**:
+1.  **Join the cluster:**
+    Use the `kubeadm join` command generated on the **membercluster** screen:
     ```bash
-    sudo kubeadm join 10.3.3.74:6443 --token <TOKEN_DO_MEMBER> \
-        --discovery-token-ca-cert-hash sha256:<HASH_DO_MEMBER>
+    sudo kubeadm join 10.3.3.74:6443 --token <MEMBER_TOKEN> \
+        --discovery-token-ca-cert-hash sha256:<MEMBER_HASH>
     ```
 
 ---
 
 > [!IMPORTANT]
-> Se perderes o comando de join, podes gerar um novo no Master com: `kubeadm token create --print-join-command`
+> If you lose the join command, you can generate a new one on the Master using: `kubeadm token create --print-join-command`
