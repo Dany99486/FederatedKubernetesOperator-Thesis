@@ -2,11 +2,18 @@ opencost:
   customPricing:
     enabled: true
     costModel:
-      description: "Master's Thesis Lab Pricing"
       cpu: "0.025"     # Cost in € per vCPU/hour
       ram: "0.012"     # Cost in € per GB/hour
       storage: "0.005"
-  metrics:
-    service:
-      type: NodePort   # Allows CMC to access easily via IP
-      port: 9003
+  
+  prometheus:
+    internal:
+      enabled: false
+    external:
+      enabled: true
+      url: "http://10.3.3.138:30090"
+
+service:
+  type: NodePort    # Allows CMC to access easily via IP
+  port: 9003
+  nodePort: 30093

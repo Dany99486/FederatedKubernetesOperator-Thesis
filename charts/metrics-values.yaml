@@ -1,14 +1,5 @@
-apiService:
-  # Creates the APIService so 'kubectl top' and HPA can function
-  create: true 
-
-extraArgs:
-  # MANDATORY: Ignore self-signed certificates from Kubeadm
+# Arguments for the metrics-server binary
+args:
   - --kubelet-insecure-tls
-  # Ensures Metrics Server uses internal IPs (10.3.3.x) for data collection
-  - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-  # Sets metrics resolution (faster response for your heuristic)
+  - --kubelet-preferred-address-types=InternalIP
   - --metric-resolution=15s
-
-# Ensures it runs in the correct namespace by default
-namespaceOverride: "kube-system"
