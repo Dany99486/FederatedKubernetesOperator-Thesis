@@ -2,12 +2,13 @@ prometheus:
   service:
     type: NodePort
     nodePort: 30090  
-    prometheusSpec:
   
+  prometheusSpec:
     # Scrape configuration for the remote cluster
     additionalScrapeConfigs:
       - job_name: 'opencost-member-cluster'
         static_configs:
-          - targets: ['10.3.1.38:30560'] # Member cluster IP
-        honor_labels: true               # Preserves original node labels
-        scrape_interval: 15s             # High frequency for fast heuristic reaction
+          # O Prometheus vai buscar os dados à porta correta do OpenCost!
+          - targets: ['10.3.1.38:30560'] 
+        honor_labels: true
+        scrape_interval: 15s
