@@ -23,21 +23,27 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// FederatedClusterSpec defines the desired state of FederatedCluster.
+// FederatedClusterSpec defines the infrastructure configuration.
 type FederatedClusterSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// Zone: Geographic identifier to match $h_{ij}$ targets
+	Zone string `json:"zone"`
 
-	// Foo is an example field of FederatedCluster. Edit federatedcluster_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// IsOnPremise: If true, triggers physical capacity constraints ($Capacity_j$)
+	IsOnPremise bool `json:"isOnPremise"`
 }
 
-// FederatedClusterStatus defines the observed state of FederatedCluster.
+// FederatedClusterStatus defines observed infrastructure metrics.
 type FederatedClusterStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-}
+	// UnitCost ($c_{ij}$): Current cost per replica obtained via OpenCost
+	UnitCost float64 `json:"unitCost,omitempty"`
 
+	// CurrentCapacity ($Capacity_j$): Available capacity read from the 
+	// virtual node's allocatable field in the CMC
+	CurrentCapacity int32 `json:"currentCapacity,omitempty"`
+
+	// Conditions represent the health and connection status of the cluster.
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
+}
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 

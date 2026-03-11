@@ -23,21 +23,63 @@ import (
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
-// FederatedPlacementSpec defines the desired state of FederatedPlacement.
+// --- AUXILIARY STRUCTS (Place them here) ---
+
+// AutoScalingSpec defines the parameters for the native HPA creation
+type AutoScalingSpec struct {
+	// MinReplicas is the lower limit for the number of replicas
+	MinReplicas *int32 `json:"minReplicas,omitempty"` // Pointer to distinguish between zero and not specified. 
+//														 int32 defaults to 0, so we use a pointer to allow nil (not specified).
+
+	// MaxReplicas is the upper limit for the number of replicas
+	MaxReplicas int32 `json:"maxReplicas"`
+
+	// TargetCPUUtilization is the average CPU utilization percentage target
+	TargetCPUUtilization *int32 `json:"targetCPUUtilization,omitempty"`
+}
+
+// ResourceStats represents the actual CPU and RAM consumption per replica (di)
+type ResourceStats struct {
+	// CPU is the average CPU usage discovered via Prometheus
+	CPU string `json:"cpu,omitempty"`
+
+	// Memory is the average RAM usage discovered via Prometheus
+	Memory string `json:"memory,omitempty"`
+}
+
+// --- MAIN CRD STRUCTS ---
+
+// FederatedPlacementSpec defines the distribution strategy for a workload.
 type FederatedPlacementSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// TargetWorkload: Reference to the existing Deployment in the CMC 
+	// that the operator will manage
+	TargetWorkload string `json:"targetWorkload"`
 
-	// Foo is an example field of FederatedPlacement. Edit federatedplacement_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// AutoScaling: Parameters for the automatic creation of the 
+	// native HPA (e.g., min/max replicas, target CPU)
+	AutoScaling AutoScalingSpec `json:"autoScaling"`
+
+	// LatencyZones ($h_{ij}$): Map of traffic fraction targets per 
+	// geographic zone (e.g., coimbra: 0.7)
+	LatencyZones map[string]string `json:"latencyZones"`
 }
 
-// FederatedPlacementStatus defines the observed state of FederatedPlacement.
+// FederatedPlacementStatus defines the data observed for this workload.
 type FederatedPlacementStatus struct {
-	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
-}
+	// ObservedDemand ($R_i$): Total number of replicas requested by the HPA
+	ObservedDemand int32 `json:"observedDemand,omitempty"`
 
+	// ResourceDemand ($d_i$): Real resource consumption (CPU/RAM) per replica 
+	// discovered via Prometheus
+	ResourceDemand ResourceStats `json:"resourceDemand,omitempty"`
+
+	// PlacementMap ($x_{ij}$): Final calculated distribution of replicas 
+	// across federated clusters
+	PlacementMap map[string]int32 `json:"placementMap,omitempty"`
+
+	// Conditions represent the current state of the placement logic.
+	Conditions []metav1.Condition `json:"conditions,omitempty"`
+}
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
