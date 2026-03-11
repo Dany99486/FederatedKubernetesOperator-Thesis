@@ -2,8 +2,9 @@ name: Lint
 
 on:
   push:
-    paths: ['operator/**']
+    paths: ['operator/**', '.github/workflows/operator-*.yml']
   pull_request:
+    paths: ['operator/**', '.github/workflows/operator-*.yml']
 
 jobs:
   lint:
