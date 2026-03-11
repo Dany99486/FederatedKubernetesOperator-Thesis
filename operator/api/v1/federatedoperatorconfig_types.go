@@ -45,7 +45,7 @@ type FederatedOperatorConfigStatus struct {
 type FederatedOperatorConfig struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-
+// TODO: Test CI
 	Spec   FederatedOperatorConfigSpec   `json:"spec,omitempty"`
 	Status FederatedOperatorConfigStatus `json:"status,omitempty"`
 }
