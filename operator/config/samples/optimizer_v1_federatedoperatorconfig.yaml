@@ -1,0 +1,9 @@
+apiVersion: optimizer.uc.pt/v1
+kind: FederatedOperatorConfig
+metadata:
+  labels:
+    app.kubernetes.io/name: federated-operator
+    app.kubernetes.io/managed-by: kustomize
+  name: federatedoperatorconfig-sample
+spec:
+  # TODO(user): Add fields here

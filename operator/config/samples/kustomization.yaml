@@ -1,0 +1,6 @@
+## Append samples of your project ##
+resources:
+- optimizer_v1_federatedoperatorconfig.yaml
+- optimizer_v1_federatedplacement.yaml
+- optimizer_v1_federatedcluster.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples
