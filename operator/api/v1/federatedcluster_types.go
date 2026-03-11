@@ -35,7 +35,7 @@ type FederatedClusterSpec struct {
 // FederatedClusterStatus defines observed infrastructure metrics.
 type FederatedClusterStatus struct {
 	// UnitCost ($c_{ij}$): Current cost per replica obtained via OpenCost
-	UnitCost float64 `json:"unitCost,omitempty"`
+	UnitCost string `json:"unitCost,omitempty"`
 
 	// CurrentCapacity ($Capacity_j$): Available capacity read from the 
 	// virtual node's allocatable field in the CMC

@@ -17,6 +17,7 @@ limitations under the License.
 package v1
 
 import (
+	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -41,10 +42,10 @@ type AutoScalingSpec struct {
 // ResourceStats represents the actual CPU and RAM consumption per replica (di)
 type ResourceStats struct {
 	// CPU is the average CPU usage discovered via Prometheus
-	CPU string `json:"cpu,omitempty"`
+	CPU resource.Quantity `json:"cpu,omitempty"`
 
 	// Memory is the average RAM usage discovered via Prometheus
-	Memory string `json:"memory,omitempty"`
+	Memory resource.Quantity `json:"memory,omitempty"`
 }
 
 // --- MAIN CRD STRUCTS ---
