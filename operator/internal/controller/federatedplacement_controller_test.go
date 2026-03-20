@@ -51,6 +51,15 @@ var _ = Describe("FederatedPlacement Controller", func() {
 						Name:      resourceName,
 						Namespace: "default",
 					},
+					Spec: optimizerv1.FederatedPlacementSpec{
+						TargetWorkload: "test-deployment",
+						AutoScaling: optimizerv1.AutoScalingSpec{
+							MaxReplicas: 10, 
+						},
+						LatencyZones: map[string]string{
+							"coimbra": "1.0", 
+						},
+					},
 					// TODO(user): Specify other spec details if needed.
 				}
 				Expect(k8sClient.Create(ctx, resource)).To(Succeed())
