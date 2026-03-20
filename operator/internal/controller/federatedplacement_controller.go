@@ -104,7 +104,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	}
 
 	// Assuming only one global config exists
-	//TODO: Implement Singleton pattern or use a specific name to fetch the config directly
+	// TODO: Implement Singleton pattern or use a specific name to fetch the config directly
 	var b_budget float64
 	var alpha float64
 	if len(configList.Items) > 0 {
