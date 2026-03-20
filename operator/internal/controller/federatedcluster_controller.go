@@ -33,9 +33,14 @@ type FederatedClusterReconciler struct {
 	Scheme *runtime.Scheme
 }
 
-// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedclusters,verbs=get;list;watch;create;update;patch;delete
-// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedclusters/status,verbs=get;update;patch
-// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedclusters/finalizers,verbs=update
+// --- 1. SDK DEFAULTS ---
+//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedclusters,verbs=get;list;watch;create;update;patch;delete
+//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedclusters/status,verbs=get;update;patch
+//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedclusters/finalizers,verbs=update
+
+// --- 2. INFRASTRUCTURE CROSS-REFERENCE ---
+// Needed to map this Custom Resource to an actual Kubernetes Node (Liqo Virtual Node).
+//+kubebuilder:rbac:groups="",resources=nodes,verbs=get;list;watch
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

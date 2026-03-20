@@ -37,13 +37,14 @@ type FederatedClusterStatus struct {
 	// UnitCost ($c_{ij}$): Current cost per replica obtained via OpenCost
 	UnitCost string `json:"unitCost,omitempty"`
 
-	// CurrentCapacity ($Capacity_j$): Available capacity read from the 
+	// CurrentCapacity ($Capacity_j$): Available capacity read from the
 	// virtual node's allocatable field in the CMC
 	CurrentCapacity int32 `json:"currentCapacity,omitempty"`
 
 	// Conditions represent the health and connection status of the cluster.
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
+
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 

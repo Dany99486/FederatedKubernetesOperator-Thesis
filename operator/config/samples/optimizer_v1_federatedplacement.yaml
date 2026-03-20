@@ -6,4 +6,16 @@ metadata:
     app.kubernetes.io/managed-by: kustomize
   name: federatedplacement-sample
 spec:
-  # TODO(user): Add fields here
+  # targetWorkload: Name of the existing Deployment in the CMC (Approach A)
+  targetWorkload: "nginx-deployment"
+
+  # autoScaling: Parameters to manage the lifecycle of the native HPA
+  autoScaling:
+    minReplicas: 2
+    maxReplicas: 20
+    targetCPUUtilization: 75
+  
+  # latencyZones (hij): Traffic fraction targets per geographic zone
+  latencyZones:
+    aveiro: "0.7"
+    coimbra: "0.3"

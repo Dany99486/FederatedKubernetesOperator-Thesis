@@ -25,26 +25,26 @@ import (
 
 // FederatedOperatorConfigSpec defines the global policy parameters.
 type FederatedOperatorConfigSpec struct {
-	// TotalBudget ($B$): Maximum financial limit for the operation cost 
+	// TotalBudget ($B$): Maximum financial limit for the operation cost
 	// of all federated workloads
 	TotalBudget string `json:"totalBudget"`
 
-	// OptimizationWeight ($\alpha$): Balance between infrastructure cost 
+	// OptimizationWeight ($\alpha$): Balance between infrastructure cost
 	// and latency penalty between 0 and 1, where 0 means only latency is considered and 1 means only cost is considered
 	OptimizationWeight string `json:"optimizationWeight"`
 
-	// NormalizationConstant ($k$): Scale used to normalize latency 
+	// NormalizationConstant ($k$): Scale used to normalize latency
 	// values against monetary values
 	NormalizationConstant string `json:"normalizationConstant"`
 }
 
 // FederatedOperatorConfigStatus defines the observed global metrics.
 type FederatedOperatorConfigStatus struct {
-	// TotalCurrentCost ($\mathcal{C}(x)$): Current total cluster cost detected 
+	// TotalCurrentCost ($\mathcal{C}(x)$): Current total cluster cost detected
 	// via Prometheus and OpenCost in the CMC
 	TotalCurrentCost string `json:"totalCurrentCost,omitempty"`
 
-	// GlobalMisalignmentScore ($\mathcal{L}(x)$): Global cluster latency score 
+	// GlobalMisalignmentScore ($\mathcal{L}(x)$): Global cluster latency score
 	// based on geographical targets
 	GlobalMisalignmentScore string `json:"globalMisalignmentScore,omitempty"`
 

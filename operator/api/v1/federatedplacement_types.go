@@ -29,8 +29,8 @@ import (
 // AutoScalingSpec defines the parameters for the native HPA creation
 type AutoScalingSpec struct {
 	// MinReplicas is the lower limit for the number of replicas
-	MinReplicas *int32 `json:"minReplicas,omitempty"` // Pointer to distinguish between zero and not specified. 
-//														 int32 defaults to 0, so we use a pointer to allow nil (not specified).
+	MinReplicas *int32 `json:"minReplicas,omitempty"` // Pointer to distinguish between zero and not specified.
+	//														 int32 defaults to 0, so we use a pointer to allow nil (not specified).
 
 	// MaxReplicas is the upper limit for the number of replicas
 	MaxReplicas int32 `json:"maxReplicas"`
@@ -52,15 +52,15 @@ type ResourceStats struct {
 
 // FederatedPlacementSpec defines the distribution strategy for a workload.
 type FederatedPlacementSpec struct {
-	// TargetWorkload: Reference to the existing Deployment in the CMC 
+	// TargetWorkload: Reference to the existing Deployment in the CMC
 	// that the operator will manage
 	TargetWorkload string `json:"targetWorkload"`
 
-	// AutoScaling: Parameters for the automatic creation of the 
+	// AutoScaling: Parameters for the automatic creation of the
 	// native HPA (e.g., min/max replicas, target CPU)
 	AutoScaling AutoScalingSpec `json:"autoScaling"`
 
-	// LatencyZones ($h_{ij}$): Map of traffic fraction targets per 
+	// LatencyZones ($h_{ij}$): Map of traffic fraction targets per
 	// geographic zone (e.g., coimbra: 0.7)
 	LatencyZones map[string]string `json:"latencyZones"`
 }
@@ -70,17 +70,18 @@ type FederatedPlacementStatus struct {
 	// ObservedDemand ($R_i$): Total number of replicas requested by the HPA
 	ObservedDemand int32 `json:"observedDemand,omitempty"`
 
-	// ResourceDemand ($d_i$): Real resource consumption (CPU/RAM) per replica 
+	// ResourceDemand ($d_i$): Real resource consumption (CPU/RAM) per replica
 	// discovered via Prometheus
 	ResourceDemand ResourceStats `json:"resourceDemand,omitempty"`
 
-	// PlacementMap ($x_{ij}$): Final calculated distribution of replicas 
+	// PlacementMap ($x_{ij}$): Final calculated distribution of replicas
 	// across federated clusters
 	PlacementMap map[string]int32 `json:"placementMap,omitempty"`
 
 	// Conditions represent the current state of the placement logic.
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
+
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
 
