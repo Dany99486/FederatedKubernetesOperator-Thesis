@@ -51,6 +51,11 @@ var _ = Describe("FederatedOperatorConfig Controller", func() {
 						Name:      resourceName,
 						Namespace: "default",
 					},
+					Spec: optimizerv1.FederatedOperatorConfigSpec{
+						TotalBudget:           "1000.0",
+						OptimizationWeight:    "0.5",
+						NormalizationConstant: "1.0",
+					},
 					// TODO(user): Specify other spec details if needed.
 				}
 				Expect(k8sClient.Create(ctx, resource)).To(Succeed())

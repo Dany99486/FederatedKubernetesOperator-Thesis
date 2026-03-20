@@ -51,6 +51,10 @@ var _ = Describe("FederatedCluster Controller", func() {
 						Name:      resourceName,
 						Namespace: "default",
 					},
+					Spec: optimizerv1.FederatedClusterSpec{
+						Zone:        "europe-west1",
+						IsOnPremise: false,
+					},
 					// TODO(user): Specify other spec details if needed.
 				}
 				Expect(k8sClient.Create(ctx, resource)).To(Succeed())

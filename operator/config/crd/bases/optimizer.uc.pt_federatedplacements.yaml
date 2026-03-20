@@ -50,16 +50,20 @@ spec:
                     description: MaxReplicas is the upper limit for the number of
                       replicas
                     format: int32
+                    minimum: 1
                     type: integer
                   minReplicas:
                     description: MinReplicas is the lower limit for the number of
                       replicas
                     format: int32
+                    minimum: 1
                     type: integer
                   targetCPUUtilization:
                     description: TargetCPUUtilization is the average CPU utilization
                       percentage target
                     format: int32
+                    maximum: 100
+                    minimum: 1
                     type: integer
                 required:
                 - maxReplicas
@@ -75,6 +79,7 @@ spec:
                 description: |-
                   TargetWorkload: Reference to the existing Deployment in the CMC
                   that the operator will manage
+                minLength: 1
                 type: string
             required:
             - autoScaling

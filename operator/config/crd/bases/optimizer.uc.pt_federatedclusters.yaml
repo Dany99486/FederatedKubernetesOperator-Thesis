@@ -45,6 +45,7 @@ spec:
                 type: boolean
               zone:
                 description: 'Zone: Geographic identifier to match $h_{ij}$ targets'
+                minLength: 1
                 type: string
             required:
             - isOnPremise
@@ -116,10 +117,12 @@ spec:
                   CurrentCapacity ($Capacity_j$): Available capacity read from the
                   virtual node's allocatable field in the CMC
                 format: int32
+                minimum: 0
                 type: integer
               unitCost:
                 description: 'UnitCost ($c_{ij}$): Current cost per replica obtained
                   via OpenCost'
+                pattern: ^([0-9]+(\.[0-9]+)?)$
                 type: string
             type: object
         type: object

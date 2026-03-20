@@ -29,13 +29,18 @@ import (
 // AutoScalingSpec defines the parameters for the native HPA creation
 type AutoScalingSpec struct {
 	// MinReplicas is the lower limit for the number of replicas
+	// +kubebuilder:validation:Minimum=1
 	MinReplicas *int32 `json:"minReplicas,omitempty"` // Pointer to distinguish between zero and not specified.
 	//														 int32 defaults to 0, so we use a pointer to allow nil (not specified).
 
 	// MaxReplicas is the upper limit for the number of replicas
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Required
 	MaxReplicas int32 `json:"maxReplicas"`
 
 	// TargetCPUUtilization is the average CPU utilization percentage target
+	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:validation:Maximum=100
 	TargetCPUUtilization *int32 `json:"targetCPUUtilization,omitempty"`
 }
 
@@ -54,14 +59,18 @@ type ResourceStats struct {
 type FederatedPlacementSpec struct {
 	// TargetWorkload: Reference to the existing Deployment in the CMC
 	// that the operator will manage
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:Required
 	TargetWorkload string `json:"targetWorkload"`
 
 	// AutoScaling: Parameters for the automatic creation of the
 	// native HPA (e.g., min/max replicas, target CPU)
+	// +kubebuilder:validation:Required
 	AutoScaling AutoScalingSpec `json:"autoScaling"`
 
 	// LatencyZones ($h_{ij}$): Map of traffic fraction targets per
 	// geographic zone (e.g., coimbra: 0.7)
+	// +kubebuilder:validation:Required
 	LatencyZones map[string]string `json:"latencyZones"`
 }
 

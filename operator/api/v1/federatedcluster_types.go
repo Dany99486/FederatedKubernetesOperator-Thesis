@@ -26,6 +26,8 @@ import (
 // FederatedClusterSpec defines the infrastructure configuration.
 type FederatedClusterSpec struct {
 	// Zone: Geographic identifier to match $h_{ij}$ targets
+	// +kubebuilder:validation:MinLength=1
+	// +kubebuilder:validation:Required
 	Zone string `json:"zone"`
 
 	// IsOnPremise: If true, triggers physical capacity constraints ($Capacity_j$)
@@ -35,10 +37,12 @@ type FederatedClusterSpec struct {
 // FederatedClusterStatus defines observed infrastructure metrics.
 type FederatedClusterStatus struct {
 	// UnitCost ($c_{ij}$): Current cost per replica obtained via OpenCost
+	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
 	UnitCost string `json:"unitCost,omitempty"`
 
 	// CurrentCapacity ($Capacity_j$): Available capacity read from the
 	// virtual node's allocatable field in the CMC
+	// +kubebuilder:validation:Minimum=0
 	CurrentCapacity int32 `json:"currentCapacity,omitempty"`
 
 	// Conditions represent the health and connection status of the cluster.

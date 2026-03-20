@@ -27,14 +27,20 @@ import (
 type FederatedOperatorConfigSpec struct {
 	// TotalBudget ($B$): Maximum financial limit for the operation cost
 	// of all federated workloads
+	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
+	// +kubebuilder:validation:Required
 	TotalBudget string `json:"totalBudget"`
 
 	// OptimizationWeight ($\alpha$): Balance between infrastructure cost
 	// and latency penalty between 0 and 1, where 0 means only latency is considered and 1 means only cost is considered
+	// +kubebuilder:validation:Pattern=`^(0(\.[0-9]+)?|1(\.0+)?)$`
+	// +kubebuilder:validation:Required
 	OptimizationWeight string `json:"optimizationWeight"`
 
 	// NormalizationConstant ($k$): Scale used to normalize latency
 	// values against monetary values
+	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
+	// +kubebuilder:validation:Required
 	NormalizationConstant string `json:"normalizationConstant"`
 }
 
