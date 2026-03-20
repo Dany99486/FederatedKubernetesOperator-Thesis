@@ -57,7 +57,7 @@ var _ = Describe("FederatedPlacement Controller", func() {
 							MaxReplicas: 10,
 						},
 						LatencyZones: map[string]string{
-							"coimbra": "1.0", 
+							"coimbra": "1.0",
 						},
 					},
 					// TODO(user): Specify other spec details if needed.
