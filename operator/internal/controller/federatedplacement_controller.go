@@ -68,7 +68,7 @@ type FederatedPlacementReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.21.0/pkg/reconcile
 func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	log := log.FromContext(ctx)
+	logger := log.FromContext(ctx)
 
 	// ------------------------------------------------------------------
 	// 1. INPUT: FederatedPlacement (The Request)
@@ -77,7 +77,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	if err := r.Get(ctx, req.NamespacedName, &placement); err != nil {
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
-	log.Info("Successfully fetched FederatedPlacement", "Target", placement.Spec.TargetWorkload)
+	logger.Info("Successfully fetched FederatedPlacement", "Target", placement.Spec.TargetWorkload)
 
 	// ------------------------------------------------------------------
 	// 2. INPUT: Target Deployment (Observed Demand Ri)
@@ -85,7 +85,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	var targetDep appsv1.Deployment
 	depName := types.NamespacedName{Namespace: placement.Namespace, Name: placement.Spec.TargetWorkload}
 	if err := r.Get(ctx, depName, &targetDep); err != nil {
-		log.Error(err, "Target Deployment not found", "name", depName)
+		logger.Error(err, "Target Deployment not found", "name", depName)
 		return ctrl.Result{RequeueAfter: time.Minute}, nil
 	}
 
@@ -93,7 +93,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	if targetDep.Spec.Replicas != nil {
 		ri = *targetDep.Spec.Replicas
 	}
-	log.Info("Input Detected", "Ri_Demand", ri)
+	logger.Info("Input Detected", "Ri_Demand", ri)
 
 	// ------------------------------------------------------------------
 	// 3. INPUT: Global Config (Budget B and Alpha)
@@ -113,7 +113,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 		// Converter TotalBudget (string -> float64)
 		bVal, err := strconv.ParseFloat(conf.TotalBudget, 64)
 		if err != nil {
-			log.Error(err, "Erro ao converter TotalBudget para número", "valor", conf.TotalBudget)
+			logger.Error(err, "Erro ao converter TotalBudget para número", "valor", conf.TotalBudget)
 			b_budget = 0 // ou um valor padrão
 		} else {
 			b_budget = bVal
@@ -122,13 +122,13 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 		// Converter OptimizationWeight (string -> float64)
 		aVal, err := strconv.ParseFloat(conf.OptimizationWeight, 64)
 		if err != nil {
-			log.Error(err, "Erro ao converter Alpha para número", "valor", conf.OptimizationWeight)
+			logger.Error(err, "Erro ao converter Alpha para número", "valor", conf.OptimizationWeight)
 			alpha = 0.5 // valor padrão de exemplo
 		} else {
 			alpha = aVal
 		}
 
-		log.Info("Input Detected", "B_Budget", b_budget, "Alpha", alpha)
+		logger.Info("Input Detected", "B_Budget", b_budget, "Alpha", alpha)
 	}
 
 	// ------------------------------------------------------------------
@@ -138,11 +138,11 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	if err := r.List(ctx, &clusters); err != nil {
 		return ctrl.Result{}, err
 	}
-	log.Info("Input Detected", "ActiveClustersCount", len(clusters.Items))
+	logger.Info("Input Detected", "ActiveClustersCount", len(clusters.Items))
 
 	// Example: iterating to see costs
 	for _, cluster := range clusters.Items {
-		log.Info("Cluster Info", "Name", cluster.Name, "Cij_Cost", cluster.Status.UnitCost)
+		logger.Info("Cluster Info", "Name", cluster.Name, "Cij_Cost", cluster.Status.UnitCost)
 	}
 
 	// ------------------------------------------------------------------
@@ -156,10 +156,10 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	for _, node := range nodes.Items {
 		// Identifying Liqo virtual nodes usually by labels or names
 		capacity := node.Status.Allocatable.Cpu().AsApproximateFloat64()
-		log.Info("Infrastructure Detected", "Node", node.Name, "CapacityJ_CPU", capacity)
+		logger.Info("Infrastructure Detected", "Node", node.Name, "CapacityJ_CPU", capacity)
 	}
 
-	log.Info(">>> All inputs collected. Ready for Heuristic Calculation <<<")
+	logger.Info(">>> All inputs collected. Ready for Heuristic Calculation <<<")
 
 	return ctrl.Result{}, nil
 }
