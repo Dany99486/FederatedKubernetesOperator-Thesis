@@ -35,9 +35,9 @@ type FederatedOperatorConfigReconciler struct {
 
 // --- 1. SDK DEFAULTS ---
 // Standard permissions to manage the global optimization settings (B, alpha, k).
-//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedoperatorconfigs,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedoperatorconfigs/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedoperatorconfigs/finalizers,verbs=update
+// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedoperatorconfigs,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedoperatorconfigs/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedoperatorconfigs/finalizers,verbs=update
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.

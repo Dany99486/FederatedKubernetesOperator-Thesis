@@ -40,23 +40,23 @@ type FederatedPlacementReconciler struct {
 
 // --- 1. SDK DEFAULTS (Lifecycle Management) ---
 // These allow the operator to manage the FederatedPlacement resource itself.
-//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedplacements,verbs=get;list;watch;create;update;patch;delete
-//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedplacements/status,verbs=get;update;patch
-//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedplacements/finalizers,verbs=update
+// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedplacements,verbs=get;list;watch;create;update;patch;delete
+// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedplacements/status,verbs=get;update;patch
+// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedplacements/finalizers,verbs=update
 
 // --- 2. OBSERVATION LAYER (Input Data) ---
 // Needed to fetch global budget (B), weights (alpha), and cluster costs (cij).
 // These are read-only to follow the principle of least privilege.
-//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedoperatorconfigs,verbs=get;list;watch
-//+kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedclusters,verbs=get;list;watch
+// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedoperatorconfigs,verbs=get;list;watch
+// +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedclusters,verbs=get;list;watch
 
 // --- 3. ACTUATION LAYER (Approach A - Target Workload) ---
 // Needed to observe the demand (Ri) and inject NodeAffinity (xij) into the Deployment.
-//+kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;update;patch
+// +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;update;patch
 
 // --- 4. INFRASTRUCTURE LAYER (Core Group) ---
 // Needed to discover Liqo Virtual Nodes and verify cluster capacity (Capacityj).
-//+kubebuilder:rbac:groups="",resources=nodes,verbs=get;list;watch
+// +kubebuilder:rbac:groups="",resources=nodes,verbs=get;list;watch
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
 // move the current state of the cluster closer to the desired state.
