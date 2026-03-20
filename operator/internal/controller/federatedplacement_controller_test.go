@@ -54,7 +54,7 @@ var _ = Describe("FederatedPlacement Controller", func() {
 					Spec: optimizerv1.FederatedPlacementSpec{
 						TargetWorkload: "test-deployment",
 						AutoScaling: optimizerv1.AutoScalingSpec{
-							MaxReplicas: 10, 
+							MaxReplicas: 10,
 						},
 						LatencyZones: map[string]string{
 							"coimbra": "1.0", 
