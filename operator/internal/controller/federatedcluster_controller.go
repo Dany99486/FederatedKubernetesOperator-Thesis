@@ -59,16 +59,16 @@ func (r *FederatedClusterReconciler) Reconcile(ctx context.Context, req ctrl.Req
 
 	// Fetch the FederatedCluster
 	fedCluster := optimizerv1.FederatedCluster{}
-    if err := r.Get(ctx, req.NamespacedName, &fedCluster); err != nil {
-        return ctrl.Result{}, client.IgnoreNotFound(err)
-    }
+	if err := r.Get(ctx, req.NamespacedName, &fedCluster); err != nil {
+		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
 
 	// Find the Virtual Node in the CMC
 	node := corev1.Node{}
-    if err := r.Get(ctx, types.NamespacedName{Name: fedCluster.Name}, &node); err != nil {
-        logger.Error(err, "Virtual Node not found", "Node", fedCluster.Name, "Zone", fedCluster.Spec.Zone)
-        return ctrl.Result{RequeueAfter: time.Minute}, nil
-    }
+	if err := r.Get(ctx, types.NamespacedName{Name: fedCluster.Name}, &node); err != nil {
+		logger.Error(err, "Virtual Node not found", "Node", fedCluster.Name, "Zone", fedCluster.Spec.Zone)
+		return ctrl.Result{RequeueAfter: time.Minute}, nil
+	}
 
 	// Extract Multi-Resource Capacity (CPU in m, RAM in MiB)
 	newCPU := int32(node.Status.Allocatable.Cpu().MilliValue())
@@ -76,20 +76,20 @@ func (r *FederatedClusterReconciler) Reconcile(ctx context.Context, req ctrl.Req
 
 	// Update Status if infrastructure changes
 	if fedCluster.Status.TotalCPU != newCPU || fedCluster.Status.TotalMemory != newMem {
-        logger.Info("Infrastructure resources updated", 
-            "Cluster", fedCluster.Name, 
-            "CPU_m", newCPU, 
-            "Mem_MiB", newMem)
-        
-        fedCluster.Status.TotalCPU = newCPU
-        fedCluster.Status.TotalMemory = newMem
-        
-        // Aqui o if curto brilha novamente!
-        if err := r.Status().Update(ctx, &fedCluster); err != nil {
-            logger.Error(err, "Failed to update status")
-            return ctrl.Result{}, err
-        }
-    }
+		logger.Info("Infrastructure resources updated",
+			"Cluster", fedCluster.Name,
+			"CPU_m", newCPU,
+			"Mem_MiB", newMem)
+
+		fedCluster.Status.TotalCPU = newCPU
+		fedCluster.Status.TotalMemory = newMem
+
+		// Aqui o if curto brilha novamente!
+		if err := r.Status().Update(ctx, &fedCluster); err != nil {
+			logger.Error(err, "Failed to update status")
+			return ctrl.Result{}, err
+		}
+	}
 
 	return ctrl.Result{RequeueAfter: time.Minute * 5}, nil
 }
