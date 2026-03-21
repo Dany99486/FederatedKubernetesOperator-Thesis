@@ -4,7 +4,8 @@ metadata:
   labels:
     app.kubernetes.io/name: federated-operator
     app.kubernetes.io/managed-by: kustomize
-  name: federatedcluster-sample
+  name: liqo-remote-cluster-aveiro  # <--- Must match the Node name in the CMC
+  namespace: federation-system      # <--- Where the operator resides
 spec:
   # zone: Geographic identifier matching the latencyZones in FederatedPlacement
   zone: "aveiro"

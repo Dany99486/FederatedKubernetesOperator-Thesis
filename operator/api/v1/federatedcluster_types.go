@@ -40,10 +40,15 @@ type FederatedClusterStatus struct {
 	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
 	UnitCost string `json:"unitCost,omitempty"`
 
-	// CurrentCapacity ($Capacity_j$): Available capacity read from the
-	// virtual node's allocatable field in the CMC
-	// +kubebuilder:validation:Minimum=0
-	CurrentCapacity int32 `json:"currentCapacity,omitempty"`
+	// TotalCPU ($Capacity_j$): Max millicores available for this operator
+    // Read from the virtual node's allocatable field in the CMC.
+    // +kubebuilder:validation:Minimum=0
+    TotalCPU int32 `json:"totalCPU,omitempty"`
+
+    // TotalMemory ($Capacity_j$): Max MiB available for this operator
+    // Read from the virtual node's allocatable field in the CMC.
+    // +kubebuilder:validation:Minimum=0
+    TotalMemory int32 `json:"totalMemory,omitempty"`
 
 	// Conditions represent the health and connection status of the cluster.
 	Conditions []metav1.Condition `json:"conditions,omitempty"`

@@ -18,8 +18,11 @@ package controller
 
 import (
 	"context"
+	"time"
 
+	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
+	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
@@ -52,11 +55,47 @@ type FederatedClusterReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.21.0/pkg/reconcile
 func (r *FederatedClusterReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = logf.FromContext(ctx)
+	logger := logf.FromContext(ctx)
+	var err error
 
-	// TODO(user): your logic here
+	// Fetch the FederatedCluster
+	var fedCluster optimizerv1.FederatedCluster
+	err = r.Get(ctx, req.NamespacedName, &fedCluster)
+	if err != nil {
+		return ctrl.Result{}, client.IgnoreNotFound(err)
+	}
 
-	return ctrl.Result{}, nil
+	// Find the Virtual Node in the CMC
+	var node corev1.Node
+	err = r.Get(ctx, types.NamespacedName{Name: fedCluster.Name}, &node)
+	if err != nil {
+		logger.Error(err, "Virtual Node not found", "Node", fedCluster.Name, "Zone", fedCluster.Spec.Zone)
+		return ctrl.Result{RequeueAfter: time.Minute}, nil
+	}
+
+	// Extract Multi-Resource Capacity (CPU in m, RAM in MiB)
+	newCPU := int32(node.Status.Allocatable.Cpu().MilliValue())
+	newMem := int32(node.Status.Allocatable.Memory().Value() / (1024 * 1024))
+
+	// Update Status if infrastructure changes
+	if fedCluster.Status.TotalCPU != newCPU || fedCluster.Status.TotalMemory != newMem {
+		logger.Info("Infrastructure resources updated", 
+			"Cluster", fedCluster.Name, 
+			"Zone", fedCluster.Spec.Zone, 
+			"CPU_m", newCPU, 
+			"Mem_MiB", newMem)
+		
+		fedCluster.Status.TotalCPU = newCPU
+		fedCluster.Status.TotalMemory = newMem
+		
+		err = r.Status().Update(ctx, &fedCluster)
+		if err != nil {
+			logger.Error(err, "Failed to update status")
+			return ctrl.Result{}, err
+		}
+	}
+
+	return ctrl.Result{RequeueAfter: time.Minute * 5}, nil
 }
 
 // SetupWithManager sets up the controller with the Manager.
