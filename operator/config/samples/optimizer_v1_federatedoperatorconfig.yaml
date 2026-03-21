@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: federated-operator
     app.kubernetes.io/managed-by: kustomize
-  name: federatedoperatorconfig-sample
+  name: global-config
 spec:
   # totalBudget (B): The maximum financial limit for all federated workloads
   totalBudget: "1000.00"

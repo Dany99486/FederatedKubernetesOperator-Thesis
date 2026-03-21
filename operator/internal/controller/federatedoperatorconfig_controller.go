@@ -33,6 +33,12 @@ type FederatedOperatorConfigReconciler struct {
 	Scheme *runtime.Scheme
 }
 
+const (
+	// Definimos a "Identidade Única" do Singleton
+	SingletonName      = "global-config"
+	SingletonNamespace = "federation-system"
+)
+
 // --- 1. SDK DEFAULTS ---
 // Standard permissions to manage the global optimization settings (B, alpha, k).
 // +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedoperatorconfigs,verbs=get;list;watch;create;update;patch;delete
@@ -49,7 +55,12 @@ type FederatedOperatorConfigReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.21.0/pkg/reconcile
 func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = logf.FromContext(ctx)
+	logger := logf.FromContext(ctx)
+
+	if req.Name != SingletonName || req.Namespace != SingletonNamespace {
+		logger.Info("Ignoring unofficial configuration", "Name", req.Name)
+		return ctrl.Result{}, nil
+	}
 
 	// TODO(user): your logic here
 
