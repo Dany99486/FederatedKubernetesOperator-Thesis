@@ -39,7 +39,14 @@ import (
 
 	optimizerv1 "github.com/Dany99486/FederatedKubernetesOperator-Thesis/operator/api/v1"
 	"github.com/Dany99486/FederatedKubernetesOperator-Thesis/operator/internal/controller"
+
+	"github.com/prometheus/client_golang/api"
+	prometheusv1 "github.com/prometheus/client_golang/api/prometheus/v1"
 	// +kubebuilder:scaffold:imports
+)
+
+const (
+	PrometheusURL = "http://prometheus-kube-prometheus-prometheus.monitoring:9090"
 )
 
 var (
@@ -202,6 +209,17 @@ func main() {
 		os.Exit(1)
 	}
 
+	// --- PROMETHEUS Configuration ---
+	promClient, err := api.NewClient(api.Config{
+		Address: PrometheusURL,
+	})
+	if err != nil {
+		setupLog.Error(err, "unable to create prometheus client")
+		os.Exit(1)
+	}
+	promAPI := prometheusv1.NewAPI(promClient)
+	// ----------------------------------
+
 	if err := (&controller.FederatedOperatorConfigReconciler{
 		Client: mgr.GetClient(),
 		Scheme: mgr.GetScheme(),
@@ -217,8 +235,9 @@ func main() {
 		os.Exit(1)
 	}
 	if err := (&controller.FederatedClusterReconciler{
-		Client: mgr.GetClient(),
-		Scheme: mgr.GetScheme(),
+		Client:  mgr.GetClient(),
+		Scheme:  mgr.GetScheme(),
+		PromAPI: promAPI,
 	}).SetupWithManager(mgr); err != nil {
 		setupLog.Error(err, "unable to create controller", "controller", "FederatedCluster")
 		os.Exit(1)

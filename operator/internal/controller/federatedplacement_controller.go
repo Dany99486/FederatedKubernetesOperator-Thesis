@@ -141,9 +141,9 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	logger.Info("Input Detected", "ActiveClustersCount", len(clusters.Items))
 
 	// Example: iterating to see costs
-	for _, cluster := range clusters.Items {
-		logger.Info("Cluster Info", "Name", cluster.Name, "Cij_Cost", cluster.Status.UnitCost)
-	}
+	// for _, cluster := range clusters.Items {
+	// 	logger.Info("Cluster Info", "Name", cluster.Name, "Cij_Cost", cluster.Status.UnitCost)
+	// }
 
 	// ------------------------------------------------------------------
 	// 5. INPUT: Infrastructure Nodes (Real Capacity Capacityj)

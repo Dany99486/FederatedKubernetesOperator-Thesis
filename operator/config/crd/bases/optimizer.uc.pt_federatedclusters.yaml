@@ -54,9 +54,27 @@ spec:
           status:
             description: FederatedClusterStatus defines observed infrastructure metrics.
             properties:
+              capacity:
+                description: Capacity defines the total resources of the cluster
+                properties:
+                  cpu:
+                    description: 'CPU ($Capacity_j$): Max millicores available (e.g.,
+                      4000)'
+                    format: int32
+                    minimum: 0
+                    type: integer
+                  memory:
+                    description: 'Memory ($Capacity_j$): Max MiB available (e.g.,
+                      8192)'
+                    format: int32
+                    minimum: 0
+                    type: integer
+                required:
+                - cpu
+                - memory
+                type: object
               conditions:
-                description: Conditions represent the health and connection status
-                  of the cluster.
+                description: Conditions represent the health of the cluster connection
                 items:
                   description: Condition contains details for one aspect of the current
                     state of this API Resource.
@@ -112,18 +130,21 @@ spec:
                   - type
                   type: object
                 type: array
-              currentCapacity:
-                description: |-
-                  CurrentCapacity ($Capacity_j$): Available capacity read from the
-                  virtual node's allocatable field in the CMC
-                format: int32
-                minimum: 0
-                type: integer
-              unitCost:
-                description: 'UnitCost ($c_{ij}$): Current cost per replica obtained
-                  via OpenCost'
-                pattern: ^([0-9]+(\.[0-9]+)?)$
-                type: string
+              unitCosts:
+                description: UnitCosts defines the real-time pricing for those resources
+                properties:
+                  cpu:
+                    description: 'CPU ($c_{cpu}$): Hourly cost per millicore'
+                    pattern: ^([0-9]+(\.[0-9]+)?)$
+                    type: string
+                  memory:
+                    description: 'Memory ($c_{mem}$): Hourly cost per MiB'
+                    pattern: ^([0-9]+(\.[0-9]+)?)$
+                    type: string
+                required:
+                - cpu
+                - memory
+                type: object
             type: object
         type: object
     served: true

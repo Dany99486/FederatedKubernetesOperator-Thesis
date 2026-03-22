@@ -34,23 +34,37 @@ type FederatedClusterSpec struct {
 	IsOnPremise bool `json:"isOnPremise"`
 }
 
+// ClusterResources represents the physical/virtual limits of a cluster
+type ClusterResources struct {
+	// CPU ($Capacity_j$): Max millicores available (e.g., 4000)
+	// +kubebuilder:validation:Minimum=0
+	CPU int32 `json:"cpu"`
+
+	// Memory ($Capacity_j$): Max MiB available (e.g., 8192)
+	// +kubebuilder:validation:Minimum=0
+	Memory int32 `json:"memory"`
+}
+
+// ResourceCosts represents the hourly pricing from OpenCost
+type ResourceCosts struct {
+	// CPU ($c_{cpu}$): Hourly cost per millicore
+	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
+	CPU string `json:"cpu"`
+
+	// Memory ($c_{mem}$): Hourly cost per MiB
+	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
+	Memory string `json:"memory"`
+}
+
 // FederatedClusterStatus defines observed infrastructure metrics.
 type FederatedClusterStatus struct {
-	// UnitCost ($c_{ij}$): Current cost per replica obtained via OpenCost
-	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
-	UnitCost string `json:"unitCost,omitempty"`
+	// Capacity defines the total resources of the cluster
+	Capacity ClusterResources `json:"capacity,omitempty"`
 
-	// TotalCPU ($Capacity_j$): Max millicores available for this operator
-	// Read from the virtual node's allocatable field in the CMC.
-	// +kubebuilder:validation:Minimum=0
-	TotalCPU int32 `json:"totalCPU,omitempty"`
+	// UnitCosts defines the real-time pricing for those resources
+	UnitCosts ResourceCosts `json:"unitCosts,omitempty"`
 
-	// TotalMemory ($Capacity_j$): Max MiB available for this operator
-	// Read from the virtual node's allocatable field in the CMC.
-	// +kubebuilder:validation:Minimum=0
-	TotalMemory int32 `json:"totalMemory,omitempty"`
-
-	// Conditions represent the health and connection status of the cluster.
+	// Conditions represent the health of the cluster connection
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
 }
 

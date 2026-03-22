@@ -28,12 +28,14 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 
 	optimizerv1 "github.com/Dany99486/FederatedKubernetesOperator-Thesis/operator/api/v1"
+	prometheusv1 "github.com/prometheus/client_golang/api/prometheus/v1"
 )
 
 // FederatedClusterReconciler reconciles a FederatedCluster object
 type FederatedClusterReconciler struct {
 	client.Client
-	Scheme *runtime.Scheme
+	Scheme  *runtime.Scheme
+	PromAPI prometheusv1.API
 }
 
 // --- 1. SDK DEFAULTS ---
@@ -58,35 +60,51 @@ func (r *FederatedClusterReconciler) Reconcile(ctx context.Context, req ctrl.Req
 	logger := logf.FromContext(ctx)
 
 	// Fetch the FederatedCluster
-	fedCluster := optimizerv1.FederatedCluster{}
-	if err := r.Get(ctx, req.NamespacedName, &fedCluster); err != nil {
+	fedCluster := &optimizerv1.FederatedCluster{}
+	if err := r.Get(ctx, req.NamespacedName, fedCluster); err != nil {
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 
 	// Find the Virtual Node in the CMC
-	node := corev1.Node{}
-	if err := r.Get(ctx, types.NamespacedName{Name: fedCluster.Name}, &node); err != nil {
-		logger.Error(err, "Virtual Node not found", "Node", fedCluster.Name, "Zone", fedCluster.Spec.Zone)
+	node := &corev1.Node{}
+	if err := r.Get(ctx, types.NamespacedName{Name: fedCluster.Name}, node); err != nil {
+		logger.Error(err, "Virtual Node not found", "Node", fedCluster.Name)
 		return ctrl.Result{RequeueAfter: time.Minute}, nil
 	}
 
 	// Extract Multi-Resource Capacity (CPU in m, RAM in MiB)
-	newCPU := int32(node.Status.Allocatable.Cpu().MilliValue())
-	newMem := int32(node.Status.Allocatable.Memory().Value() / (1024 * 1024))
+	currentCapacity := optimizerv1.ClusterResources{
+		CPU:    int32(node.Status.Allocatable.Cpu().MilliValue()),
+		Memory: int32(node.Status.Allocatable.Memory().Value() / (1024 * 1024)),
+	}
 
-	// Update Status if infrastructure changes
-	if fedCluster.Status.TotalCPU != newCPU || fedCluster.Status.TotalMemory != newMem {
-		logger.Info("Infrastructure resources updated",
+	// Fetch Real-time Costs from Prometheus ($c_{ij}$) 🕵️‍♂️
+	currentCosts, warnings, err := GetNodeCostsFromPrometheus(ctx, r.PromAPI, fedCluster.Name)
+	if err != nil {
+		// As requested, log warnings ONLY when an error occurs
+		logger.Error(err, "Failed to update costs from Prometheus",
+			"Node", fedCluster.Name,
+			"Warnings", warnings)
+
+		// If Prometheus is unreachable, we retry soon but don't break the manager
+		return ctrl.Result{RequeueAfter: time.Minute * 2}, nil
+	}
+
+	// Update Status ONLY if something has changed
+	if fedCluster.Status.Capacity != currentCapacity || fedCluster.Status.UnitCosts != currentCosts {
+
+		logger.Info("Synchronizing cluster infrastructure metrics",
 			"Cluster", fedCluster.Name,
-			"CPU_m", newCPU,
-			"Mem_MiB", newMem)
+			"CPU_Cost", currentCosts.CPU,
+			"Mem_Cost", currentCosts.Memory,
+			"CPU_m", currentCapacity.CPU,
+			"Mem_MiB", currentCapacity.Memory)
 
-		fedCluster.Status.TotalCPU = newCPU
-		fedCluster.Status.TotalMemory = newMem
+		fedCluster.Status.Capacity = currentCapacity
+		fedCluster.Status.UnitCosts = currentCosts
 
-		// Aqui o if curto brilha novamente!
-		if err := r.Status().Update(ctx, &fedCluster); err != nil {
-			logger.Error(err, "Failed to update status")
+		if err := r.Status().Update(ctx, fedCluster); err != nil {
+			logger.Error(err, "Failed to update status subresource")
 			return ctrl.Result{}, err
 		}
 	}
