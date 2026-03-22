@@ -45,10 +45,6 @@ import (
 	// +kubebuilder:scaffold:imports
 )
 
-const (
-	PrometheusURL = "http://prometheus-kube-prometheus-prometheus.monitoring:9090"
-)
-
 var (
 	scheme   = runtime.NewScheme()
 	setupLog = ctrl.Log.WithName("setup")
@@ -63,6 +59,13 @@ func init() {
 
 // nolint:gocyclo
 func main() {
+
+	// Tries to read ambient variable. If not set, defaults to localhost:9090 (useful for local testing with port-forwarding).
+	promAddr := os.Getenv("PROMETHEUS_URL")
+	if promAddr == "" {
+		promAddr = "http://localhost:9090"
+	}
+
 	var metricsAddr string
 	var metricsCertPath, metricsCertName, metricsCertKey string
 	var webhookCertPath, webhookCertName, webhookCertKey string
@@ -211,7 +214,7 @@ func main() {
 
 	// --- PROMETHEUS Configuration ---
 	promClient, err := api.NewClient(api.Config{
-		Address: PrometheusURL,
+		Address: promAddr,
 	})
 	if err != nil {
 		setupLog.Error(err, "unable to create prometheus client")

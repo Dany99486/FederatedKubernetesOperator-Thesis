@@ -18,7 +18,7 @@ liqoctl install kubeadm --cluster-id cmc-cluster
 ### On membercluster (Provider):
 
 ```bash
-liqoctl install kubeadm --cluster-id member-cluster
+liqoctl install kubeadm --cluster-id membercluster
 
 ```
 
@@ -73,7 +73,7 @@ kubectl create namespace member-ns
 # 2. Enable offloading, forcing remote execution on the specific ID
 liqoctl offload namespace member-ns \
   --pod-offloading-strategy Remote \
-  --selector 'liqo.io/remote-cluster-id=member-cluster'
+  --selector 'liqo.io/remote-cluster-id=membercluster'
 
 ```
 

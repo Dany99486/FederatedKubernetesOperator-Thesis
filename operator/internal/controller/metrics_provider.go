@@ -29,7 +29,7 @@ func GetNodeCostsFromPrometheus(ctx context.Context, api prometheusv1.API, nodeN
 	allWarnings = append(allWarnings, warnCPU...)
 
 	if vector, ok := valCPU.(model.Vector); ok && len(vector) > 0 {
-		costs.CPU = fmt.Sprintf("%.4f", float64(vector[0].Value))
+		costs.CPU = fmt.Sprintf("%.8f", float64(vector[0].Value))
 	}
 
 	// Memory Query
@@ -40,7 +40,7 @@ func GetNodeCostsFromPrometheus(ctx context.Context, api prometheusv1.API, nodeN
 	allWarnings = append(allWarnings, warnMem...)
 
 	if vector, ok := valMem.(model.Vector); ok && len(vector) > 0 {
-		costs.Memory = fmt.Sprintf("%.4f", float64(vector[0].Value))
+		costs.Memory = fmt.Sprintf("%.8f", float64(vector[0].Value))
 	}
 
 	return costs, allWarnings, nil

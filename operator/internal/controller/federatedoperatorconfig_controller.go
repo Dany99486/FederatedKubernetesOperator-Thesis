@@ -34,7 +34,7 @@ type FederatedOperatorConfigReconciler struct {
 }
 
 const (
-	// Definimos a "Identidade Única" do Singleton
+	// Constants used to implement Singleton
 	SingletonName      = "global-config"
 	SingletonNamespace = "federation-system"
 )
@@ -57,6 +57,7 @@ const (
 func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
 	logger := logf.FromContext(ctx)
 
+	// Enforce Singleton: Only process the resource with the predefined name and namespace.
 	if req.Name != SingletonName || req.Namespace != SingletonNamespace {
 		logger.Info("Ignoring unofficial configuration", "Name", req.Name)
 		return ctrl.Result{}, nil
