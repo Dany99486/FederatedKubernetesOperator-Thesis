@@ -60,7 +60,7 @@ func init() {
 // nolint:gocyclo
 func main() {
 
-	// Tries to read ambient variable. If not set, 
+	// Tries to read ambient variable. If not set,
 	// defaults to localhost:9090 (useful for local testing with port-forwarding).
 	promAddr := os.Getenv("PROMETHEUS_URL")
 	if promAddr == "" {
