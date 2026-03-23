@@ -1,65 +1,59 @@
 # FederatedKubernetesOperator
 
-## Contexto Académico
-Este repositório contém o desenvolvimento prático da dissertação **"A FEDERATED OPERATOR FOR KUBERNETES"**, apresentada no âmbito do Mestrado em Engenharia Informática (Especialização em Engenharia de Software) da Faculdade de Ciências e Tecnologia da Universidade de Coimbra.
+## Academic Context
+This repository contains the practical development of the dissertation **"A FEDERATED OPERATOR FOR KUBERNETES"**, presented as part of the Master's Degree in Informatics Engineering (Software Engineering Specialization) at the Faculty of Sciences and Technology of the University of Coimbra.
 
-## Resumo do Projeto
-O objetivo central é enfrentar a complexidade da gestão de cargas de trabalho em infraestruturas multi-cloud distribuídas. Propõe-se o desenvolvimento de um **Operador Federado** que automatiza a colocação de réplicas através de um ambiente multi-cluster, utilizando um modelo de otimização multiobjetivo.
+## Project Summary
+The main objective is to address the complexity of managing workloads in distributed multi-cloud infrastructures. It proposes the development of a **Federated Operator** that automates replica placement across a multi-cluster environment, using a multi-objective optimization model.
 
-## Arquitetura do Sistema
-O sistema adota uma arquitetura de **Plano de Controlo Centralizado (CMC)**, estruturada em três camadas lógicas fundamentais:
-
-1.  **Camada de Observação**: Responsável pela recolha de telemetria em tempo real, incluindo custos de infraestrutura e distribuição de réplicas.
-2.  **Camada de Decisão**: Onde o Operador executa a heurística de otimização para reconciliar o estado desejado com o observado.
-3.  **Camada de Atuação**: Utiliza os clusters membros como camada de execução, abstraídos como **Virtual Nodes** para permitir o agendamento via primitivas nativas do Kubernetes.
+## System Architecture
 
 
+The system adopts a **Centralized Management Control (CMC)** architecture, structured into three fundamental logical layers:
 
-## Modelo de Otimização
-A solução visa minimizar um score global $$Z$$, equilibrando a eficiência financeira e a performance geográfica:
+1.  **Observation Layer**: Responsible for collecting real-time telemetry, including infrastructure costs and replica distribution.
+2.  **Decision Layer**: Where the Operator executes the optimization heuristic to reconcile the desired state with the observed state.
+3.  **Actuation Layer**: Uses the member clusters as the execution layer, abstracted as **Virtual Nodes** to allow scheduling via native Kubernetes primitives.
+
+## Optimization Model
+The solution aims to minimize a global score $Z$, balancing financial efficiency and geographic performance:
 
 $$min_{x}Z = \alpha \cdot \mathcal{C}(x) + (1 - \alpha) \cdot \mathcal{L}(x)$$
 
-* **$\mathcal{C}(x)$ (Custo)**: Função linear baseada no custo unitário por réplica em cada cluster.
-* **$\mathcal{L}(x)$ (Latência)**: Penalização baseada no desalinhamento entre a distribuição real de réplicas e as "Zonas de Latência" (alvos de tráfego de utilizadores).
-* **$\alpha$**: Fator de ponderação entre gasto financeiro e latência de rede.
-* **Restrições**: O modelo respeita um orçamento total $$B$$ e os limites físicos de capacidade de cada cluster.
+* **$\mathcal{C}(x)$ (Cost)**: Linear function based on the unit cost per replica in each cluster.
+* **$\mathcal{L}(x)$ (Latency)**: Penalty based on the misalignment between the actual replica distribution and the "Latency Zones" (user traffic targets).
+* **$\alpha$**: Weighting factor between financial expenditure and network latency.
+* **Constraints**: The model respects a total budget $B$ and the physical capacity limits of each cluster.
 
-## Stack Tecnológica
-* **Desenvolvimento**: Go e Operator SDK.
-* **Federação**: Liqo (abstração de Virtual Nodes).
-* **Observabilidade**: Prometheus (métricas de utilização) e Kubecost/OpenCost (dados financeiros).
-* **Escalonamento**: Integração com o Horizontal Pod Autoscaler (HPA) para definir o número total de réplicas necessárias ($R_i$).
+## Technology Stack
+* **Development**: Go and Operator SDK.
+* **Federation**: Liqo (Virtual Nodes abstraction).
+* **Observability**: Prometheus (utilization metrics) and Kubecost/OpenCost (financial data).
+* **Scaling**: Integration with the Horizontal Pod Autoscaler (HPA) to define the total number of required replicas ($R_i$).
 
-### Organização de Namespaces
+### Namespace Organization
+To ensure isolation and efficient resource management, the project uses the following namespaces:
 
-Para garantir o isolamento e a gestão eficiente dos recursos, o projeto utiliza os seguintes namespaces:
+**`monitoring`**: Hosts the central Prometheus and Grafana stack for global telemetry collection.
 
+**`opencost`**: Exclusively for the financial metric collection agents ($c_{ij}$) in the clusters.
 
-**`monitoring`**: Aloja a stack central do Prometheus e Grafana para a recolha de telemetria global.
+**`liqo`**: Where the network infrastructure components and Virtual Nodes for federation reside.
 
+**`federation-system`**: Dedicated namespace for running the **Federated Operator** (Control Plane).
 
-**`opencost`**: Destinado exclusivamente aos agentes de recolha de métricas financeiras ($c_{ij}$) nos clusters.
+## Repository Structure
+* `/infra`: Scripts and configurations for the multi-cluster lab and Liqo peering.
+* `/charts`: Custom `values.yaml` files for Helm (Prometheus, OpenCost).
+* `/operator`: Source code of the Federated Operator generated by the Operator SDK.
+    * `/api`: Definitions for the `FederatedPlacement` Custom Resource Definition (CRD).
+    * `/controllers`: Reconciliation loop logic and heuristic implementation.
+* `/deploy`: Manifests for test workloads and placement policies.
 
-
-**`liqo`**: Onde residem os componentes da infraestrutura de rede e os Virtual Nodes para a federação.
-
- 
-**`federation-system`**: Namespace dedicado à execução do **Federated Operator** (Control Plane).
-
-
-## Estrutura do Repositório
-* `/infra`: Scripts e configurações para o laboratório multi-cluster e peering do Liqo.
-* `/charts`: Ficheiros `values.yaml` personalizados para Helm (Prometheus, OpenCost).
-* `/operator`: Código-fonte do Federated Operator gerado pelo Operator SDK.
-    * `/api`: Definições do Custom Resource (CRD) `FederatedPlacement`.
-    * `/controllers`: Lógica do loop de reconciliação e implementação da heurística.
-* `/deploy`: Manifestos para workloads de teste e políticas de colocação.
-
-## Planeamento (2º Semestre)
-De acordo com o cronograma definido na dissertação:
-* **Mês 1**: Configuração do Ambiente e Peering (Tarefa 1).
-* **Mês 2**: Implementação base do Operador e CRDs (Tarefa 2).
-* **Mês 3**: Integração da Lógica Heurística (Tarefa 3).
-* **Mês 4**: Testes e Validação em cenários reais (Tarefa 4).
-* **Mês 5**: Escrita final e análise de resultados (Tarefa 5).
+## Planning (2nd Semester)
+According to the schedule defined in the dissertation:
+* **Month 1**: Environment Setup and Peering (Task 1).
+* **Month 2**: Base Operator and CRDs Implementation (Task 2).
+* **Month 3**: Heuristic Logic Integration (Task 3).
+* **Month 4**: Testing and Validation in real scenarios (Task 4).
+* **Month 5**: Final writing and results analysis (Task 5).

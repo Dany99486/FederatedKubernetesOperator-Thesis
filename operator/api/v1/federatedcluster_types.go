@@ -34,7 +34,7 @@ type FederatedClusterSpec struct {
 	IsOnPremise bool `json:"isOnPremise"`
 }
 
-// ClusterResources represents the physical/virtual limits of a cluster
+// ClusterResources represents the physical/virtual limits of a cluster (When empty)
 type ClusterResources struct {
 	// CPU ($Capacity_j$): Max millicores available (e.g., 4000)
 	// +kubebuilder:validation:Minimum=0
