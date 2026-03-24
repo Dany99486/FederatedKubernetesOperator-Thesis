@@ -25,6 +25,7 @@ import (
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
 
 // DefaultResources defines the default resource values for workload startup (cold start d_i)
+// TODO: Maybe give a default value
 type DefaultResources struct {
 	// CPU: Default CPU estimate (e.g., "200m")
 	// +kubebuilder:validation:Required

@@ -10,13 +10,7 @@ import (
 	"github.com/prometheus/common/model"
 )
 
-// NodeCosts stores hourly cost data for both CPU and RAM
-type NodeCosts struct {
-	CPU string
-	RAM string
-}
-
-// GetNodeCostsFromPrometheus returns the ResourceCosts struct directly
+// GetNodeCostsFromPrometheus returns the ResourceCosts struct
 func GetNodeCostsFromPrometheus(ctx context.Context, api prometheusv1.API, nodeName string) (optimizerv1.ResourceCosts, prometheusv1.Warnings, error) {
 	costs := optimizerv1.ResourceCosts{CPU: "0.0000", Memory: "0.0000"}
 	var allWarnings prometheusv1.Warnings
