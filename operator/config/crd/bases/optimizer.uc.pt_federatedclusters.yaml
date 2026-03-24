@@ -58,17 +58,21 @@ spec:
                 description: Capacity defines the total resources of the cluster
                 properties:
                   cpu:
+                    anyOf:
+                    - type: integer
+                    - type: string
                     description: 'CPU ($Capacity_j$): Max millicores available (e.g.,
                       4000)'
-                    format: int32
-                    minimum: 0
-                    type: integer
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
                   memory:
+                    anyOf:
+                    - type: integer
+                    - type: string
                     description: 'Memory ($Capacity_j$): Max MiB available (e.g.,
                       8192)'
-                    format: int32
-                    minimum: 0
-                    type: integer
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
                 required:
                 - cpu
                 - memory
@@ -135,11 +139,9 @@ spec:
                 properties:
                   cpu:
                     description: 'CPU ($c_{cpu}$): Hourly cost per millicore'
-                    pattern: ^([0-9]+(\.[0-9]+)?)$
                     type: string
                   memory:
                     description: 'Memory ($c_{mem}$): Hourly cost per MiB'
-                    pattern: ^([0-9]+(\.[0-9]+)?)$
                     type: string
                 required:
                 - cpu

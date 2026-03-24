@@ -40,6 +40,29 @@ spec:
           spec:
             description: FederatedOperatorConfigSpec defines the global policy parameters.
             properties:
+              defaultEstimates:
+                description: |-
+                  DefaultEstimates: Valores padrão usados quando não há métricas reais disponíveis
+                  Serve como a "rede de segurança" para a tua heurística global
+                properties:
+                  cpu:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    description: 'CPU: Default CPU estimate (e.g., "200m")'
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                  memory:
+                    anyOf:
+                    - type: integer
+                    - type: string
+                    description: 'Memory: Default memory estimate (e.g., "256Mi")'
+                    pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                    x-kubernetes-int-or-string: true
+                required:
+                - cpu
+                - memory
+                type: object
               normalizationConstant:
                 description: |-
                   NormalizationConstant ($k$): Scale used to normalize latency
@@ -59,6 +82,7 @@ spec:
                 pattern: ^([0-9]+(\.[0-9]+)?)$
                 type: string
             required:
+            - defaultEstimates
             - normalizationConstant
             - optimizationWeight
             - totalBudget

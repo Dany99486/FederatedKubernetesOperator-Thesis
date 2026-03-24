@@ -74,8 +74,8 @@ func (r *FederatedClusterReconciler) Reconcile(ctx context.Context, req ctrl.Req
 
 	// Extract Multi-Resource Capacity (CPU in m, RAM in MiB)
 	currentCapacity := optimizerv1.ClusterResources{
-		CPU:    int32(node.Status.Allocatable.Cpu().MilliValue()),
-		Memory: int32(node.Status.Allocatable.Memory().Value() / (1024 * 1024)),
+		CPU:    *node.Status.Allocatable.Cpu(),
+		Memory: *node.Status.Allocatable.Memory(),
 	}
 
 	// Fetch Real-time Costs from Prometheus ($c_{ij}$) 🕵️‍♂️
@@ -90,8 +90,12 @@ func (r *FederatedClusterReconciler) Reconcile(ctx context.Context, req ctrl.Req
 		return ctrl.Result{RequeueAfter: time.Minute * 2}, nil
 	}
 
+	// Compare using equal(). One can be in milicore while the other is in cores
+	capacityChanged := !fedCluster.Status.Capacity.CPU.Equal(currentCapacity.CPU) || 
+					!fedCluster.Status.Capacity.Memory.Equal(currentCapacity.Memory)
+
 	// Update Status ONLY if something has changed
-	if fedCluster.Status.Capacity != currentCapacity || fedCluster.Status.UnitCosts != currentCosts {
+	if capacityChanged || fedCluster.Status.UnitCosts != currentCosts {
 
 		logger.Info("Synchronizing cluster infrastructure metrics",
 			"Cluster", fedCluster.Name,

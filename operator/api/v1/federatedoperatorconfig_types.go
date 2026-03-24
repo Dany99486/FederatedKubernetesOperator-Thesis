@@ -17,11 +17,24 @@ limitations under the License.
 package v1
 
 import (
+	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
 // EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
 // NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
+
+// DefaultResources defines the default resource values for workload startup (cold start d_i)
+type DefaultResources struct {
+	// CPU: Default CPU estimate (e.g., "200m")
+	// +kubebuilder:validation:Required
+	CPU resource.Quantity `json:"cpu"`
+
+	// Memory: Default memory estimate (e.g., "256Mi")
+	// +kubebuilder:validation:Required
+	Memory resource.Quantity `json:"memory"`
+}
+
 
 // FederatedOperatorConfigSpec defines the global policy parameters.
 type FederatedOperatorConfigSpec struct {
@@ -42,6 +55,11 @@ type FederatedOperatorConfigSpec struct {
 	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
 	// +kubebuilder:validation:Required
 	NormalizationConstant string `json:"normalizationConstant"`
+
+	// DefaultEstimates: Valores padrão usados quando não há métricas reais disponíveis
+	// Serve como a "rede de segurança" para a tua heurística global
+	// +kubebuilder:validation:Required
+	DefaultEstimates DefaultResources `json:"defaultEstimates"`
 }
 
 // FederatedOperatorConfigStatus defines the observed global metrics.

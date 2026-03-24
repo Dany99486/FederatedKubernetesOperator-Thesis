@@ -17,6 +17,7 @@ limitations under the License.
 package v1
 
 import (
+	"k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
@@ -37,22 +38,18 @@ type FederatedClusterSpec struct {
 // ClusterResources represents the physical/virtual limits of a cluster (When empty)
 type ClusterResources struct {
 	// CPU ($Capacity_j$): Max millicores available (e.g., 4000)
-	// +kubebuilder:validation:Minimum=0
-	CPU int32 `json:"cpu"`
+	CPU resource.Quantity `json:"cpu"`
 
 	// Memory ($Capacity_j$): Max MiB available (e.g., 8192)
-	// +kubebuilder:validation:Minimum=0
-	Memory int32 `json:"memory"`
+	Memory resource.Quantity `json:"memory"`
 }
 
 // ResourceCosts represents the hourly pricing from OpenCost
 type ResourceCosts struct {
 	// CPU ($c_{cpu}$): Hourly cost per millicore
-	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
 	CPU string `json:"cpu"`
 
 	// Memory ($c_{mem}$): Hourly cost per MiB
-	// +kubebuilder:validation:Pattern=`^([0-9]+(\.[0-9]+)?)$`
 	Memory string `json:"memory"`
 }
 
