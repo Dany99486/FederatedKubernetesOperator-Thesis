@@ -93,6 +93,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 
 			return ctrl.Result{RequeueAfter: time.Second * 15}, nil
 		}
+		log.Error(err, "Failed to fetch target deployment for unknown reason", "target", fp.Spec.TargetWorkload)
 		return ctrl.Result{}, err
 	}
 
