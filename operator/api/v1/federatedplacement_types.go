@@ -30,17 +30,20 @@ import (
 type AutoScalingSpec struct {
 	// MinReplicas is the lower limit for the number of replicas
 	// +kubebuilder:validation:Minimum=1
+	// +kubebuilder:default=1
 	MinReplicas *int32 `json:"minReplicas,omitempty"` // Pointer to distinguish between zero and not specified.
 	//														 int32 defaults to 0, so we use a pointer to allow nil (not specified).
 
 	// MaxReplicas is the upper limit for the number of replicas
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Required
+	// +kubebuilder:default=10
 	MaxReplicas int32 `json:"maxReplicas"`
 
 	// TargetCPUUtilization is the average CPU utilization percentage target
 	// +kubebuilder:validation:Minimum=1
 	// +kubebuilder:validation:Maximum=100
+	// +kubebuilder:default=80
 	TargetCPUUtilization *int32 `json:"targetCPUUtilization,omitempty"`
 }
 

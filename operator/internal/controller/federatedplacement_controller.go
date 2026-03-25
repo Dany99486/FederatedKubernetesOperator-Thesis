@@ -168,7 +168,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	return ctrl.Result{RequeueAfter: time.Minute}, nil
 }
 
-// ensureHPA manages the lifecycle of the HPA targeting our Custom Resource
+// ensureHPA manages the lifecycle of the HPA targeting the Custom Resource
 func (r *FederatedPlacementReconciler) ensureHPA(ctx context.Context, fp *optimizerv1.FederatedPlacement) error {
 	hpa := &autoscalingv2.HorizontalPodAutoscaler{
 		ObjectMeta: metav1.ObjectMeta{
@@ -178,33 +178,29 @@ func (r *FederatedPlacementReconciler) ensureHPA(ctx context.Context, fp *optimi
 	}
 
 	_, err := controllerutil.CreateOrUpdate(ctx, r.Client, hpa, func() error {
-		// Target our CRD, allowing us to intercept the decision
+		// Target the CRD, allowing to intercept the decision
 		hpa.Spec.ScaleTargetRef = autoscalingv2.CrossVersionObjectReference{
 			APIVersion: fp.APIVersion,
 			Kind:       fp.Kind,
 			Name:       fp.Name,
 		}
 
-		minReplicas := int32(1)
-		if fp.Spec.AutoScaling.MinReplicas != nil {
-			minReplicas = *fp.Spec.AutoScaling.MinReplicas
-		}
-		hpa.Spec.MinReplicas = &minReplicas
+		
+		hpa.Spec.MinReplicas = fp.Spec.AutoScaling.MinReplicas
 		hpa.Spec.MaxReplicas = fp.Spec.AutoScaling.MaxReplicas
 
 		if fp.Spec.AutoScaling.TargetCPUUtilization != nil {
-			targetCPU := *fp.Spec.AutoScaling.TargetCPUUtilization
-			hpa.Spec.Metrics = []autoscalingv2.MetricSpec{{
-				Type: autoscalingv2.ResourceMetricSourceType,
-				Resource: &autoscalingv2.ResourceMetricSource{
-					Name: "cpu",
-					Target: autoscalingv2.MetricTarget{
-						Type:               autoscalingv2.UtilizationMetricType,
-						AverageUtilization: &targetCPU,
-					},
-				},
-			}}
-		}
+            hpa.Spec.Metrics = []autoscalingv2.MetricSpec{{
+                Type: autoscalingv2.ResourceMetricSourceType,
+                Resource: &autoscalingv2.ResourceMetricSource{
+                    Name: "cpu",
+                    Target: autoscalingv2.MetricTarget{
+                        Type:               autoscalingv2.UtilizationMetricType,
+                        AverageUtilization: fp.Spec.AutoScaling.TargetCPUUtilization,
+                    },
+                },
+            }}
+        }
 		// Set owner reference: if FP is deleted, HPA is deleted too
 		return controllerutil.SetControllerReference(fp, hpa, r.Scheme)
 	})
