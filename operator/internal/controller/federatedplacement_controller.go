@@ -158,8 +158,8 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 			log.Error(err, "Failed to apply replicas to deployment")
 			return ctrl.Result{}, err
 		}
-		log.Info("Scale applied successfully", 
-			"source", "HPA/Global", 
+		log.Info("Scale applied successfully",
+			"source", "HPA/Global",
 			"replicas", approvedReplicas)
 	}
 
