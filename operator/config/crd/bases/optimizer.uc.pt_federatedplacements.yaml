@@ -47,18 +47,21 @@ spec:
                   native HPA (e.g., min/max replicas, target CPU)
                 properties:
                   maxReplicas:
+                    default: 10
                     description: MaxReplicas is the upper limit for the number of
                       replicas
                     format: int32
                     minimum: 1
                     type: integer
                   minReplicas:
+                    default: 1
                     description: MinReplicas is the lower limit for the number of
                       replicas
                     format: int32
                     minimum: 1
                     type: integer
                   targetCPUUtilization:
+                    default: 80
                     description: TargetCPUUtilization is the average CPU utilization
                       percentage target
                     format: int32
