@@ -185,22 +185,21 @@ func (r *FederatedPlacementReconciler) ensureHPA(ctx context.Context, fp *optimi
 			Name:       fp.Name,
 		}
 
-		
 		hpa.Spec.MinReplicas = fp.Spec.AutoScaling.MinReplicas
 		hpa.Spec.MaxReplicas = fp.Spec.AutoScaling.MaxReplicas
 
 		if fp.Spec.AutoScaling.TargetCPUUtilization != nil {
-            hpa.Spec.Metrics = []autoscalingv2.MetricSpec{{
-                Type: autoscalingv2.ResourceMetricSourceType,
-                Resource: &autoscalingv2.ResourceMetricSource{
-                    Name: "cpu",
-                    Target: autoscalingv2.MetricTarget{
-                        Type:               autoscalingv2.UtilizationMetricType,
-                        AverageUtilization: fp.Spec.AutoScaling.TargetCPUUtilization,
-                    },
-                },
-            }}
-        }
+			hpa.Spec.Metrics = []autoscalingv2.MetricSpec{{
+				Type: autoscalingv2.ResourceMetricSourceType,
+				Resource: &autoscalingv2.ResourceMetricSource{
+					Name: "cpu",
+					Target: autoscalingv2.MetricTarget{
+						Type:               autoscalingv2.UtilizationMetricType,
+						AverageUtilization: fp.Spec.AutoScaling.TargetCPUUtilization,
+					},
+				},
+			}}
+		}
 		// Set owner reference: if FP is deleted, HPA is deleted too
 		return controllerutil.SetControllerReference(fp, hpa, r.Scheme)
 	})
@@ -211,7 +210,7 @@ func (r *FederatedPlacementReconciler) ensureHPA(ctx context.Context, fp *optimi
 func (r *FederatedPlacementReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
 		For(&optimizerv1.FederatedPlacement{}).
-		Owns(&autoscalingv2.HorizontalPodAutoscaler{}).
+		Owns(&autoscalingv2.HorizontalPodAutoscaler{}). // Watch HPA changes to react faster to scaling events
 		Named("federatedplacement").
 		Complete(r)
 }
