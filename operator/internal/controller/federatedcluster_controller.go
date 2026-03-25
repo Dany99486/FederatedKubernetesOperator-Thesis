@@ -91,8 +91,8 @@ func (r *FederatedClusterReconciler) Reconcile(ctx context.Context, req ctrl.Req
 	}
 
 	// Compare using equal(). One can be in milicore while the other is in cores
-	capacityChanged := !fedCluster.Status.Capacity.CPU.Equal(currentCapacity.CPU) || 
-					!fedCluster.Status.Capacity.Memory.Equal(currentCapacity.Memory)
+	capacityChanged := !fedCluster.Status.Capacity.CPU.Equal(currentCapacity.CPU) ||
+		!fedCluster.Status.Capacity.Memory.Equal(currentCapacity.Memory)
 
 	// Update Status ONLY if something has changed
 	if capacityChanged || fedCluster.Status.UnitCosts != currentCosts {

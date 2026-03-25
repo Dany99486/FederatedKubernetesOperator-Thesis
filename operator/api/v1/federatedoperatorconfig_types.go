@@ -36,7 +36,6 @@ type DefaultResources struct {
 	Memory resource.Quantity `json:"memory"`
 }
 
-
 // FederatedOperatorConfigSpec defines the global policy parameters.
 type FederatedOperatorConfigSpec struct {
 	// TotalBudget ($B$): Maximum financial limit for the operation cost
