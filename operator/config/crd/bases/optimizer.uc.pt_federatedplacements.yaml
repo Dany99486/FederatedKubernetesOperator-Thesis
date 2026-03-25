@@ -75,6 +75,12 @@ spec:
                   LatencyZones ($h_{ij}$): Map of traffic fraction targets per
                   geographic zone (e.g., coimbra: 0.7)
                 type: object
+              replicas:
+                default: 1
+                description: Replicas is where the HPA will write its recommendation
+                  ($R_i$)
+                format: int32
+                type: integer
               targetWorkload:
                 description: |-
                   TargetWorkload: Reference to the existing Deployment in the CMC
@@ -90,6 +96,11 @@ spec:
             description: FederatedPlacementStatus defines the data observed for this
               workload.
             properties:
+              allowedReplicas:
+                description: AllowedReplicas is the number of replicas approved by
+                  the global controller
+                format: int32
+                type: integer
               conditions:
                 description: Conditions represent the current state of the placement
                   logic.
@@ -148,6 +159,11 @@ spec:
                   - type
                   type: object
                 type: array
+              hpaRecommendation:
+                description: HPARecommendation is the last recommendation from the
+                  HPA
+                format: int32
+                type: integer
               observedDemand:
                 description: 'ObservedDemand ($R_i$): Total number of replicas requested
                   by the HPA'
@@ -161,6 +177,9 @@ spec:
                   PlacementMap ($x_{ij}$): Final calculated distribution of replicas
                   across federated clusters
                 type: object
+              replicas:
+                format: int32
+                type: integer
               resourceDemand:
                 description: |-
                   ResourceDemand ($d_i$): Real resource consumption (CPU/RAM) per replica
@@ -181,9 +200,16 @@ spec:
                     pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
                     x-kubernetes-int-or-string: true
                 type: object
+              selector:
+                description: Selector tells the HPA which pods to monitor for CPU/RAM
+                type: string
             type: object
         type: object
     served: true
     storage: true
     subresources:
+      scale:
+        labelSelectorPath: .status.selector
+        specReplicasPath: .spec.replicas
+        statusReplicasPath: .status.replicas
       status: {}

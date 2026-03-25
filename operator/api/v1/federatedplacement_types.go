@@ -72,6 +72,10 @@ type FederatedPlacementSpec struct {
 	// geographic zone (e.g., coimbra: 0.7)
 	// +kubebuilder:validation:Required
 	LatencyZones map[string]string `json:"latencyZones"`
+
+	// Replicas is where the HPA will write its recommendation ($R_i$)
+	// +kubebuilder:default=1
+	Replicas *int32 `json:"replicas,omitempty"`
 }
 
 // FederatedPlacementStatus defines the data observed for this workload.
@@ -89,10 +93,25 @@ type FederatedPlacementStatus struct {
 
 	// Conditions represent the current state of the placement logic.
 	Conditions []metav1.Condition `json:"conditions,omitempty"`
+
+	// AllowedReplicas is the number of replicas approved by the global controller
+	AllowedReplicas int32 `json:"allowedReplicas,omitempty"`
+
+	// HPARecommendation is the last recommendation from the HPA
+	HPARecommendation int32 `json:"hpaRecommendation,omitempty"`
+
+	// --- Required for HPA to work ---
+	// Replicas tracks the actual pods running in the target deployment
+	Replicas int32 `json:"replicas,omitempty"`
+
+	// Selector tells the HPA which pods to monitor for CPU/RAM
+	Selector string `json:"selector,omitempty"`
 }
 
 // +kubebuilder:object:root=true
 // +kubebuilder:subresource:status
+// This marker enables the HPA to treat our CR as a scalable object
+// +kubebuilder:subresource:scale:specpath=.spec.replicas,statuspath=.status.replicas,selectorpath=.status.selector
 
 // FederatedPlacement is the Schema for the federatedplacements API.
 type FederatedPlacement struct {
