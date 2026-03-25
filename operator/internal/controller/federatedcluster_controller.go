@@ -66,8 +66,8 @@ func (r *FederatedClusterReconciler) Reconcile(ctx context.Context, req ctrl.Req
 	}
 
 	// Find the Virtual Node in the CMC
-	node := &corev1.Node{}
-	if err := r.Get(ctx, types.NamespacedName{Name: fedCluster.Name}, node); err != nil {
+	var node corev1.Node
+	if err := r.Get(ctx, types.NamespacedName{Name: fedCluster.Name}, &node); err != nil {
 		logger.Error(err, "Virtual Node not found", "Node", fedCluster.Name)
 		return ctrl.Result{RequeueAfter: time.Minute}, nil
 	}

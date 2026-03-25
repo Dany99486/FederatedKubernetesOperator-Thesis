@@ -64,8 +64,8 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	log := logf.FromContext(ctx)
 
 	// Fetch the FederatedPlacement (The Manager)
-	var fp optimizerv1.FederatedPlacement
-	if err := r.Get(ctx, req.NamespacedName, &fp); err != nil {
+	fp := &optimizerv1.FederatedPlacement{}
+	if err := r.Get(ctx, req.NamespacedName, fp); err != nil {
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 
@@ -76,7 +76,6 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 
 	if err != nil {
 		if errors.IsNotFound(err) {
-			// Deployment is missing
 			log.Info("Target deployment not found. Waiting...", "target", fp.Spec.TargetWorkload)
 
 			// Update status to inform the user
@@ -87,15 +86,18 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 				Message:            fmt.Sprintf("Waiting for deployment %s", fp.Spec.TargetWorkload),
 				LastTransitionTime: metav1.Now(),
 			}}
-			r.Status().Update(ctx, &fp)
+			if err := r.Status().Update(ctx, fp); err != nil {
+				log.Error(err, "Failed to update status for missing deployment")
+				return ctrl.Result{}, err
+			}
 
 			return ctrl.Result{RequeueAfter: time.Second * 15}, nil
 		}
 		return ctrl.Result{}, err
 	}
 
-	// Ensure the HPA exists and targets the FederatedPlacement
-	if err := r.ensureHPA(ctx, &fp); err != nil {
+	// Ensure the HPA exists
+	if err := r.ensureHPA(ctx, fp); err != nil {
 		log.Error(err, "Failed to manage HPA")
 		return ctrl.Result{}, err
 	}
@@ -131,7 +133,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 
 	// If anything in status changed, update it and requeue
 	if changed {
-		if err := r.Status().Update(ctx, &fp); err != nil {
+		if err := r.Status().Update(ctx, fp); err != nil {
 			log.Error(err, "Failed to update FederatedPlacement status")
 			return ctrl.Result{}, err
 		}
