@@ -24,6 +24,7 @@ import (
 	appsv1 "k8s.io/api/apps/v1"
 	autoscalingv2 "k8s.io/api/autoscaling/v2"
 	"k8s.io/apimachinery/pkg/api/errors"
+	"k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
@@ -79,16 +80,18 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 			log.Info("Target deployment not found. Waiting...", "target", fp.Spec.TargetWorkload)
 
 			// Update status to inform the user
-			fp.Status.Conditions = []metav1.Condition{{
-				Type:               "Ready",
-				Status:             metav1.ConditionFalse,
-				Reason:             "DeploymentNotFound",
-				Message:            fmt.Sprintf("Waiting for deployment %s", fp.Spec.TargetWorkload),
-				LastTransitionTime: metav1.Now(),
-			}}
-			if err := r.Status().Update(ctx, fp); err != nil {
-				log.Error(err, "Failed to update status for missing deployment")
-				return ctrl.Result{}, err
+			wasFalse := meta.IsStatusConditionFalse(fp.Status.Conditions, "Ready")
+			meta.SetStatusCondition(&fp.Status.Conditions, metav1.Condition{
+				Type:    "Ready",
+				Status:  metav1.ConditionFalse,
+				Reason:  "DeploymentNotFound",
+				Message: fmt.Sprintf("Waiting for deployment %s", fp.Spec.TargetWorkload),
+			})
+			if !wasFalse { // Only update if it wasn't already marked as False
+				if err := r.Status().Update(ctx, fp); err != nil {
+					log.Error(err, "Failed to update status for missing deployment")
+					return ctrl.Result{}, err
+				}
 			}
 
 			return ctrl.Result{RequeueAfter: time.Second * 15}, nil
@@ -108,6 +111,19 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	changed := false
 	selector, _ := metav1.LabelSelectorAsSelector(deploy.Spec.Selector)
 	selectorString := selector.String()
+
+	// We check the previous state ONLY to decide if we need to call r.Status().Update()
+    wasReady := meta.IsStatusConditionTrue(fp.Status.Conditions, "Ready")
+    
+    meta.SetStatusCondition(&fp.Status.Conditions, metav1.Condition{
+        Type:    "Ready",
+        Status:  metav1.ConditionTrue,
+        Reason:  "DeploymentLinked",
+        Message: fmt.Sprintf("Deployment %s found and linked", fp.Spec.TargetWorkload),
+    })
+
+    // If it transitioned from False to True, we mark as changed
+    if !wasReady { changed = true }
 
 	// Sync Selector (for HPA visibility)
 	if fp.Status.Selector != selectorString {
