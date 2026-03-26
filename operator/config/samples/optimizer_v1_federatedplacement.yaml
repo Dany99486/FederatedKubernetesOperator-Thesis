@@ -5,6 +5,7 @@ metadata:
     app.kubernetes.io/name: federated-operator
     app.kubernetes.io/managed-by: kustomize
   name: federatedplacement-sample
+  namespace: default
 spec:
   # targetWorkload: Name of the existing Deployment in the CMC (Approach A)
   targetWorkload: "nginx-deployment"
