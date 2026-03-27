@@ -83,8 +83,6 @@ type FederatedPlacementSpec struct {
 
 // FederatedPlacementStatus defines the data observed for this workload.
 type FederatedPlacementStatus struct {
-	// ObservedDemand ($R_i$): Total number of replicas requested by the HPA
-	ObservedDemand int32 `json:"observedDemand,omitempty"`
 
 	// ResourceDemand ($d_i$): Real resource consumption (CPU/RAM) per replica
 	// discovered via Prometheus

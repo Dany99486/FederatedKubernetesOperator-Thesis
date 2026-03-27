@@ -62,7 +62,7 @@ type FederatedClusterStatus struct {
 	UnitCosts ResourceCosts `json:"unitCosts,omitempty"`
 
 	// Conditions represent the health of the cluster connection
-	Conditions []metav1.Condition `json:"conditions,omitempty"`
+	Conditions []metav1.Condition `json:"conditions,omitempty"` //TODO: Implement
 }
 
 // +kubebuilder:object:root=true
