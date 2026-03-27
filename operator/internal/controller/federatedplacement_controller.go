@@ -34,12 +34,14 @@ import (
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
 
 	optimizerv1 "github.com/Dany99486/FederatedKubernetesOperator-Thesis/operator/api/v1"
+	prometheusv1 "github.com/prometheus/client_golang/api/prometheus/v1"
 )
 
 // FederatedPlacementReconciler reconciles a FederatedPlacement object
 type FederatedPlacementReconciler struct {
 	client.Client
 	Scheme *runtime.Scheme
+	PromAPI prometheusv1.API
 }
 
 // --- SDK DEFAULTS (Lifecycle Management) ---
