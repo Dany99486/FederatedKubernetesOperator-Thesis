@@ -40,7 +40,7 @@ import (
 // FederatedPlacementReconciler reconciles a FederatedPlacement object
 type FederatedPlacementReconciler struct {
 	client.Client
-	Scheme *runtime.Scheme
+	Scheme  *runtime.Scheme
 	PromAPI prometheusv1.API
 }
 
