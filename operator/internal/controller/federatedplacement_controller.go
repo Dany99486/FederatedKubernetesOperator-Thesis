@@ -113,17 +113,19 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	selectorString := selector.String()
 
 	// We check the previous state ONLY to decide if we need to call r.Status().Update()
-    wasReady := meta.IsStatusConditionTrue(fp.Status.Conditions, "Ready")
-    
-    meta.SetStatusCondition(&fp.Status.Conditions, metav1.Condition{
-        Type:    "Ready",
-        Status:  metav1.ConditionTrue,
-        Reason:  "DeploymentLinked",
-        Message: fmt.Sprintf("Deployment %s found and linked", fp.Spec.TargetWorkload),
-    })
+	wasReady := meta.IsStatusConditionTrue(fp.Status.Conditions, "Ready")
 
-    // If it transitioned from False to True, we mark as changed
-    if !wasReady { changed = true }
+	meta.SetStatusCondition(&fp.Status.Conditions, metav1.Condition{
+		Type:    "Ready",
+		Status:  metav1.ConditionTrue,
+		Reason:  "DeploymentLinked",
+		Message: fmt.Sprintf("Deployment %s found and linked", fp.Spec.TargetWorkload),
+	})
+
+	// If it transitioned from False to True, we mark as changed
+	if !wasReady {
+		changed = true
+	}
 
 	// Sync Selector (for HPA visibility)
 	if fp.Status.Selector != selectorString {
