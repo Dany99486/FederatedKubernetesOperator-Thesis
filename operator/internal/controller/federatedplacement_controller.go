@@ -29,9 +29,11 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
+	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
+	"sigs.k8s.io/controller-runtime/pkg/predicate"
 
 	optimizerv1 "github.com/Dany99486/FederatedKubernetesOperator-Thesis/operator/api/v1"
 	prometheusv1 "github.com/prometheus/client_golang/api/prometheus/v1"
@@ -81,21 +83,16 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 		if errors.IsNotFound(err) {
 			log.Info("Target deployment not found. Waiting...", "target", fp.Spec.TargetWorkload)
 
-			// Update status to inform the user
-			wasFalse := meta.IsStatusConditionFalse(fp.Status.Conditions, "Ready")
+			// Update status to reflect missing deployment
 			meta.SetStatusCondition(&fp.Status.Conditions, metav1.Condition{
 				Type:    "Ready",
 				Status:  metav1.ConditionFalse,
 				Reason:  "DeploymentNotFound",
 				Message: fmt.Sprintf("Waiting for deployment %s", fp.Spec.TargetWorkload),
 			})
-			if !wasFalse { // Only update if it wasn't already marked as False
-				if err := r.Status().Update(ctx, fp); err != nil {
-					log.Error(err, "Failed to update status for missing deployment")
-					return ctrl.Result{}, err
-				}
-			}
+			_ = r.Status().Update(ctx, fp)
 
+			// Requeue shortly to check again
 			return ctrl.Result{RequeueAfter: time.Second * 15}, nil
 		}
 		log.Error(err, "Failed to fetch target deployment for unknown reason", "target", fp.Spec.TargetWorkload)
@@ -109,14 +106,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	}
 
 	// CONSOLIDATED STATUS SYNC
-	// Check all status fields at once to minimize API calls
-	changed := false
-	selector, _ := metav1.LabelSelectorAsSelector(deploy.Spec.Selector)
-	selectorString := selector.String()
-
-	// We check the previous state ONLY to decide if we need to call r.Status().Update()
-	wasReady := meta.IsStatusConditionTrue(fp.Status.Conditions, "Ready")
-
+	// Build the entire status state in memory first
 	meta.SetStatusCondition(&fp.Status.Conditions, metav1.Condition{
 		Type:    "Ready",
 		Status:  metav1.ConditionTrue,
@@ -124,42 +114,29 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 		Message: fmt.Sprintf("Deployment %s found and linked", fp.Spec.TargetWorkload),
 	})
 
-	// If it transitioned from False to True, we mark as changed
-	if !wasReady {
-		changed = true
-	}
+	selector, _ := metav1.LabelSelectorAsSelector(deploy.Spec.Selector)
+	fp.Status.Selector = selector.String()
+	fp.Status.Replicas = deploy.Status.Replicas
 
-	// Sync Selector (for HPA visibility)
-	if fp.Status.Selector != selectorString {
-		fp.Status.Selector = selectorString
-		changed = true
-	}
-
-	// Sync Actual Replicas (for HPA feedback loop)
-	if fp.Status.Replicas != deploy.Status.Replicas {
-		fp.Status.Replicas = deploy.Status.Replicas
-		changed = true
-	}
-
-	// CAPTURE HPA RECOMMENDATION ($R_i$)
-	// Read what HPA wrote in Spec and save to Status for the Global Controller
+	// Capture HPA Recommendation
 	hpaValue := int32(1)
 	if fp.Spec.Replicas != nil {
 		hpaValue = *fp.Spec.Replicas
 	}
-	if fp.Status.HPARecommendation != hpaValue {
-		fp.Status.HPARecommendation = hpaValue
-		changed = true
-	}
+	fp.Status.HPARecommendation = hpaValue
 
-	// If anything in status changed, update it and requeue
-	if changed {
-		if err := r.Status().Update(ctx, fp); err != nil {
-			log.Error(err, "Failed to update FederatedPlacement status")
-			return ctrl.Result{}, err
+	// Fetch telemetry metrics (CPU/Memory usage per replica)
+	currentUsage, err := GetWorkloadMetricsFromPrometheus(ctx, r.PromAPI, fp.Namespace, fp.Spec.TargetWorkload)
+	if err == nil {
+		// Simple comparison using Kubernetes .Equal() method
+		if !fp.Status.ResourceDemand.CPU.Equal(currentUsage.CPU) ||
+			!fp.Status.ResourceDemand.Memory.Equal(currentUsage.Memory) {
+
+			fp.Status.ResourceDemand = currentUsage
+			log.Info("Workload metrics updated", "cpu", currentUsage.CPU.String(), "mem", currentUsage.Memory.String())
 		}
-		// Return and let the next reconciliation handle the logic with fresh data
-		return ctrl.Result{}, nil
+	} else {
+		log.Error(err, "Failed to sync Prometheus telemetry")
 	}
 
 	// DECIDE FINAL REPLICAS ($R_{final}$)
@@ -186,7 +163,16 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 			"replicas", approvedReplicas)
 	}
 
-	return ctrl.Result{RequeueAfter: time.Minute}, nil
+	// SAVE STATUS
+	// Single API call to commit all observed state changes
+	if err := r.Status().Update(ctx, fp); err != nil {
+		log.Error(err, "Failed to update FederatedPlacement status")
+		return ctrl.Result{}, err
+	}
+
+	// SCHEDULE NEXT RECONCILIATION
+	// The operator sleeps for 30 seconds before fetching new metrics
+	return ctrl.Result{RequeueAfter: 30 * time.Second}, nil
 }
 
 // ensureHPA manages the lifecycle of the HPA targeting the Custom Resource
@@ -230,7 +216,8 @@ func (r *FederatedPlacementReconciler) ensureHPA(ctx context.Context, fp *optimi
 // SetupWithManager sets up the controller with the Manager.
 func (r *FederatedPlacementReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&optimizerv1.FederatedPlacement{}).
+		// FILTER: Ignore status updates, only react to Spec changes (Generation mutations)
+		For(&optimizerv1.FederatedPlacement{}, builder.WithPredicates(predicate.GenerationChangedPredicate{})).
 		Owns(&autoscalingv2.HorizontalPodAutoscaler{}). // Watch HPA changes to react faster to scaling events
 		Named("federatedplacement").
 		Complete(r)

@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"time"
 
+	"k8s.io/apimachinery/pkg/api/resource"
+
 	optimizerv1 "github.com/Dany99486/FederatedKubernetesOperator-Thesis/operator/api/v1"
 	prometheusv1 "github.com/prometheus/client_golang/api/prometheus/v1"
 	"github.com/prometheus/common/model"
@@ -38,4 +40,53 @@ func GetNodeCostsFromPrometheus(ctx context.Context, api prometheusv1.API, nodeN
 	}
 
 	return costs, allWarnings, nil
+}
+
+// GetWorkloadMetricsFromPrometheus returns the ResourceStats ($d_i$) for a specific deployment,
+// metrics are averaged over a 2-minute window to smooth out fluctuations.
+// It queries both CPU usage (in millicores) and Memory usage (in bytes).
+func GetWorkloadMetricsFromPrometheus(ctx context.Context, api prometheusv1.API, namespace string, deploymentName string) (optimizerv1.ResourceStats, error) {
+	stats := optimizerv1.ResourceStats{}
+
+	// --- CPU Demand (d_i_cpu) Calculation ---
+	// Uses 'sum by (pod)' to capture the total CPU footprint of each replica (ignoring no containers).
+	// Aggregated over a 2-minute window to smooth out transient spikes.
+	cpuQuery := fmt.Sprintf("avg(sum by (pod) (rate(container_cpu_usage_seconds_total{namespace='%s', pod=~'%s-.*', container!=''}[2m])))",
+		namespace, deploymentName)
+
+	valCPU, _, err := api.Query(ctx, cpuQuery, time.Now())
+	if err != nil {
+		return stats, err
+	}
+
+	if vector, ok := valCPU.(model.Vector); ok && len(vector) > 0 {
+		// Direct assignment using NewMilliQuantity (converts cores to millicores)
+		stats.CPU = *resource.NewMilliQuantity(int64(float64(vector[0].Value)*1000), resource.DecimalSI)
+		fmt.Printf("DEBUG: CPU d_i calculated for %s, %f\n", deploymentName, (vector[0].Value)*1e9)
+	}
+
+	// --- Memory Demand (d_i_mem) Calculation ---
+	// Aggregates 'working_set_bytes' for all containers per Pod, then averages across replicas.
+	// This captures the total memory pressure, including the 'pause' container overhead.
+	memQuery := fmt.Sprintf("avg(sum by (pod) (avg_over_time(container_memory_working_set_bytes{namespace='%s', pod=~'%s-.*', container!=''}[2m])))",
+		namespace, deploymentName)
+
+	valMem, _, err := api.Query(ctx, memQuery, time.Now())
+	if err != nil {
+		return stats, err
+	}
+
+	if vector, ok := valMem.(model.Vector); ok && len(vector) > 0 {
+		memBytes := float64(vector[0].Value)
+
+		memKi := int64(memBytes / 1024)
+
+		parsedMem, err := resource.ParseQuantity(fmt.Sprintf("%dKi", memKi))
+		if err == nil {
+			stats.Memory = parsedMem
+			fmt.Printf("DEBUG: Memory d_i calculated for %s: %s\n", deploymentName, stats.Memory.String())
+		}
+	}
+
+	return stats, nil
 }

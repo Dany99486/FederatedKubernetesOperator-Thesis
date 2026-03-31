@@ -167,11 +167,6 @@ spec:
                   HPA
                 format: int32
                 type: integer
-              observedDemand:
-                description: 'ObservedDemand ($R_i$): Total number of replicas requested
-                  by the HPA'
-                format: int32
-                type: integer
               placementMap:
                 additionalProperties:
                   format: int32
