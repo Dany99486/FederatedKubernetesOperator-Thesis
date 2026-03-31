@@ -107,6 +107,9 @@ type FederatedPlacementStatus struct {
 
 	// Selector tells the HPA which pods to monitor for CPU/RAM
 	Selector string `json:"selector,omitempty"`
+
+	// LastMetricsUpdateTime tracks when the ResourceDemand was last updated
+	LastMetricsUpdateTime *metav1.Time `json:"lastMetricsUpdateTime,omitempty"`
 }
 
 // +kubebuilder:object:root=true

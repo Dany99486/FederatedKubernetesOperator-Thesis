@@ -19,6 +19,7 @@ package controller
 import (
 	"context"
 	"fmt"
+	"reflect"
 	"time"
 
 	appsv1 "k8s.io/api/apps/v1"
@@ -29,11 +30,9 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
-	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
-	"sigs.k8s.io/controller-runtime/pkg/predicate"
 
 	optimizerv1 "github.com/Dany99486/FederatedKubernetesOperator-Thesis/operator/api/v1"
 	prometheusv1 "github.com/prometheus/client_golang/api/prometheus/v1"
@@ -74,6 +73,9 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 
+	// Clone the status to compare it at the end of the loop and prevent infinite loops
+	oldStatus := fp.Status.DeepCopy()
+
 	// Look for the Target Deployment (The Managed Workload)
 	var deploy appsv1.Deployment
 	deployName := types.NamespacedName{Name: fp.Spec.TargetWorkload, Namespace: fp.Namespace}
@@ -105,8 +107,7 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 		return ctrl.Result{}, err
 	}
 
-	// CONSOLIDATED STATUS SYNC
-	// Build the entire status state in memory first
+	// Update Monitoring Status (Acting as a Sensor)
 	meta.SetStatusCondition(&fp.Status.Conditions, metav1.Condition{
 		Type:    "Ready",
 		Status:  metav1.ConditionTrue,
@@ -125,29 +126,28 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	}
 	fp.Status.HPARecommendation = hpaValue
 
-	// Fetch telemetry metrics (CPU/Memory usage per replica)
-	currentUsage, err := GetWorkloadMetricsFromPrometheus(ctx, r.PromAPI, fp.Namespace, fp.Spec.TargetWorkload)
-	if err == nil {
-		// Simple comparison using Kubernetes .Equal() method
-		if !fp.Status.ResourceDemand.CPU.Equal(currentUsage.CPU) ||
-			!fp.Status.ResourceDemand.Memory.Equal(currentUsage.Memory) {
+	// Throttled Telemetry Sync (Prometheus)
+	// Only fetch metrics if enough time has passed to avoid API noise and loops
+	metricsInterval := 1 * time.Minute
+	now := metav1.Now()
 
+	if fp.Status.LastMetricsUpdateTime == nil || now.Sub(fp.Status.LastMetricsUpdateTime.Time) > metricsInterval {
+		currentUsage, err := GetWorkloadMetricsFromPrometheus(ctx, r.PromAPI, fp.Namespace, fp.Spec.TargetWorkload)
+		if err == nil {
 			fp.Status.ResourceDemand = currentUsage
+			fp.Status.LastMetricsUpdateTime = &now
 			log.Info("Workload metrics updated", "cpu", currentUsage.CPU.String(), "mem", currentUsage.Memory.String())
+		} else {
+			log.Error(err, "Failed to sync Prometheus telemetry")
 		}
-	} else {
-		log.Error(err, "Failed to sync Prometheus telemetry")
 	}
 
 	// DECIDE FINAL REPLICAS ($R_{final}$)
 	// Priority: 1. Global Decision (AllowedReplicas) | 2. HPA Recommendation | 3. MinReplicas
 	var approvedReplicas int32
-
 	if fp.Status.AllowedReplicas > 0 {
-		// The Global Controller (FederatedOperatorConfig) has spoken!
 		approvedReplicas = fp.Status.AllowedReplicas
 	} else {
-		// Fallback to HPA recommendation until the brain decides
 		approvedReplicas = hpaValue
 	}
 
@@ -163,11 +163,12 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 			"replicas", approvedReplicas)
 	}
 
-	// SAVE STATUS
-	// Single API call to commit all observed state changes
-	if err := r.Status().Update(ctx, fp); err != nil {
-		log.Error(err, "Failed to update FederatedPlacement status")
-		return ctrl.Result{}, err
+	// Commit Status changes if any (DeepEqual prevents infinite reconciliation loops)
+	if !reflect.DeepEqual(oldStatus, &fp.Status) {
+		if err := r.Status().Update(ctx, fp); err != nil {
+			log.Error(err, "Failed to update status")
+			return ctrl.Result{}, err
+		}
 	}
 
 	// SCHEDULE NEXT RECONCILIATION
@@ -216,9 +217,7 @@ func (r *FederatedPlacementReconciler) ensureHPA(ctx context.Context, fp *optimi
 // SetupWithManager sets up the controller with the Manager.
 func (r *FederatedPlacementReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		// FILTER: Ignore status updates, only react to Spec changes (Generation mutations)
-		For(&optimizerv1.FederatedPlacement{}, builder.WithPredicates(predicate.GenerationChangedPredicate{})).
+		For(&optimizerv1.FederatedPlacement{}).
 		Owns(&autoscalingv2.HorizontalPodAutoscaler{}). // Watch HPA changes to react faster to scaling events
-		Named("federatedplacement").
 		Complete(r)
 }
