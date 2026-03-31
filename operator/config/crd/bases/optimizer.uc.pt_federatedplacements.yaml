@@ -167,6 +167,11 @@ spec:
                   HPA
                 format: int32
                 type: integer
+              lastMetricsUpdateTime:
+                description: LastMetricsUpdateTime tracks when the ResourceDemand
+                  was last updated
+                format: date-time
+                type: string
               placementMap:
                 additionalProperties:
                   format: int32
