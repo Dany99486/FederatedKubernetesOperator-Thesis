@@ -11,4 +11,4 @@ spec:
   zone: "aveiro"
   
   # isOnPremise: If true, physical capacity constraints (Capacity_j) are strictly enforced
-  isOnPremise: false
+  isOnPremise: true
