@@ -76,7 +76,7 @@ type FederatedPlacementSpec struct {
 	// +kubebuilder:validation:Required
 	LatencyZones map[string]string `json:"latencyZones"`
 
-	// Replicas is where the HPA will write its recommendation ($R_i$)
+	// Replicas is where the system will write its recommendation ($R_i$)
 	// +kubebuilder:default=1
 	Replicas *int32 `json:"replicas,omitempty"`
 }
@@ -90,7 +90,8 @@ type FederatedPlacementStatus struct {
 
 	// PlacementMap ($x_{ij}$): Final calculated distribution of replicas
 	// across federated clusters
-	PlacementMap map[string]int32 `json:"placementMap,omitempty"`
+	PlacementMap map[string]int32 `json:"placementMap,omitempty"` //TODO: implement (federatedoperatorconfig
+	// 																	  will update this field with the calculated distribution)
 
 	// Conditions represent the current state of the placement logic.
 	Conditions []metav1.Condition `json:"conditions,omitempty"`

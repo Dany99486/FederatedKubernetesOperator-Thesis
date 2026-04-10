@@ -30,9 +30,11 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
+	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	logf "sigs.k8s.io/controller-runtime/pkg/log"
+	"sigs.k8s.io/controller-runtime/pkg/predicate"
 
 	optimizerv1 "github.com/Dany99486/FederatedKubernetesOperator-Thesis/operator/api/v1"
 	prometheusv1 "github.com/prometheus/client_golang/api/prometheus/v1"
@@ -217,7 +219,8 @@ func (r *FederatedPlacementReconciler) ensureHPA(ctx context.Context, fp *optimi
 // SetupWithManager sets up the controller with the Manager.
 func (r *FederatedPlacementReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&optimizerv1.FederatedPlacement{}).
+		// Ignore status updates, only react to Spec changes
+		For(&optimizerv1.FederatedPlacement{}, builder.WithPredicates(predicate.GenerationChangedPredicate{})).
 		Owns(&autoscalingv2.HorizontalPodAutoscaler{}). // Watch HPA changes to react faster to scaling events
 		Complete(r)
 }

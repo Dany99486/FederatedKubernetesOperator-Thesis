@@ -57,7 +57,7 @@ type FederatedOperatorConfigSpec struct {
 	NormalizationConstant string `json:"normalizationConstant"`
 
 	// DefaultEstimates: Valores padrão usados quando não há métricas reais disponíveis
-	// Serve como a "rede de segurança" para a tua heurística global
+	// Serves as a "safety net" for the global heuristic,
 	// +kubebuilder:validation:Required
 	DefaultEstimates DefaultResources `json:"defaultEstimates"`
 }
@@ -66,7 +66,7 @@ type FederatedOperatorConfigSpec struct {
 type FederatedOperatorConfigStatus struct {
 	// TotalCurrentCost ($\mathcal{C}(x)$): Current total cluster cost detected
 	// via Prometheus and OpenCost in the CMC
-	TotalCurrentCost string `json:"totalCurrentCost,omitempty"`
+	TotalCurrentCost string `json:"totalCurrentCost,omitempty"` //Todo: implement status (federatedoperatorconfig will update)
 
 	// GlobalMisalignmentScore ($\mathcal{L}(x)$): Global cluster latency score
 	// based on geographical targets
