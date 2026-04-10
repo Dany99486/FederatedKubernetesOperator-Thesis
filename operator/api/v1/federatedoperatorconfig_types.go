@@ -66,7 +66,7 @@ type FederatedOperatorConfigSpec struct {
 type FederatedOperatorConfigStatus struct {
 	// TotalCurrentCost ($\mathcal{C}(x)$): Current total cluster cost detected
 	// via Prometheus and OpenCost in the CMC
-	TotalCurrentCost string `json:"totalCurrentCost,omitempty"` //Todo: implement status (federatedoperatorconfig will update)
+	TotalCurrentCost string `json:"totalCurrentCost,omitempty"` // Todo: implement status (federatedoperatorconfig will update)
 
 	// GlobalMisalignmentScore ($\mathcal{L}(x)$): Global cluster latency score
 	// based on geographical targets

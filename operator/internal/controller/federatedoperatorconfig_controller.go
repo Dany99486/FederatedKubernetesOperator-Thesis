@@ -133,12 +133,12 @@ func (r *FederatedOperatorConfigReconciler) SetupWithManager(mgr ctrl.Manager) e
 		For(&optimizerv1.FederatedOperatorConfig{}, builder.WithPredicates(predicate.GenerationChangedPredicate{})).
 		Watches(
 			&optimizerv1.FederatedCluster{},
-			mapToSingleton, // Uses the MapFunc instead of EnqueueRequestForObject
+			mapToSingleton,
 			builder.WithPredicates(predicate.GenerationChangedPredicate{}),
 		).
 		Watches(
 			&optimizerv1.FederatedPlacement{},
-			mapToSingleton, // Uses the MapFunc here too
+			mapToSingleton,
 			builder.WithPredicates(predicate.GenerationChangedPredicate{}),
 		).
 		Named("federatedoperatorconfig").
