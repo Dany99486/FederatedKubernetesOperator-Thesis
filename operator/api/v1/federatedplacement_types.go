@@ -90,7 +90,7 @@ type FederatedPlacementStatus struct {
 
 	// PlacementMap ($x_{ij}$): Final calculated distribution of replicas
 	// across federated clusters
-	PlacementMap map[string]int32 `json:"placementMap,omitempty"` //TODO: implement (federatedoperatorconfig
+	PlacementMap map[string]int32 `json:"placementMap,omitempty"` // TODO: implement (federatedoperatorconfig
 	// 																	  will update this field with the calculated distribution)
 
 	// Conditions represent the current state of the placement logic.
