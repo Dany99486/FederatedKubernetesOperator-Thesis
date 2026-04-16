@@ -138,10 +138,10 @@ spec:
                 description: UnitCosts defines the real-time pricing for those resources
                 properties:
                   cpu:
-                    description: 'CPU ($c_{cpu}$): Hourly cost per millicore'
+                    description: 'CPU ($c_{cpu}$): Hourly cost per Core'
                     type: string
                   memory:
-                    description: 'Memory ($c_{mem}$): Hourly cost per MiB'
+                    description: 'Memory ($c_{mem}$): Hourly cost per GiB'
                     type: string
                 required:
                 - cpu
