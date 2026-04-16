@@ -156,11 +156,11 @@ func (r *FederatedOperatorConfigReconciler) calculatePlacement(config *optimizer
 
 	// Clean up artifacts from previous reconciliation cycles
 	if err := os.Remove(modelPath); err != nil && !os.IsNotExist(err) {
-        return fmt.Errorf("failed to remove old model file: %w", err)
-    }
-    if err := os.Remove(solutionPath); err != nil && !os.IsNotExist(err) {
-        return fmt.Errorf("failed to remove old solution file: %w", err)
-    }
+		return fmt.Errorf("failed to remove old model file: %w", err)
+	}
+	if err := os.Remove(solutionPath); err != nil && !os.IsNotExist(err) {
+		return fmt.Errorf("failed to remove old solution file: %w", err)
+	}
 
 	// Translate cluster state into a mathematical .lp string
 	lpContent := generateLPFileContent(config, clusters, placements)
