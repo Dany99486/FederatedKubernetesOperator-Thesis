@@ -46,10 +46,10 @@ type ClusterResources struct {
 
 // ResourceCosts represents the hourly pricing from OpenCost
 type ResourceCosts struct {
-	// CPU ($c_{cpu}$): Hourly cost per millicore
+	// CPU ($c_{cpu}$): Hourly cost per Core
 	CPU string `json:"cpu"`
 
-	// Memory ($c_{mem}$): Hourly cost per MiB
+	// Memory ($c_{mem}$): Hourly cost per GiB
 	Memory string `json:"memory"`
 }
 

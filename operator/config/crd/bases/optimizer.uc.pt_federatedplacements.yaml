@@ -80,7 +80,7 @@ spec:
                 type: object
               replicas:
                 default: 1
-                description: Replicas is where the HPA will write its recommendation
+                description: Replicas is where the system will write its recommendation
                   ($R_i$)
                 format: int32
                 type: integer

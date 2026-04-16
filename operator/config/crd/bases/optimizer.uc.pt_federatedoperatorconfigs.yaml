@@ -43,7 +43,7 @@ spec:
               defaultEstimates:
                 description: |-
                   DefaultEstimates: Valores padrão usados quando não há métricas reais disponíveis
-                  Serve como a "rede de segurança" para a tua heurística global
+                  Serves as a "safety net" for the global heuristic,
                 properties:
                   cpu:
                     anyOf:
