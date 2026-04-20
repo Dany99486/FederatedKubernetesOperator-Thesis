@@ -20,6 +20,7 @@ import (
 	"context"
 	"fmt"
 	"reflect"
+	"strconv"
 	"time"
 
 	appsv1 "k8s.io/api/apps/v1"
@@ -107,6 +108,21 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	if err := r.ensureHPA(ctx, fp); err != nil {
 		log.Error(err, "Failed to manage HPA")
 		return ctrl.Result{}, err
+	}
+
+	totalTraffic := 0.0
+	for zone, val := range fp.Spec.LatencyZones {
+		v, err := strconv.ParseFloat(val, 64)
+		if err != nil {
+			log.Error(err, "Invalid latency zone value format", "zone", zone, "value", val)
+			continue
+		}
+		totalTraffic += v
+	}
+
+	// Verification of the sum
+	if len(fp.Spec.LatencyZones) > 0 && (totalTraffic > 1.001 || totalTraffic < 0.999) {
+		log.Info("Warning: Latency zones traffic fractions do not sum to 1.0", "total", totalTraffic)
 	}
 
 	// Update Monitoring Status (Acting as a Sensor)
