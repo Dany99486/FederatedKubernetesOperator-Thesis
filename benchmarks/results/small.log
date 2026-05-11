@@ -1,0 +1,64 @@
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 10
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances/small.lp
+Reading time = 0.00 seconds
+obj: 126 rows, 204 columns, 527 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  10
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 126 rows, 204 columns and 527 nonzeros (Min)
+Model fingerprint: 0x7d301a64
+Model has 2 linear objective coefficients
+Variable types: 104 continuous, 100 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 5e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-02, 1e+03]
+
+Found heuristic solution: objective 2307.9262500
+Presolve removed 25 rows and 23 columns
+Presolve time: 0.00s
+Presolved: 101 rows, 181 columns, 341 nonzeros
+Variable types: 56 continuous, 125 integer (39 binary)
+
+Root relaxation: objective 6.374307e+02, 98 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  637.43066    0   78 2307.92625  637.43066  72.4%     -    0s
+H    0     0                    1313.0406000  637.43066  51.5%     -    0s
+H    0     0                    1061.4371000  637.43066  39.9%     -    0s
+*    0     0               0    1024.1241500 1024.12415  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 12
+  MIR: 72
+
+Explored 1 nodes (171 simplex iterations) in 0.01 seconds (0.00 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 4: 1024.12 1061.44 1313.04 2307.93 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.024124150000e+03, best bound 1.024124150000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results/small.sol'
+

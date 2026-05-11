@@ -1,0 +1,63 @@
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 10
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances/large.lp
+Reading time = 0.23 seconds
+obj: 101006 rows, 200004 columns, 501007 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  10
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 101006 rows, 200004 columns and 501007 nonzeros (Min)
+Model fingerprint: 0xaf04aa66
+Model has 2 linear objective coefficients
+Variable types: 100004 continuous, 100000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 5e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Presolve removed 27 rows and 26 columns
+Presolve time: 1.02s
+Presolved: 100979 rows, 199978 columns, 399955 nonzeros
+Variable types: 677 continuous, 199301 integer (99301 binary)
+Deterministic concurrent LP optimizer: primal and dual simplex
+Showing primal log only...
+
+Concurrent spin time: 0.08s
+
+Solved with primal simplex
+
+Root relaxation: objective 4.404892e+05, 110525 iterations, 2.29 seconds (2.29 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 440489.169    0    6          - 440489.169      -     -    4s
+H    0     0                    440491.50130 440489.169  0.00%     -    5s
+
+Explored 1 nodes (110525 simplex iterations) in 6.00 seconds (5.67 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 1: 440492 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.404915013000e+05, best bound 4.404891691319e+05, gap 0.0005%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results/large.sol'
+
