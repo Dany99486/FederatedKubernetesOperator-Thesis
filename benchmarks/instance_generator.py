@@ -76,7 +76,7 @@ def generate_lp(n_workloads, m_clusters, filename, alpha=0.5, k=100.0, budget=10
 # Generate the 4 tiers for Table 7.1 (Scalability Analysis)
 generate_lp(5, 2, "micro.lp")
 generate_lp(20, 5, "small.lp")
-generate_lp(100, 20, "medium.lp", budget=5000.0)
-generate_lp(1000, 100, "large.lp", budget=18500.0)
+generate_lp(50, 10, "medium.lp", budget=2500.0)
+generate_lp(250, 25, "large.lp", budget=4750.0)
 
 print(f"Success: .lp instances created in {INSTANCES_DIR}")
