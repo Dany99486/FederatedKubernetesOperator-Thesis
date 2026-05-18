@@ -34,10 +34,10 @@ for model_file in "$INSTANCES_DIR"/*.lp; do
     
     echo "[$(date +'%H:%M:%S')] Testing instance: $case_name"
     
-    # Execute Gurobi CLI
+    # Execute Gurobi CLI. Also logs time and memory usage with /usr/bin/time -v
     # TimeLimit=10: Best-effort solution if optimal is not reached (Task 4)
     # ResultFile: Exports variables x_ij and y_ij to .sol format
-    gurobi_cl TimeLimit=10 \
+    /usr/bin/time -v gurobi_cl TimeLimit=10 \
               ResultFile="$RESULTS_DIR/${case_name}.sol" \
               "$model_file" > "$RESULTS_DIR/${case_name}.log" 2>&1
     

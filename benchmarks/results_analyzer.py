@@ -20,10 +20,14 @@ def parse_gurobi_logs(results_path):
             runtime_match = re.search(r"Explored (\d+) nodes .* in ([\d\.]+) seconds", content)
             gap_match = re.search(r"gap ([\d\.]+)%", content)
             obj_match = re.search(r"Best objective ([\d\.\+e\-]+)", content)
+            ram_match = re.search(r"Maximum resident set size \(kbytes\):\s+(\d+)", content)
 
             # Mapping tiers for logical ordering in charts
             tier_order = {"Micro": 1, "Small": 2, "Medium": 3, "Large": 4}
             tier = log_file.stem.capitalize()
+
+            # Convert RAM from kbytes to MB for better readability in charts
+            peak_ram_mb = (int(ram_match.group(1)) / 1024.0) if ram_match else 0.0
 
             data.append({
                 "Tier": tier,
@@ -33,6 +37,7 @@ def parse_gurobi_logs(results_path):
                 "Runtime_s": float(runtime_match.group(2)) if runtime_match else 0.0,
                 "Nodes_Explored": int(runtime_match.group(1)) if runtime_match else 0,
                 "Gap_percent": float(gap_match.group(1)) if gap_match else 0.0,
+                "Memory_MB": peak_ram_mb,
                 "Objective_Z": float(obj_match.group(1)) if obj_match else 0.0
             })
     return pd.DataFrame(data).sort_values("Order")
@@ -49,7 +54,7 @@ def generate_visualizations(df):
     plt.close()
     print(f"Chart saved: {OUTPUT_DIR}/solver_runtime_chart.png")
 
-    # Graph 2: Optimality Gap vs Tier (Usa barras para destacar o teto do T_max)
+    # Graph 2: Optimality Gap vs Tier
     plt.figure(figsize=(8, 5))
     plt.bar(df['Tier'], df['Gap_percent'], color='r', alpha=0.7, width=0.4)
     plt.title('Gurobi Solver Performance - Optimality Gap')
@@ -60,7 +65,7 @@ def generate_visualizations(df):
     plt.close()
     print(f"Chart saved: {OUTPUT_DIR}/solver_gap_chart.png")
 
-    # Graph 3: Nodes Explored vs Tier (Demonstra a complexidade combinatorial)
+    # Graph 3: Nodes Explored vs Tier
     plt.figure(figsize=(8, 5))
     plt.plot(df['Tier'], df['Nodes_Explored'], marker='s', linestyle='-', color='g', linewidth=2)
     plt.title('Gurobi Solver Complexity - Nodes Explored')
@@ -71,10 +76,21 @@ def generate_visualizations(df):
     plt.close()
     print(f"Chart saved: {OUTPUT_DIR}/solver_nodes_chart.png")
 
+    # Graph 4: Peak Memory Footprint Real vs Tier
+    plt.figure(figsize=(8, 5))
+    plt.plot(df['Tier'], df['Memory_MB'], marker='^', linestyle='-', color='m', linewidth=2)
+    plt.title('Gurobi Solver Resource Consumption - Memory Footprint')
+    plt.xlabel('Test Tier (Problem Scale)')
+    plt.ylabel('Peak RAM Usage (MB)')
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.savefig(OUTPUT_DIR / "solver_memory_chart.png", dpi=300)
+    plt.close()
+    print(f"Chart saved: {OUTPUT_DIR}/solver_memory_chart.png")
+
 if __name__ == "__main__":
     if RESULTS_DIR.exists():
         df = parse_gurobi_logs(RESULTS_DIR)
         generate_visualizations(df)
-        print(f"\nParte 1 concluída. Verifica a pasta '{OUTPUT_DIR.name}' para ver os três gráficos reais do solver.")
+        print(f"\nPipeline concluído. Verifica a pasta '{OUTPUT_DIR.name}' para ver os quatro gráficos reais do solver.")
     else:
         print("Results directory not found.")

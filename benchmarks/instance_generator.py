@@ -79,4 +79,10 @@ generate_lp(20, 5, "small.lp")
 generate_lp(50, 10, "medium.lp", budget=2500.0)
 generate_lp(250, 25, "large.lp", budget=4750.0)
 
+# Parameters for larger instances
+# generate_lp(50, 10, "micro.lp", budget=2500.0)
+# generate_lp(250, 25, "small.lp", budget=4750.0)
+# generate_lp(500, 100, "medium.lp", budget=25000.0)
+# generate_lp(1000, 250, "large.lp", budget=50000.0)
+
 print(f"Success: .lp instances created in {INSTANCES_DIR}")
