@@ -17,7 +17,7 @@ def parse_gurobi_logs(results_path):
             
             # Extract Metrics using RegEx
             size_match = re.search(r"Optimize a model with (\d+) rows, (\d+) columns", content)
-            runtime_match = re.search(r"Explored \d+ nodes .* in ([\d\.]+) seconds", content)
+            runtime_match = re.search(r"Explored (\d+) nodes .* in ([\d\.]+) seconds", content)
             gap_match = re.search(r"gap ([\d\.]+)%", content)
             obj_match = re.search(r"Best objective ([\d\.\+e\-]+)", content)
 
@@ -30,29 +30,51 @@ def parse_gurobi_logs(results_path):
                 "Order": tier_order.get(tier, 5),
                 "Constraints": int(size_match.group(1)) if size_match else 0,
                 "Variables": int(size_match.group(2)) if size_match else 0,
-                "Runtime_s": float(runtime_match.group(1)) if runtime_match else 0.0,
+                "Runtime_s": float(runtime_match.group(2)) if runtime_match else 0.0,
+                "Nodes_Explored": int(runtime_match.group(1)) if runtime_match else 0,
                 "Gap_percent": float(gap_match.group(1)) if gap_match else 0.0,
                 "Objective_Z": float(obj_match.group(1)) if obj_match else 0.0
             })
     return pd.DataFrame(data).sort_values("Order")
 
 def generate_visualizations(df):
-    # Create a Scalability Plot: Runtime vs Tier
-    plt.figure(figsize=(10, 6))
-    plt.plot(df['Tier'], df['Runtime_s'], marker='o', linestyle='-', color='b')
+    # Graph 1: Runtime vs Tier
+    plt.figure(figsize=(8, 5))
+    plt.plot(df['Tier'], df['Runtime_s'], marker='o', linestyle='-', color='b', linewidth=2)
     plt.title('Gurobi Solver Scalability - Runtime per Tier')
     plt.xlabel('Test Tier (Problem Scale)')
     plt.ylabel('Runtime (seconds)')
-    plt.grid(True, linestyle='--', alpha=0.7)
-    plt.savefig(OUTPUT_DIR / "scalability_chart.png")
-    print(f"Chart saved: {OUTPUT_DIR}/scalability_chart.png")
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.savefig(OUTPUT_DIR / "solver_runtime_chart.png", dpi=300)
+    plt.close()
+    print(f"Chart saved: {OUTPUT_DIR}/solver_runtime_chart.png")
+
+    # Graph 2: Optimality Gap vs Tier (Usa barras para destacar o teto do T_max)
+    plt.figure(figsize=(8, 5))
+    plt.bar(df['Tier'], df['Gap_percent'], color='r', alpha=0.7, width=0.4)
+    plt.title('Gurobi Solver Performance - Optimality Gap')
+    plt.xlabel('Test Tier (Problem Scale)')
+    plt.ylabel('Optimality Gap (%)')
+    plt.grid(axis='y', linestyle='--', alpha=0.5)
+    plt.savefig(OUTPUT_DIR / "solver_gap_chart.png", dpi=300)
+    plt.close()
+    print(f"Chart saved: {OUTPUT_DIR}/solver_gap_chart.png")
+
+    # Graph 3: Nodes Explored vs Tier (Demonstra a complexidade combinatorial)
+    plt.figure(figsize=(8, 5))
+    plt.plot(df['Tier'], df['Nodes_Explored'], marker='s', linestyle='-', color='g', linewidth=2)
+    plt.title('Gurobi Solver Complexity - Nodes Explored')
+    plt.xlabel('Test Tier (Problem Scale)')
+    plt.ylabel('Nodes Count')
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.savefig(OUTPUT_DIR / "solver_nodes_chart.png", dpi=300)
+    plt.close()
+    print(f"Chart saved: {OUTPUT_DIR}/solver_nodes_chart.png")
 
 if __name__ == "__main__":
     if RESULTS_DIR.exists():
         df = parse_gurobi_logs(RESULTS_DIR)
-        
         generate_visualizations(df)
-        
-        print(f"Analysis complete! Check the '{OUTPUT_DIR.name}' folder for Excel, LaTeX, and Charts.")
+        print(f"\nParte 1 concluída. Verifica a pasta '{OUTPUT_DIR.name}' para ver os três gráficos reais do solver.")
     else:
         print("Results directory not found.")
