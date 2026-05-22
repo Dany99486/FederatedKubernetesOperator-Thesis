@@ -46,9 +46,9 @@ def generate_visualizations(df):
     # Graph 1: Runtime vs Tier
     plt.figure(figsize=(8, 5))
     plt.plot(df['Tier'], df['Runtime_s'], marker='o', linestyle='-', color='b', linewidth=2)
-    plt.title('Gurobi Solver Scalability - Runtime per Tier')
+    plt.title('Optimization Model Scalability - Resolution Time per Tier')
     plt.xlabel('Test Tier (Problem Scale)')
-    plt.ylabel('Runtime (seconds)')
+    plt.ylabel('Resolution Time (seconds)')
     plt.grid(True, linestyle='--', alpha=0.5)
     plt.savefig(OUTPUT_DIR / "solver_runtime_chart.png", dpi=300)
     plt.close()
@@ -57,7 +57,7 @@ def generate_visualizations(df):
     # Graph 2: Optimality Gap vs Tier
     plt.figure(figsize=(8, 5))
     plt.bar(df['Tier'], df['Gap_percent'], color='r', alpha=0.7, width=0.4)
-    plt.title('Gurobi Solver Performance - Optimality Gap')
+    plt.title('Optimization Model Convergence - Optimality Gap')
     plt.xlabel('Test Tier (Problem Scale)')
     plt.ylabel('Optimality Gap (%)')
     plt.grid(axis='y', linestyle='--', alpha=0.5)
@@ -68,7 +68,7 @@ def generate_visualizations(df):
     # Graph 3: Nodes Explored vs Tier
     plt.figure(figsize=(8, 5))
     plt.plot(df['Tier'], df['Nodes_Explored'], marker='s', linestyle='-', color='g', linewidth=2)
-    plt.title('Gurobi Solver Complexity - Nodes Explored')
+    plt.title('Optimization Model Complexity - Search Space (Nodes Explored)')
     plt.xlabel('Test Tier (Problem Scale)')
     plt.ylabel('Nodes Count')
     plt.grid(True, linestyle='--', alpha=0.5)
@@ -79,7 +79,7 @@ def generate_visualizations(df):
     # Graph 4: Peak Memory Footprint Real vs Tier
     plt.figure(figsize=(8, 5))
     plt.plot(df['Tier'], df['Memory_MB'], marker='^', linestyle='-', color='m', linewidth=2)
-    plt.title('Gurobi Solver Resource Consumption - Memory Footprint')
+    plt.title('Optimization Model Resource Demand - Peak Memory Footprint')
     plt.xlabel('Test Tier (Problem Scale)')
     plt.ylabel('Peak RAM Usage (MB)')
     plt.grid(True, linestyle='--', alpha=0.5)
