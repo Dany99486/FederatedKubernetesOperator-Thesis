@@ -73,16 +73,11 @@ def generate_lp(n_workloads, m_clusters, filename, alpha=0.5, k=100.0, budget=10
         # Constraint 3.9: Discrete decision variables for allocated replicas 
         f.write("\nGenerals\n  " + "\n  ".join(all_x_vars) + "\nEnd")
 
-# Generate the 4 tiers for Table 7.1 (Scalability Analysis)
-generate_lp(5, 2, "micro.lp")
-generate_lp(20, 5, "small.lp")
-generate_lp(50, 10, "medium.lp", budget=2500.0)
-generate_lp(250, 25, "large.lp", budget=4750.0)
+print("Generating 5 distinct random instances per tier...")
+for run in range(1, 6):
+    generate_lp(50, 10, f"micro_run_{run}.lp", budget=2500.0)
+    generate_lp(250, 25, f"small_run_{run}.lp", budget=5000.0)
+    generate_lp(500, 100, f"medium_run_{run}.lp", budget=25000.0)
+    generate_lp(1000, 250, f"large_run_{run}.lp", budget=50000.0)
 
-# Parameters for larger instances
-# generate_lp(50, 10, "micro.lp", budget=2500.0)
-# generate_lp(250, 25, "small.lp", budget=4750.0)
-# generate_lp(500, 100, "medium.lp", budget=25000.0)
-# generate_lp(1000, 250, "large.lp", budget=50000.0)
-
-print(f"Success: .lp instances created in {INSTANCES_DIR}")
+print(f"Success: Distinct .lp instances batch created in {INSTANCES_DIR}")
