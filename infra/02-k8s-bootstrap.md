@@ -5,7 +5,7 @@ This guide describes the commands to be executed on the **Master** and **Worker*
 ---
 
 ## 1. CMC Cluster Configuration (Consumer)
-**Nodes:** `CMCcluster` (10.3.3.138) and `cmc-worker1` (10.3.3.156)
+**Nodes:** `CMCcluster` (10.3.2.161) and `cmc-worker1` (10.3.2.162)
 
 ### On CMCcluster (Master):
 
@@ -33,14 +33,14 @@ This guide describes the commands to be executed on the **Master** and **Worker*
 1.  **Join the cluster:**
     Use the `kubeadm join` command that was generated on the **CMCcluster** screen after the `init`. The command will look like this:
     ```bash
-    sudo kubeadm join 10.3.3.138:6443 --token <CMC_TOKEN> \
+    sudo kubeadm join 10.3.2.161:6443 --token <CMC_TOKEN> \
         --discovery-token-ca-cert-hash sha256:<CMC_HASH>
     ```
 
 ---
 
 ## 2. Member Cluster Configuration (Provider)
-**Nodes:** `membercluster` (10.3.3.74) and `memberworker` (10.3.1.38)
+**Nodes:** `membercluster` (10.3.2.163) and `memberworker` (10.3.2.164)
 
 ### On membercluster (Master):
 
@@ -66,7 +66,7 @@ This guide describes the commands to be executed on the **Master** and **Worker*
 1.  **Join the cluster:**
     Use the `kubeadm join` command generated on the **membercluster** screen:
     ```bash
-    sudo kubeadm join 10.3.3.74:6443 --token <MEMBER_TOKEN> \
+    sudo kubeadm join 10.3.2.163:6443 --token <MEMBER_TOKEN> \
         --discovery-token-ca-cert-hash sha256:<MEMBER_HASH>
     ```
 

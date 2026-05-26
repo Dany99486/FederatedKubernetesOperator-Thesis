@@ -11,7 +11,7 @@ opencost:
       enabled: false
     external:
       enabled: true
-      url: "http://10.3.3.138:30090"
+      url: "http://10.3.3.138:30090" #Todo: Atualizar para o novo IP(10.3.2.161)
 
 service:
   type: NodePort    # Allows CMC to access easily via IP

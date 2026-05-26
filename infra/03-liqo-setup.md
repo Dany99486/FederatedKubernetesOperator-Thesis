@@ -11,7 +11,7 @@ Liqo must be installed on the **Master** nodes of both clusters. The installer w
 ### On CMCcluster (Consumer):
 
 ```bash
-liqoctl install kubeadm --cluster-id cmc-cluster
+liqoctl install kubeadm --cluster-id cmccluster
 
 ```
 
