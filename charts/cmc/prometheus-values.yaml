@@ -9,6 +9,6 @@ prometheus:
       - job_name: 'opencost-member-cluster'
         static_configs:
           # O Prometheus vai buscar os dados à porta correta do OpenCost!
-          - targets: ['10.3.1.38:30560'] #Todo: Atualizar para  o novo IP 10.3.2.161
+          - targets: ['10.3.2.163:30093'] #Todo: Atualizar para  o novo IP 10.3.2.164
         honor_labels: true
         scrape_interval: 15s

@@ -11,9 +11,13 @@ opencost:
       enabled: false
     external:
       enabled: true
-      url: "http://10.3.3.138:30090" #Todo: Atualizar para o novo IP(10.3.2.161)
+      url: "http://10.3.2.161:30090"
 
 service:
-  type: NodePort    # Allows CMC to access easily via IP
-  port: 9003
-  nodePort: 30093
+  type: NodePort
+  extraPorts:
+    - name: api-scrape
+      port: 9004
+      targetPort: 9003
+      nodePort: 30093
+      protocol: TCP
