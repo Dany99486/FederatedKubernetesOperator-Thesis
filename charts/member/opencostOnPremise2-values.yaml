@@ -1,0 +1,23 @@
+opencost:
+  customPricing:
+    enabled: true
+    costModel:
+      cpu: "0.025"     # Cost in € per vCPU/hour
+      ram: "0.012"     # Cost in € per GB/hour
+      storage: "0.005"
+  
+  prometheus:
+    internal:
+      enabled: false
+    external:
+      enabled: true
+      url: "http://10.3.2.161:30090"
+
+service:
+  type: NodePort
+  extraPorts:
+    - name: api-scrape
+      port: 9004
+      targetPort: 9003
+      nodePort: 30093
+      protocol: TCP

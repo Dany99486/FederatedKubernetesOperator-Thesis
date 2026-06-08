@@ -8,6 +8,14 @@ This guide describes the process of installing Liqo and establishing peering bet
 
 Liqo must be installed on the **Master** nodes of both clusters. The installer will automatically detect available Worker nodes to host the infrastructure components.
 
+To install run the following commands:
+
+```bash
+curl --fail -LS "https://github.com/liqotech/liqo/releases/download/v1.1.1/liqoctl-linux-amd64.tar.gz" | tar -xz
+sudo install -o root -g root -m 0755 liqoctl /usr/local/bin/liqoctl
+
+```
+
 ### On CMCcluster (Consumer):
 
 ```bash
