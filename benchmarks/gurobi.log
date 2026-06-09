@@ -1,0 +1,4480 @@
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:15 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.0.lp
+Reading time = 0.01 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0x5625a5e4
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 1e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 1047 rows and 1976 columns
+Presolve time: 0.07s
+Presolved: 9 rows, 28 columns, 36 nonzeros
+Variable types: 8 continuous, 20 integer (12 binary)
+Found heuristic solution: objective 14071.590000
+Found heuristic solution: objective 13971.590000
+Found heuristic solution: objective 13965.810000
+
+Root relaxation: objective 1.335505e+04, 10 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 13355.0484    0    9 13965.8100 13355.0484  4.37%     -    0s
+H    0     0                    13463.810000 13355.0484  0.81%     -    0s
+H    0     0                    13436.550000 13355.0484  0.61%     -    0s
+H    0     0                    13434.130000 13355.0484  0.59%     -    0s
+     0     0          -    0      13434.1300 13433.3761  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 9
+
+Explored 1 nodes (18 simplex iterations) in 0.08 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 6: 13434.1 13436.5 13463.8 ... 14071.6
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.343413000000e+04, best bound 1.343337613500e+04, gap 0.0056%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.1.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x949dc65b
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 9e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (908 binary)
+Found heuristic solution: objective 39076.752320
+Found heuristic solution: objective 39067.816330
+Found heuristic solution: objective 39042.517890
+Found heuristic solution: objective 39016.585270
+Found heuristic solution: objective 39008.386010
+
+Root relaxation: objective 1.138123e+04, 1018 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 11381.2283    0  122 39008.3860 11381.2283  70.8%     -    0s
+H    0     0                    13591.577770 11381.2283  16.3%     -    0s
+H    0     0                    12861.631770 11381.2283  11.5%     -    0s
+H    0     0                    12498.305290 11381.2283  8.94%     -    0s
+*    0     0               0    12331.467650 12331.4676  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 143
+
+Explored 1 nodes (1124 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 12331.5 12498.3 12861.6 ... 39076.8
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.233146765000e+04, best bound 1.233146765000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.1.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.2.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x8cdc5cd3
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (908 binary)
+Found heuristic solution: objective 34797.604640
+Found heuristic solution: objective 34790.152660
+Found heuristic solution: objective 34767.295780
+Found heuristic solution: objective 34745.520540
+Found heuristic solution: objective 34745.364000
+
+Root relaxation: objective 1.038474e+04, 1019 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 10384.7399    0  122 34745.3640 10384.7399  70.1%     -    0s
+H    0     0                    12089.471420 10384.7399  14.1%     -    0s
+H    0     0                    11692.865620 10384.7399  11.2%     -    0s
+H    0     0                    11374.372660 10384.7399  8.70%     -    0s
+*    0     0               0    11228.507340 11228.5073  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 143
+
+Explored 1 nodes (1125 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 11228.5 11374.4 11692.9 ... 34797.6
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.122850734000e+04, best bound 1.122850734000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.2.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.3.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x12a8b2dc
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 7e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (908 binary)
+Found heuristic solution: objective 30518.456960
+Found heuristic solution: objective 30512.488990
+Found heuristic solution: objective 30492.073670
+Found heuristic solution: objective 30474.455810
+Found heuristic solution: objective 30473.406000
+
+Root relaxation: objective 9.387677e+03, 1019 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 9387.67737    0  122 30473.4060 9387.67737  69.2%     -    0s
+H    0     0                    10838.215280 9387.67737  13.4%     -    0s
+H    0     0                    10523.548640 9387.67737  10.8%     -    0s
+H    0     0                    10249.945810 9387.67737  8.41%     -    0s
+*    0     0               0    10124.975870 10124.9759  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 138
+
+Explored 1 nodes (1126 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 10125 10249.9 10523.5 ... 30518.5
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.012497587000e+04, best bound 1.012497587000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.3.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.4.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x66eb7eba
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 6e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (908 binary)
+Found heuristic solution: objective 26239.309280
+Found heuristic solution: objective 26234.825320
+Found heuristic solution: objective 26216.851560
+Found heuristic solution: objective 26203.391080
+Found heuristic solution: objective 26201.448000
+
+Root relaxation: objective 8.388338e+03, 1019 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 8388.33759    0  122 26201.4480 8388.33759  68.0%     -    0s
+H    0     0                    9728.6038800 8388.33759  13.8%     -    0s
+H    0     0                    9385.6904800 8388.33759  10.6%     -    0s
+H    0     0                    9134.2104800 8388.33759  8.17%     -    0s
+*    0     0               0    9019.3841200 9019.38412  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 138
+
+Explored 1 nodes (1125 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 9019.38 9134.21 9385.69 ... 26239.3
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.019384120000e+03, best bound 9.019384120000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.4.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.5.lp
+Reading time = 0.01 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x4e7b1f26
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 5e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (908 binary)
+Found heuristic solution: objective 21960.161600
+Found heuristic solution: objective 21957.161650
+Found heuristic solution: objective 21941.629450
+Found heuristic solution: objective 21932.326350
+Found heuristic solution: objective 21929.490000
+
+Root relaxation: objective 7.387274e+03, 1019 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 7387.27411    0  122 21929.4900 7387.27411  66.3%     -    0s
+H    0     0                    8615.4603500 7387.27411  14.3%     -    0s
+H    0     0                    8206.4293500 7387.27411  10.0%     -    0s
+H    0     0                    7994.2054000 7387.27411  7.59%     -    0s
+*    0     0               0    7912.2336500 7912.23365  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 143
+
+Explored 1 nodes (1125 simplex iterations) in 0.06 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 7912.23 7994.21 8206.43 ... 21960.2
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.912233650000e+03, best bound 7.912233650000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.5.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.6.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x48173581
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 4e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (908 binary)
+Found heuristic solution: objective 17681.013920
+Found heuristic solution: objective 17679.497980
+Found heuristic solution: objective 17666.407340
+Found heuristic solution: objective 17661.261620
+Found heuristic solution: objective 17657.532000
+
+Root relaxation: objective 6.383776e+03, 1018 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6383.77592    0  123 17657.5320 6383.77592  63.8%     -    0s
+H    0     0                    7414.1641800 6383.77592  13.9%     -    0s
+H    0     0                    7043.0477400 6383.77592  9.36%     -    0s
+H    0     0                    6865.9250800 6383.77592  7.02%     -    0s
+*    0     0               0    6802.8225800 6802.82258  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 134
+
+Explored 1 nodes (1120 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 6802.82 6865.93 7043.05 ... 17681
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.802822580000e+03, best bound 6.802822580000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.6.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.7.lp
+Reading time = 0.01 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xb4f0f502
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 3e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (908 binary)
+Found heuristic solution: objective 13401.866240
+Found heuristic solution: objective 13401.834310
+Found heuristic solution: objective 13391.185230
+Found heuristic solution: objective 13390.196890
+Found heuristic solution: objective 13385.574000
+
+Root relaxation: objective 5.373528e+03, 1018 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 5373.52846    0  124 13385.5740 5373.52846  59.9%     -    0s
+H    0     0                    6050.3196500 5373.52846  11.2%     -    0s
+H    0     0                    5849.8379400 5373.52846  8.14%     -    0s
+H    0     0                    5731.2970000 5373.52846  6.24%     -    0s
+*    0     0               0    5688.0361600 5688.03616  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 130
+
+Explored 1 nodes (1120 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 5688.04 5731.3 5849.84 ... 13401.9
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.688036160000e+03, best bound 5.688036160000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.7.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.8.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x09cafc07
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (908 binary)
+Found heuristic solution: objective 9122.7185600
+Found heuristic solution: objective 9115.9631200
+Found heuristic solution: objective 9113.6160000
+
+Root relaxation: objective 4.350358e+03, 1012 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4350.35791    0  124 9113.61600 4350.35791  52.3%     -    0s
+H    0     0                    4839.2233600 4350.35791  10.1%     -    0s
+H    0     0                    4643.2956800 4350.35791  6.31%     -    0s
+H    0     0                    4584.0303200 4350.35791  5.10%     -    0s
+*    0     0               0    4559.0055200 4559.00552  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 134
+
+Explored 1 nodes (1112 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 7: 4559.01 4584.03 4643.3 ... 9122.72
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.559005520000e+03, best bound 4.559005520000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.8.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.9.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x35f0f0f2
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 1e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (908 binary)
+Found heuristic solution: objective 4843.5708800
+Found heuristic solution: objective 4840.7410100
+
+Root relaxation: objective 3.285085e+03, 993 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 3285.08496    0  120 4840.74101 3285.08496  32.1%     -    0s
+H    0     0                    3595.8450000 3285.08496  8.64%     -    0s
+H    0     0                    3395.7998200 3285.08496  3.26%     -    0s
+H    0     0                    3382.8041000 3285.08496  2.89%     -    0s
+H    0     0                    3382.7003300 3285.08496  2.89%     -    0s
+H    0     0                    3382.3291300 3285.08496  2.88%     -    0s
+H    0     0                    3381.5933100 3285.08496  2.85%     -    0s
+*    0     0               0    3380.3258300 3380.32583  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 131
+
+Explored 1 nodes (1094 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 3380.33 3381.59 3382.33 ... 4843.57
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.380325830000e+03, best bound 3.380325830000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.9.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_1.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0x293f2ecf
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-03, 2e+04]
+
+Found heuristic solution: objective 2319.7631000
+Presolve removed 1056 rows and 2004 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 2 available processors)
+
+Solution count 2: 564.423 2319.76 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.644232000000e+02, best bound 5.644232000000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_1.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0x9bdd0fdf
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 1e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 1048 rows and 1977 columns
+Presolve time: 0.04s
+Presolved: 8 rows, 27 columns, 34 nonzeros
+Variable types: 6 continuous, 21 integer (13 binary)
+Found heuristic solution: objective 13591.970000
+Found heuristic solution: objective 13501.400000
+
+Root relaxation: objective 1.308776e+04, 9 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 13087.7567    0    8 13501.4000 13087.7567  3.06%     -    0s
+H    0     0                    13174.840000 13087.7567  0.66%     -    0s
+H    0     0                    13149.310000 13087.7567  0.47%     -    0s
+H    0     0                    13118.940000 13087.7567  0.24%     -    0s
+
+Cutting planes:
+  MIR: 1
+
+Explored 1 nodes (9 simplex iterations) in 0.04 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 5: 13118.9 13149.3 13174.8 ... 13592
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.311894000000e+04, best bound 1.311894000000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.1.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x8325ddae
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 9e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (902 binary)
+Found heuristic solution: objective 40476.543850
+Found heuristic solution: objective 40446.249780
+Found heuristic solution: objective 40440.821020
+Found heuristic solution: objective 40434.882390
+Found heuristic solution: objective 40402.306300
+
+Root relaxation: objective 1.121126e+04, 1023 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 11211.2605    0  136 40402.3063 11211.2605  72.3%     -    0s
+H    0     0                    13295.721250 11211.2605  15.7%     -    0s
+H    0     0                    12395.362590 11211.2605  9.55%     -    0s
+H    0     0                    12240.486980 11211.2605  8.41%     -    0s
+H    0     0                    12212.087410 11211.2605  8.20%     -    0s
+H    0     0                    12204.286530 11211.2605  8.14%     -    0s
+H    0     0                    12201.971060 11211.2605  8.12%     -    0s
+*    0     0               0    12059.220240 12059.2202  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 21
+  MIR: 110
+
+Explored 1 nodes (1132 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 12059.2 12202 12204.3 ... 40440.8
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.205922024000e+04, best bound 1.205922024000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.1.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.2.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x7974466e
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (902 binary)
+Found heuristic solution: objective 36045.917700
+Found heuristic solution: objective 36019.249560
+Found heuristic solution: objective 36014.432040
+Found heuristic solution: objective 36009.694780
+Found heuristic solution: objective 35980.122600
+
+Root relaxation: objective 1.024533e+04, 1023 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 10245.3312    0  136 35980.1226 10245.3312  71.5%     -    0s
+H    0     0                    12028.653160 10245.3312  14.8%     -    0s
+H    0     0                    11291.617960 10245.3312  9.27%     -    0s
+H    0     0                    11136.312500 10245.3312  8.00%     -    0s
+H    0     0                    11111.633360 10245.3312  7.80%     -    0s
+H    0     0                    11104.871600 10245.3312  7.74%     -    0s
+H    0     0                    11103.300660 10245.3312  7.73%     -    0s
+*    0     0               0    10998.553260 10998.5533  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 21
+  MIR: 110
+
+Explored 1 nodes (1132 simplex iterations) in 0.04 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 10998.6 11103.3 11104.9 ... 36014.4
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.099855326000e+04, best bound 1.099855326000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.2.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.3.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xc5c52de4
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 7e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (902 binary)
+Found heuristic solution: objective 31615.291550
+Found heuristic solution: objective 31592.249340
+Found heuristic solution: objective 31588.043060
+Found heuristic solution: objective 31584.507170
+Found heuristic solution: objective 31557.938900
+
+Root relaxation: objective 9.278088e+03, 1019 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 9278.08841    0  137 31557.9389 9278.08841  70.6%     -    0s
+H    0     0                    11199.719340 9278.08841  17.2%     -    0s
+H    0     0                    10231.545750 9278.08841  9.32%     -    0s
+H    0     0                    10054.478700 9278.08841  7.72%     -    0s
+H    0     0                    10033.519990 9278.08841  7.53%     -    0s
+H    0     0                    10027.797350 9278.08841  7.48%     -    0s
+H    0     0                    10026.970940 9278.08841  7.47%     -    0s
+*    0     0               0    9936.6204200 9936.62042  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 21
+  MIR: 110
+
+Explored 1 nodes (1128 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 9936.62 10027 10027.8 ... 31588
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.936620420000e+03, best bound 9.936620420000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.3.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.4.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xa829248f
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 6e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (902 binary)
+Found heuristic solution: objective 27184.665400
+Found heuristic solution: objective 27165.249120
+Found heuristic solution: objective 27161.654080
+Found heuristic solution: objective 27159.319560
+Found heuristic solution: objective 27135.755200
+
+Root relaxation: objective 8.309952e+03, 1020 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 8309.95150    0  137 27135.7552 8309.95150  69.4%     -    0s
+H    0     0                    9814.7215200 8309.95150  15.3%     -    0s
+H    0     0                    9119.1574000 8309.95150  8.87%     -    0s
+H    0     0                    8971.8780000 8309.95150  7.38%     -    0s
+H    0     0                    8954.6397200 8309.95150  7.20%     -    0s
+H    0     0                    8949.9562000 8309.95150  7.15%     -    0s
+H    0     0                    8949.8743200 8309.95150  7.15%     -    0s
+*    0     0               0    8873.9269600 8873.92696  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 21
+  MIR: 110
+
+Explored 1 nodes (1128 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 8873.93 8949.87 8949.96 ... 27161.7
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.873926960000e+03, best bound 8.873926960000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.4.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:16 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.5.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xbd107855
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 5e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (902 binary)
+Found heuristic solution: objective 22754.039250
+Found heuristic solution: objective 22738.248900
+Found heuristic solution: objective 22735.265100
+Found heuristic solution: objective 22734.131950
+Found heuristic solution: objective 22713.571500
+
+Root relaxation: objective 7.340591e+03, 1020 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 7340.59099    0  137 22713.5715 7340.59099  67.7%     -    0s
+H    0     0                    9244.0978000 7340.59099  20.6%     -    0s
+H    0     0                    8005.4528000 7340.59099  8.31%     -    0s
+H    0     0                    7887.9610500 7340.59099  6.94%     -    0s
+H    0     0                    7874.4432000 7340.59099  6.78%     -    0s
+H    0     0                    7870.7988000 7340.59099  6.74%     -    0s
+*    0     0               0    7809.0939000 7809.09390  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 21
+  MIR: 110
+
+Explored 1 nodes (1128 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 7809.09 7870.8 7874.44 ... 22738.2
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.809093900000e+03, best bound 7.809093900000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.5.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.6.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x2798c236
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 4e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (902 binary)
+Found heuristic solution: objective 18323.413100
+Found heuristic solution: objective 18311.248680
+Found heuristic solution: objective 18308.876120
+Found heuristic solution: objective 18307.936520
+Found heuristic solution: objective 18291.387800
+
+Root relaxation: objective 6.368434e+03, 1022 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6368.43430    0  137 18291.3878 6368.43430  65.2%     -    0s
+H    0     0                    7604.6161600 6368.43430  16.3%     -    0s
+H    0     0                    6888.8583800 6368.43430  7.55%     -    0s
+H    0     0                    6793.7333800 6368.43430  6.26%     -    0s
+H    0     0                    6783.9359600 6368.43430  6.12%     -    0s
+H    0     0                    6781.3306800 6368.43430  6.09%     -    0s
+*    0     0               0    6740.7355600 6740.73556  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 21
+  MIR: 110
+
+Explored 1 nodes (1129 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 6740.74 6781.33 6783.94 ... 18311.2
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.740735560000e+03, best bound 6.740735560000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.6.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.7.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x27d89ac2
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 3e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (902 binary)
+Found heuristic solution: objective 13892.786950
+Found heuristic solution: objective 13884.248460
+Found heuristic solution: objective 13882.487140
+Found heuristic solution: objective 13869.204100
+
+Root relaxation: objective 5.386652e+03, 1023 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 5386.65226    0  136 13869.2041 5386.65226  61.2%     -    0s
+H    0     0                    6109.3974200 5386.65226  11.8%     -    0s
+H    0     0                    5762.1497900 5386.65226  6.52%     -    0s
+H    0     0                    5699.7880200 5386.65226  5.49%     -    0s
+H    0     0                    5693.7110300 5386.65226  5.39%     -    0s
+H    0     0                    5692.1448700 5386.65226  5.37%     -    0s
+*    0     0               0    5663.1876700 5663.18767  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 21
+  MIR: 110
+
+Explored 1 nodes (1131 simplex iterations) in 0.04 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 5663.19 5692.14 5693.71 ... 13892.8
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.663187670000e+03, best bound 5.663187670000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.7.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.8.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x69ff92da
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (902 binary)
+Found heuristic solution: objective 9462.1608000
+Found heuristic solution: objective 9457.2482400
+Found heuristic solution: objective 9456.0981600
+Found heuristic solution: objective 9447.0204000
+
+Root relaxation: objective 4.389946e+03, 1017 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4389.94576    0  135 9447.02040 4389.94576  53.5%     -    0s
+H    0     0                    4837.0728000 4389.94576  9.24%     -    0s
+H    0     0                    4629.4722400 4389.94576  5.17%     -    0s
+H    0     0                    4590.7924000 4389.94576  4.37%     -    0s
+H    0     0                    4585.6999200 4389.94576  4.27%     -    0s
+*    0     0               0    4568.9952000 4568.99520  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 21
+  MIR: 110
+
+Explored 1 nodes (1126 simplex iterations) in 0.04 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 4569 4585.7 4590.79 ... 9462.16
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.568995200000e+03, best bound 4.568995200000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.8.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.9.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xc091ecc7
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 1e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 83 continuous, 1868 integer (902 binary)
+Found heuristic solution: objective 5031.5346500
+Found heuristic solution: objective 5030.2480200
+Found heuristic solution: objective 5029.7009700
+Found heuristic solution: objective 5024.8367000
+
+Root relaxation: objective 3.345531e+03, 995 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 3345.53061    0  129 5024.83670 3345.53061  33.4%     -    0s
+H    0     0                    3653.9362600 3345.53061  8.44%     -    0s
+H    0     0                    3441.0950900 3345.53061  2.78%     -    0s
+H    0     0                    3429.8237100 3345.53061  2.46%     -    0s
+H    0     0                    3427.7501600 3345.53061  2.40%     -    0s
+*    0     0               0    3422.0575700 3422.05757  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 108
+
+Explored 1 nodes (1098 simplex iterations) in 0.05 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 3422.06 3427.75 3429.82 ... 5031.53
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.422057570000e+03, best bound 3.422057570000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.9.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_1.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0xaf157cfa
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [9e-04, 2e+04]
+
+Found heuristic solution: objective 2419.2425000
+Presolve removed 1056 rows and 2004 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 2 available processors)
+
+Solution count 2: 600.909 2419.24 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.009085000000e+02, best bound 6.009085000000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_1.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0x086d05bd
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 1e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 1047 rows and 1976 columns
+Presolve time: 0.03s
+Presolved: 9 rows, 28 columns, 36 nonzeros
+Variable types: 5 continuous, 23 integer (12 binary)
+Found heuristic solution: objective 14291.250000
+Found heuristic solution: objective 14205.510000
+
+Root relaxation: objective 1.365987e+04, 11 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 13659.8692    0    9 14205.5100 13659.8692  3.84%     -    0s
+H    0     0                    13874.860000 13659.8692  1.55%     -    0s
+H    0     0                    13756.960000 13659.8692  0.71%     -    0s
+H    0     0                    13750.210000 13659.8692  0.66%     -    0s
+H    0     0                    13747.820000 13659.8692  0.64%     -    0s
+H    0     0                    13713.230000 13659.8692  0.39%     -    0s
+     0     0     cutoff    0      13713.2300 13713.2300  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 9
+
+Explored 1 nodes (19 simplex iterations) in 0.03 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 7: 13713.2 13747.8 13750.2 ... 14291.2
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.371323000000e+04, best bound 1.371323000000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.1.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x1aab67b3
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 9e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 63 continuous, 1888 integer (925 binary)
+Found heuristic solution: objective 38527.354130
+Found heuristic solution: objective 38475.029130
+Found heuristic solution: objective 38462.236690
+Found heuristic solution: objective 38451.321000
+Found heuristic solution: objective 38416.614540
+
+Root relaxation: objective 1.196260e+04, 1026 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 11962.5971    0   96 38416.6145 11962.5971  68.9%     -    0s
+H    0     0                    13424.552160 11962.5971  10.9%     -    0s
+H    0     0                    12751.086190 11962.5971  6.18%     -    0s
+H    0     0                    12630.996440 11962.5971  5.29%     -    0s
+H    0     0                    12625.204590 11962.5971  5.25%     -    0s
+H    0     0                    12621.651600 11962.5971  5.22%     -    0s
+*    0     0               0    12577.357270 12577.3573  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 15
+  MIR: 91
+
+Explored 1 nodes (1099 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 12577.4 12621.7 12625.2 ... 38475
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.257735727000e+04, best bound 1.257735727000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.1.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.2.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x09214d33
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 63 continuous, 1888 integer (925 binary)
+Found heuristic solution: objective 34310.318260
+Found heuristic solution: objective 34264.598260
+Found heuristic solution: objective 34252.683380
+Found heuristic solution: objective 34243.992000
+Found heuristic solution: objective 34213.379080
+
+Root relaxation: objective 1.089366e+04, 1026 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 10893.6556    0   96 34213.3791 10893.6556  68.2%     -    0s
+H    0     0                    11876.831060 10893.6556  8.28%     -    0s
+H    0     0                    11591.015180 10893.6556  6.02%     -    0s
+H    0     0                    11486.855680 10893.6556  5.16%     -    0s
+H    0     0                    11482.181980 10893.6556  5.13%     -    0s
+H    0     0                    11478.986000 10893.6556  5.10%     -    0s
+*    0     0               0    11440.417340 11440.4173  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 15
+  MIR: 91
+
+Explored 1 nodes (1099 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 11440.4 11479 11482.2 ... 34264.6
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.144041734000e+04, best bound 1.144041734000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.2.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.3.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xa5503918
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 7e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 63 continuous, 1888 integer (925 binary)
+Found heuristic solution: objective 30093.282390
+Found heuristic solution: objective 30054.167390
+Found heuristic solution: objective 30054.018490
+Found heuristic solution: objective 30036.663000
+Found heuristic solution: objective 30010.143620
+
+Root relaxation: objective 9.823373e+03, 1024 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 9823.37289    0   96 30010.1436 9823.37289  67.3%     -    0s
+H    0     0                    11336.648150 9823.37289  13.3%     -    0s
+H    0     0                    10429.631260 9823.37289  5.81%     -    0s
+H    0     0                    10341.402010 9823.37289  5.01%     -    0s
+H    0     0                    10337.846460 9823.37289  4.98%     -    0s
+H    0     0                    10335.007490 9823.37289  4.95%     -    0s
+*    0     0               0    10302.164500 10302.1645  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 15
+  MIR: 91
+
+Explored 1 nodes (1097 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 10302.2 10335 10337.8 ... 30054.2
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.030216450000e+04, best bound 1.030216450000e+04, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.3.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.4.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x2c2f5b65
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 6e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 63 continuous, 1888 integer (925 binary)
+Found heuristic solution: objective 25876.246520
+Found heuristic solution: objective 25843.736520
+Found heuristic solution: objective 25842.751320
+Found heuristic solution: objective 25829.334000
+Found heuristic solution: objective 25806.908160
+
+Root relaxation: objective 8.751839e+03, 1024 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 8751.83946    0   96 25806.9082 8751.83946  66.1%     -    0s
+H    0     0                    9583.5241200 8751.83946  8.68%     -    0s
+H    0     0                    9267.1127600 8751.83946  5.56%     -    0s
+H    0     0                    9194.8137600 8751.83946  4.82%     -    0s
+H    0     0                    9192.3763600 8751.83946  4.79%     -    0s
+H    0     0                    9189.8944000 8751.83946  4.77%     -    0s
+*    0     0               0    9162.7770800 9162.77708  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 15
+  MIR: 91
+
+Explored 1 nodes (1097 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 9162.78 9189.89 9192.38 ... 25843.7
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 9.162777080000e+03, best bound 9.162777080000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.4.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.5.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x57f5e103
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 5e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 63 continuous, 1888 integer (925 binary)
+Found heuristic solution: objective 21659.210650
+Found heuristic solution: objective 21633.305650
+Found heuristic solution: objective 21631.484150
+Found heuristic solution: objective 21622.005000
+Found heuristic solution: objective 21603.672700
+
+Root relaxation: objective 7.678195e+03, 1024 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 7678.19487    0   95 21603.6727 7678.19487  64.5%     -    0s
+H    0     0                    8613.8751000 7678.19487  10.9%     -    0s
+H    0     0                    8102.4378000 7678.19487  5.24%     -    0s
+H    0     0                    8045.4602000 7678.19487  4.56%     -    0s
+H    0     0                    8044.1409500 7678.19487  4.55%     -    0s
+H    0     0                    8042.0160000 7678.19487  4.52%     -    0s
+*    0     0               0    8020.8117500 8020.81175  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 15
+  MIR: 96
+
+Explored 1 nodes (1097 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 8020.81 8042.02 8044.14 ... 21633.3
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.020811750000e+03, best bound 8.020811750000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.5.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.6.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xea0775f9
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 4e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 63 continuous, 1888 integer (925 binary)
+Found heuristic solution: objective 17442.174780
+Found heuristic solution: objective 17422.874780
+Found heuristic solution: objective 17420.216980
+Found heuristic solution: objective 17414.676000
+Found heuristic solution: objective 17400.437240
+
+Root relaxation: objective 6.601534e+03, 1024 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 6601.53392    0   95 17400.4372 6601.53392  62.1%     -    0s
+H    0     0                    7318.8398800 6601.53392  9.80%     -    0s
+H    0     0                    6934.8086000 6601.53392  4.81%     -    0s
+H    0     0                    6892.5034800 6601.53392  4.22%     -    0s
+H    0     0                    6892.3023800 6601.53392  4.22%     -    0s
+H    0     0                    6890.5344400 6601.53392  4.19%     -    0s
+*    0     0               0    6875.3173400 6875.31734  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 15
+  MIR: 96
+
+Explored 1 nodes (1097 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 6875.32 6890.53 6892.3 ... 17422.9
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.875317340000e+03, best bound 6.875317340000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.6.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.7.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x7a24bf88
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 3e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 63 continuous, 1888 integer (925 binary)
+Found heuristic solution: objective 13225.138910
+Found heuristic solution: objective 13212.443910
+Found heuristic solution: objective 13208.949810
+Found heuristic solution: objective 13207.347000
+Found heuristic solution: objective 13197.201780
+
+Root relaxation: objective 5.515884e+03, 1026 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 5515.88414    0   95 13197.2018 5515.88414  58.2%     -    0s
+H    0     0                    5981.5915600 5515.88414  7.79%     -    0s
+H    0     0                    5758.2288800 5515.88414  4.21%     -    0s
+H    0     0                    5736.5209800 5515.88414  3.85%     -    0s
+H    0     0                    5730.1023600 5515.88414  3.74%     -    0s
+*    0     0               0    5720.8724100 5720.87241  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 15
+  MIR: 96
+
+Explored 1 nodes (1099 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 10: 5720.87 5730.1 5736.52 ... 13225.1
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.720872410000e+03, best bound 5.720872410000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.7.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.8.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x575d2aec
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 2e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 63 continuous, 1888 integer (925 binary)
+Found heuristic solution: objective 9008.1030400
+Found heuristic solution: objective 9002.0130400
+Found heuristic solution: objective 8997.6826400
+
+Root relaxation: objective 4.413705e+03, 1016 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 4413.70546    0   96 8997.68264 4413.70546  50.9%     -    0s
+H    0     0                    4768.7568800 4413.70546  7.45%     -    0s
+H    0     0                    4565.4553600 4413.70546  3.32%     -    0s
+H    0     0                    4556.0664800 4413.70546  3.12%     -    0s
+H    0     0                    4552.4952000 4413.70546  3.05%     -    0s
+*    0     0               0    4548.0572800 4548.05728  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 15
+  MIR: 96
+
+Explored 1 nodes (1089 simplex iterations) in 0.04 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 8: 4548.06 4552.5 4556.07 ... 9008.1
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 4.548057280000e+03, best bound 4.548057280000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.8.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.9.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xf09c76d1
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 1e+01]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 63 continuous, 1888 integer (925 binary)
+Found heuristic solution: objective 4791.0671700
+Found heuristic solution: objective 4790.2158600
+Found heuristic solution: objective 4786.4154700
+
+Root relaxation: objective 3.266164e+03, 994 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 3266.16445    0   94 4786.41547 3266.16445  31.8%     -    0s
+H    0     0                    3413.7606100 3266.16445  4.32%     -    0s
+H    0     0                    3329.1359800 3266.16445  1.89%     -    0s
+H    0     0                    3327.4746200 3266.16445  1.84%     -    0s
+H    0     0                    3324.0843600 3266.16445  1.74%     -    0s
+*    0     0               0    3323.3874500 3323.38745  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 14
+  MIR: 95
+
+Explored 1 nodes (1065 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 8: 3323.39 3324.08 3327.47 ... 4791.07
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.323387450000e+03, best bound 3.323387450000e+03, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.9.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 15:56:17 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_1.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0xd3d92466
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [3e-04, 2e+04]
+
+Found heuristic solution: objective 2274.7201000
+Presolve removed 1056 rows and 2004 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 2 available processors)
+
+Solution count 2: 574.031 2274.72 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.740313000000e+02, best bound 5.740313000000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_1.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:28 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0x213554b3
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Presolve removed 1045 rows and 1974 columns
+Presolve time: 0.03s
+Presolved: 11 rows, 30 columns, 40 nonzeros
+Variable types: 8 continuous, 22 integer (10 binary)
+Found heuristic solution: objective 336.3985000
+Found heuristic solution: objective 333.8985000
+Found heuristic solution: objective 333.0350000
+Found heuristic solution: objective 331.6387500
+
+Root relaxation: objective 3.164878e+02, 12 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  316.48780    0   11  331.63875  316.48780  4.57%     -    0s
+H    0     0                     320.8295000  316.48780  1.35%     -    0s
+H    0     0                     319.5717500  316.48780  0.97%     -    0s
+H    0     0                     319.3947500  316.48780  0.91%     -    0s
+H    0     0                     318.5557500  316.48780  0.65%     -    0s
+     0     0          -    0       318.55575  318.53512  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 11
+
+Explored 1 nodes (22 simplex iterations) in 0.04 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 8: 318.556 319.395 319.572 ... 336.399
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.185557500000e+02, best bound 3.185351224000e+02, gap 0.0065%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.1.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x98141bfa
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 90 continuous, 1861 integer (894 binary)
+Found heuristic solution: objective 1031.3832450
+
+Root relaxation: objective 4.970613e+02, 1014 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  497.06127    0  142 1031.38324  497.06127  51.8%     -    0s
+H    0     0                     566.2934750  497.06127  12.2%     -    0s
+H    0     0                     526.2304600  497.06127  5.54%     -    0s
+H    0     0                     523.1358600  497.06127  4.98%     -    0s
+H    0     0                     522.5918000  497.06127  4.89%     -    0s
+*    0     0               0     520.1088650  520.10886  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 117
+
+Explored 1 nodes (1125 simplex iterations) in 0.04 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 6: 520.109 522.592 523.136 ... 1031.38
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.201088650000e+02, best bound 5.201088650000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.1.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.2.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xad1ab781
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 90 continuous, 1861 integer (894 binary)
+Found heuristic solution: objective 982.7682400
+
+Root relaxation: objective 6.839759e+02, 983 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  683.97595    0  130  982.76824  683.97595  30.4%     -    0s
+H    0     0                     738.7315600  683.97595  7.41%     -    0s
+H    0     0                     703.5143200  683.97595  2.78%     -    0s
+H    0     0                     702.9504400  683.97595  2.70%     -    0s
+H    0     0                     702.5565000  683.97595  2.64%     -    0s
+*    0     0               0     701.0669800  701.06698  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 16
+  MIR: 128
+
+Explored 1 nodes (1096 simplex iterations) in 0.04 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 6: 701.067 702.556 702.95 ... 982.768
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.010669800000e+02, best bound 7.010669800000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.2.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.3.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x46bafb45
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Found heuristic solution: objective 1111.3210400
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Found heuristic solution: objective 1111.3822900
+Variable types: 90 continuous, 1861 integer (894 binary)
+Found heuristic solution: objective 1110.7820400
+
+Root relaxation: objective 8.222828e+02, 953 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  822.28277    0   78 1110.78204  822.28277  26.0%     -    0s
+H    0     0                     862.6039950  822.28277  4.67%     -    0s
+H    0     0                     831.8794200  822.28277  1.15%     -    0s
+H    0     0                     831.5174250  822.28277  1.11%     -    0s
+H    0     0                     830.3294850  822.28277  0.97%     -    0s
+     0     0          -    0       830.32948  830.26522  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 4
+  MIR: 75
+
+Explored 1 nodes (1025 simplex iterations) in 0.03 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 7: 830.329 831.517 831.879 ... 1111.38
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.303294850000e+02, best bound 8.302652247680e+02, gap 0.0077%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.3.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.4.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xad98fb99
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Found heuristic solution: objective 1281.2607200
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Found heuristic solution: objective 1281.3132200
+Variable types: 90 continuous, 1861 integer (894 binary)
+Found heuristic solution: objective 1280.7987200
+
+Root relaxation: objective 8.545386e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  854.53859    0   36 1280.79872  854.53859  33.3%     -    0s
+H    0     0                     868.0976800  854.53859  1.56%     -    0s
+H    0     0                     856.7458900  854.53859  0.26%     -    0s
+     0     0          -    0       856.74589  856.67853  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 35
+
+Explored 1 nodes (982 simplex iterations) in 0.03 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 5: 856.746 868.098 1280.8 ... 1281.31
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.567458900000e+02, best bound 8.566785292480e+02, gap 0.0079%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.4.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.5.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x929b9bd5
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Found heuristic solution: objective 1451.2004000
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Found heuristic solution: objective 1451.2441500
+Variable types: 90 continuous, 1861 integer (894 binary)
+Found heuristic solution: objective 1450.8154000
+
+Root relaxation: objective 8.304788e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  830.47875    0   15 1450.81540  830.47875  42.8%     -    0s
+H    0     0                     836.1558250  830.47875  0.68%     -    0s
+H    0     0                     831.0011500  830.47875  0.06%     -    0s
+     0     0     cutoff    0       831.00115  831.00115  0.00%     -    0s
+
+Cutting planes:
+  MIR: 13
+
+Explored 1 nodes (951 simplex iterations) in 0.02 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 5: 831.001 836.156 1450.82 ... 1451.24
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.310011500000e+02, best bound 8.310011500000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.5.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.6.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xc2753c51
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Found heuristic solution: objective 1621.1400800
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Found heuristic solution: objective 1621.1750800
+Variable types: 90 continuous, 1861 integer (894 binary)
+Found heuristic solution: objective 1620.8320800
+
+Root relaxation: objective 7.874110e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  787.41096    0    5 1620.83208  787.41096  51.4%     -    0s
+H    0     0                     788.7918400  787.41096  0.18%     -    0s
+H    0     0                     787.5022200  787.41096  0.01%     -    0s
+
+Cutting planes:
+  MIR: 2
+
+Explored 1 nodes (951 simplex iterations) in 0.02 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 5: 787.502 788.792 1620.83 ... 1621.18
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.875022200000e+02, best bound 7.875022200000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.6.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.7.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x086d059e
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Found heuristic solution: objective 1804.7322800
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 90 continuous, 1861 integer (894 binary)
+Found heuristic solution: objective 1804.7048300
+
+Root relaxation: objective 7.396932e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     739.6932150  739.69321  0.00%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 3: 739.693 1804.7 1804.73 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.396932150000e+02, best bound 7.396932150000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.7.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.8.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x55e03471
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Found heuristic solution: objective 1975.9053200
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 90 continuous, 1861 integer (894 binary)
+Found heuristic solution: objective 1975.8870200
+
+Root relaxation: objective 6.910782e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     691.0782100  691.07821  0.00%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 3: 691.078 1975.89 1975.91 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.910782100000e+02, best bound 6.910782100000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.8.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_0.9.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x7c7ab38e
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Found heuristic solution: objective 2147.0783600
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 90 continuous, 1861 integer (894 binary)
+Found heuristic solution: objective 2147.0692100
+
+Root relaxation: objective 6.424632e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     642.4632050  642.46320  0.00%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 3: 642.463 2147.07 2147.08 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.424632050000e+02, best bound 6.424632050000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_0.9.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_1_alpha_1.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0xfc721905
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e-04, 2e+04]
+
+Presolve removed 1056 rows and 2004 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 2 available processors)
+
+Solution count 1: 593.848 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.938482000000e+02, best bound 5.938482000000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_1_alpha_1.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0x95c1305c
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Presolve removed 1046 rows and 1975 columns
+Presolve time: 0.04s
+Presolved: 10 rows, 29 columns, 38 nonzeros
+Variable types: 9 continuous, 20 integer (10 binary)
+Found heuristic solution: objective 349.6845000
+Found heuristic solution: objective 347.1845000
+Found heuristic solution: objective 346.8792500
+Found heuristic solution: objective 344.9422500
+
+Root relaxation: objective 3.301499e+02, 11 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  330.14990    0   10  344.94225  330.14990  4.29%     -    0s
+H    0     0                     334.5112500  330.14990  1.30%     -    0s
+H    0     0                     332.5750000  330.14990  0.73%     -    0s
+H    0     0                     331.8917500  330.14990  0.52%     -    0s
+     0     0          -    0       331.89175  331.86471  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 2
+  MIR: 9
+
+Explored 1 nodes (21 simplex iterations) in 0.04 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 7: 331.892 332.575 334.511 ... 349.685
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.318917500000e+02, best bound 3.318647073000e+02, gap 0.0081%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.1.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x40f2fcc6
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 92 continuous, 1859 integer (896 binary)
+Found heuristic solution: objective 1045.6436200
+Found heuristic solution: objective 1045.0415850
+Found heuristic solution: objective 1044.5296400
+Found heuristic solution: objective 1044.0208950
+Found heuristic solution: objective 1043.9838700
+
+Root relaxation: objective 5.091291e+02, 1006 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  509.12914    0  141 1043.98387  509.12914  51.2%     -    0s
+H    0     0                     566.3182300  509.12914  10.1%     -    0s
+H    0     0                     540.8152000  509.12914  5.86%     -    0s
+H    0     0                     536.8988250  509.12914  5.17%     -    0s
+*    0     0               0     532.9957050  532.99571  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 18
+  MIR: 131
+
+Explored 1 nodes (1118 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 532.996 536.899 540.815 ... 1045.64
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.329957050000e+02, best bound 5.329957050000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.1.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.2.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x45c497e4
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 92 continuous, 1859 integer (896 binary)
+Found heuristic solution: objective 985.8102400
+Found heuristic solution: objective 984.9907400
+Found heuristic solution: objective 984.9527800
+
+Root relaxation: objective 6.930818e+02, 982 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  693.08177    0  134  984.95278  693.08177  29.6%     -    0s
+H    0     0                     751.0466600  693.08177  7.72%     -    0s
+H    0     0                     715.8904800  693.08177  3.19%     -    0s
+H    0     0                     713.5029200  693.08177  2.86%     -    0s
+*    0     0               0     712.8142400  712.81424  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 15
+  MIR: 129
+
+Explored 1 nodes (1093 simplex iterations) in 0.05 seconds (0.03 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 7: 712.814 713.503 715.89 ... 985.81
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.128142400000e+02, best bound 7.128142400000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.2.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.3.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xe2068e0a
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 92 continuous, 1859 integer (896 binary)
+Found heuristic solution: objective 925.9768600
+Found heuristic solution: objective 925.3759200
+
+Root relaxation: objective 8.193002e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  819.30020    0   81  925.37592  819.30020  11.5%     -    0s
+H    0     0                     869.9605400  819.30020  5.82%     -    0s
+H    0     0                     831.0154100  819.30020  1.41%     -    0s
+H    0     0                     829.4954850  819.30020  1.23%     -    0s
+     0     0          -    0       829.49548  829.41726  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 2
+  MIR: 81
+
+Explored 1 nodes (1025 simplex iterations) in 0.04 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 5: 829.495 831.015 869.961 ... 925.977
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.294954850000e+02, best bound 8.294172613360e+02, gap 0.0094%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.3.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.4.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xd7cafa8e
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 92 continuous, 1859 integer (896 binary)
+Found heuristic solution: objective 866.1434800
+Found heuristic solution: objective 865.7990600
+
+Root relaxation: objective 8.338360e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  833.83603    0   40  865.79906  833.83603  3.69%     -    0s
+H    0     0                     852.6756900  833.83603  2.21%     -    0s
+H    0     0                     838.2373800  833.83603  0.53%     -    0s
+H    0     0                     837.9032000  833.83603  0.49%     -    0s
+H    0     0                     837.7573100  833.83603  0.47%     -    0s
+     0     0          -    0       837.75731  837.73884  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 1
+  MIR: 39
+
+Explored 1 nodes (987 simplex iterations) in 0.03 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 6: 837.757 837.903 838.237 ... 866.143
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.377573100000e+02, best bound 8.377388354520e+02, gap 0.0022%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.4.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.5.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x80dbfebd
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 92 continuous, 1859 integer (896 binary)
+Found heuristic solution: objective 806.3101000
+Found heuristic solution: objective 806.2222000
+
+Root relaxation: objective 7.997778e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  799.77779    0   19  806.22220  799.77779  0.80%     -    0s
+H    0     0                     800.6937750  799.77779  0.11%     -    0s
+     0     0          -    0       800.69377  800.63512  0.01%     -    0s
+
+Cutting planes:
+  MIR: 19
+
+Explored 1 nodes (963 simplex iterations) in 0.03 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 3: 800.694 806.222 806.31 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.006937750000e+02, best bound 8.006351238450e+02, gap 0.0073%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.5.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.6.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xbba53a5e
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 92 continuous, 1859 integer (896 binary)
+Found heuristic solution: objective 746.4767200
+
+Root relaxation: objective 7.459634e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  745.96345    0    3  746.47672  745.96345  0.07%     -    0s
+     0     0  745.97657    0    1  746.47672  745.97657  0.07%     -    0s
+H    0     0                     746.4172600  745.97657  0.06%     -    0s
+H    0     0                     746.0612200  745.97657  0.01%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.02 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 3: 746.061 746.417 746.477 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.460612200000e+02, best bound 7.460612200000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.6.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.7.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x9963acdf
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Found heuristic solution: objective 1790.9898350
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 92 continuous, 1859 integer (896 binary)
+
+Root relaxation: objective 6.866433e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     686.6433400  686.64334  0.00%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 2: 686.643 1790.99 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.866433400000e+02, best bound 6.866433400000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.7.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.8.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xd9f663f8
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Found heuristic solution: objective 1958.3769900
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 92 continuous, 1859 integer (896 binary)
+
+Root relaxation: objective 6.268100e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     626.8099600  626.80996  0.00%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 2: 626.81 1958.38 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.268099600000e+02, best bound 6.268099600000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.8.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:29 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_0.9.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xf9dffbcf
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Found heuristic solution: objective 2125.7641450
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 92 continuous, 1859 integer (896 binary)
+
+Root relaxation: objective 5.669766e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     566.9765800  566.97658  0.00%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 2: 566.977 2125.76 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.669765800000e+02, best bound 5.669765800000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_0.9.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_2_alpha_1.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0xbd182524
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [2e-04, 2e+04]
+
+Found heuristic solution: objective 2337.5853000
+Presolve removed 1056 rows and 2004 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 2 available processors)
+
+Solution count 2: 507.143 2337.59 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.071432000000e+02, best bound 5.071432000000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_2_alpha_1.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0xb8f30ecf
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 608.4115000
+Presolve removed 1046 rows and 1975 columns
+Presolve time: 0.03s
+Presolved: 10 rows, 29 columns, 38 nonzeros
+Found heuristic solution: objective 336.5822500
+Variable types: 9 continuous, 20 integer (11 binary)
+Found heuristic solution: objective 336.1577500
+
+Root relaxation: objective 3.198990e+02, 11 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  319.89901    0   10  336.15775  319.89901  4.84%     -    0s
+H    0     0                     321.9047500  319.89901  0.62%     -    0s
+     0     0          -    0       321.90475  321.88888  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 2
+  MIR: 9
+
+Explored 1 nodes (19 simplex iterations) in 0.04 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 4: 321.905 336.158 336.582 608.412 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 3.219047500000e+02, best bound 3.218888804500e+02, gap 0.0049%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.0.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.1.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x431efe86
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 783.2122000
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 101 continuous, 1850 integer (888 binary)
+Found heuristic solution: objective 782.7415000
+
+Root relaxation: objective 5.048203e+02, 1007 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  504.82026    0  152  782.74150  504.82026  35.5%     -    0s
+H    0     0                     563.5213550  504.82026  10.4%     -    0s
+H    0     0                     538.6582800  504.82026  6.28%     -    0s
+H    0     0                     537.7919550  504.82026  6.13%     -    0s
+H    0     0                     533.4112500  504.82026  5.36%     -    0s
+H    0     0                     532.7104350  504.82026  5.24%     -    0s
+H    0     0                     532.4441050  504.82026  5.19%     -    0s
+*    0     0               0     530.2702850  530.27028  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 22
+  MIR: 139
+
+Explored 1 nodes (1131 simplex iterations) in 0.04 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 9: 530.27 532.444 532.71 ... 783.212
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 5.302702850000e+02, best bound 5.302702850000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.1.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.2.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x3e69a954
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 958.0129000
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 101 continuous, 1850 integer (888 binary)
+Found heuristic solution: objective 957.5945000
+
+Root relaxation: objective 6.961922e+02, 986 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  696.19224    0  147  957.59450  696.19224  27.3%     -    0s
+H    0     0                     753.3053600  696.19224  7.58%     -    0s
+H    0     0                     719.6901200  696.19224  3.26%     -    0s
+H    0     0                     717.5787400  696.19224  2.98%     -    0s
+H    0     0                     717.1423200  696.19224  2.92%     -    0s
+H    0     0                     716.9306400  696.19224  2.89%     -    0s
+*    0     0               0     716.4913000  716.49130  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 20
+  MIR: 131
+
+Explored 1 nodes (1106 simplex iterations) in 0.04 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 8: 716.491 716.931 717.142 ... 958.013
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.164913000000e+02, best bound 7.164913000000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.2.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.3.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xb474bce0
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 1143.7654350
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 101 continuous, 1850 integer (888 binary)
+
+Root relaxation: objective 8.312581e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  831.25807    0   88 1143.76543  831.25807  27.3%     -    0s
+H    0     0                     874.5608400  831.25807  4.95%     -    0s
+H    0     0                     844.8296300  831.25807  1.61%     -    0s
+H    0     0                     844.4673150  831.25807  1.56%     -    0s
+H    0     0                     842.2881750  831.25807  1.31%     -    0s
+     0     0          -    0       842.28817  842.20616  0.01%     -    0s
+
+Cutting planes:
+  Gomory: 5
+  MIR: 86
+
+Explored 1 nodes (1031 simplex iterations) in 0.03 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 5: 842.288 844.467 844.83 ... 1143.77
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.422881750000e+02, best bound 8.422061593020e+02, gap 0.0097%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.3.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.4.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xa4338dc8
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 1320.1453300
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 101 continuous, 1850 integer (888 binary)
+
+Root relaxation: objective 8.664945e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  866.49451    0   51 1320.14533  866.49451  34.4%     -    0s
+H    0     0                     894.4967800  866.49451  3.13%     -    0s
+H    0     0                     871.1569900  866.49451  0.54%     -    0s
+H    0     0                     871.0286600  866.49451  0.52%     -    0s
+H    0     0                     870.3302300  866.49451  0.44%     -    0s
+     0     0          -    0       870.33023  870.29435  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 3
+  MIR: 48
+
+Explored 1 nodes (998 simplex iterations) in 0.03 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 5: 870.33 871.029 871.157 ... 1320.15
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.703302300000e+02, best bound 8.702943455920e+02, gap 0.0041%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.4.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.5.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x0cc91dd8
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 1496.5252250
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 101 continuous, 1850 integer (888 binary)
+
+Root relaxation: objective 8.453400e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  845.33998    0   19 1496.52522  845.33998  43.5%     -    0s
+H    0     0                     854.1150500  845.33998  1.03%     -    0s
+H    0     0                     846.3324500  845.33998  0.12%     -    0s
+     0     0          -    0       846.33245  846.28871  0.01%     -    0s
+
+Cutting planes:
+  MIR: 20
+
+Explored 1 nodes (961 simplex iterations) in 0.03 seconds (0.02 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 3: 846.332 854.115 1496.53 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.463324500000e+02, best bound 8.462887147550e+02, gap 0.0052%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.5.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.6.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xe4767d1c
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 1672.9051200
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 101 continuous, 1850 integer (888 binary)
+
+Root relaxation: objective 8.018394e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  801.83938    0    7 1672.90512  801.83938  52.1%     -    0s
+H    0     0                     804.1441600  801.83938  0.29%     -    0s
+H    0     0                     802.0073200  801.83938  0.02%     -    0s
+
+Cutting planes:
+  MIR: 4
+
+Explored 1 nodes (951 simplex iterations) in 0.02 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 3: 802.007 804.144 1672.91 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 8.020073200000e+02, best bound 8.020073200000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.6.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.7.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0xaf017c39
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 1820.5320350
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 101 continuous, 1850 integer (888 binary)
+
+Root relaxation: objective 7.525916e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0  752.59160    0    1 1820.53203  752.59160  58.7%     -    0s
+H    0     0                     753.1913500  752.59160  0.08%     -    0s
+H    0     0                     752.5948750  752.59160  0.00%     -    0s
+     0     0  752.59160    0    1  752.59488  752.59160  0.00%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.02 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 3: 752.595 753.191 1820.53 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.525948750000e+02, best bound 7.525948750000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.7.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.8.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x213f6b2f
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 1993.9977900
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 101 continuous, 1850 integer (888 binary)
+
+Root relaxation: objective 7.021769e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     702.1768500  702.17685  0.00%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 2: 702.177 1994 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 7.021768500000e+02, best bound 7.021768500000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.8.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_0.9.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5057 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5057 nonzeros (Min)
+Model fingerprint: 0x7b6cfc1b
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Found heuristic solution: objective 2167.4635450
+Presolve removed 55 rows and 53 columns
+Presolve time: 0.01s
+Presolved: 1001 rows, 1951 columns, 3851 nonzeros
+Variable types: 101 continuous, 1850 integer (888 binary)
+
+Root relaxation: objective 6.517407e+02, 951 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0     651.7406750  651.74068  0.00%     -    0s
+
+Explored 1 nodes (951 simplex iterations) in 0.01 seconds (0.01 work units)
+Thread count was 2 (of 2 available processors)
+
+Solution count 2: 651.741 2167.46 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.517406750000e+02, best bound 6.517406750000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_0.9.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Mon Jun  8 16:03:30 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter TimeLimit to value 60
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file /home/admin/FederatedKubernetesOperator-Thesis/benchmarks/instances_pareto/pareto_run_3_alpha_1.0.lp
+Reading time = 0.00 seconds
+obj: 1056 rows, 2004 columns, 5056 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Non-default parameters:
+TimeLimit  60
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 1056 rows, 2004 columns and 5056 nonzeros (Min)
+Model fingerprint: 0xed481972
+Model has 2 linear objective coefficients
+Variable types: 1004 continuous, 1000 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [1e-01, 8e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [7e-04, 2e+04]
+
+Presolve removed 1056 rows and 2004 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 2 available processors)
+
+Solution count 1: 601.305 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 6.013045000000e+02, best bound 6.013045000000e+02, gap 0.0000%
+
+Wrote result file '/home/admin/FederatedKubernetesOperator-Thesis/benchmarks/results_pareto/pareto_run_3_alpha_1.0.sol'
+
