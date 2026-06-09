@@ -25,6 +25,7 @@ import (
 
 	appsv1 "k8s.io/api/apps/v1"
 	autoscalingv2 "k8s.io/api/autoscaling/v2"
+	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -55,7 +56,7 @@ type FederatedPlacementReconciler struct {
 // +kubebuilder:rbac:groups=optimizer.uc.pt,resources=federatedplacements/finalizers,verbs=update
 
 // --- HPA, Deployments Permissions  ---
-// +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;update;patch
+// +kubebuilder:rbac:groups=apps,resources=deployments,verbs=get;list;watch;create;update;patch
 // +kubebuilder:rbac:groups=autoscaling,resources=horizontalpodautoscalers,verbs=get;list;watch;create;update;patch;delete
 
 // Reconcile is part of the main kubernetes reconciliation loop which aims to
@@ -135,7 +136,6 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 
 	selector, _ := metav1.LabelSelectorAsSelector(deploy.Spec.Selector)
 	fp.Status.Selector = selector.String()
-	fp.Status.Replicas = deploy.Status.Replicas
 
 	// Capture HPA Recommendation
 	hpaValue := int32(1)
@@ -160,26 +160,77 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 		}
 	}
 
-	// DECIDE FINAL REPLICAS ($R_{final}$)
-	// Priority: 1. Global Decision (AllowedReplicas) | 2. HPA Recommendation | 3. MinReplicas
-	var approvedReplicas int32
-	if fp.Status.AllowedReplicas > 0 {
-		approvedReplicas = fp.Status.AllowedReplicas
-	} else {
-		approvedReplicas = hpaValue
-	}
-
-	// APPLY TO REAL DEPLOYMENT
-	if deploy.Spec.Replicas == nil || *deploy.Spec.Replicas != approvedReplicas {
-		deploy.Spec.Replicas = &approvedReplicas
+	// NEUTRALIZAR O DEPLOYMENT ORIGINAL
+	// O Deployment original passa a ser apenas um template inativo.
+	zeroReplicas := int32(0)
+	if deploy.Spec.Replicas == nil || *deploy.Spec.Replicas != 0 {
+		deploy.Spec.Replicas = &zeroReplicas
 		if err := r.Update(ctx, &deploy); err != nil {
-			log.Error(err, "Failed to apply replicas to deployment")
+			log.Error(err, "Failed to scale down original template deployment")
 			return ctrl.Result{}, err
 		}
-		log.Info("Scale applied successfully",
-			"source", "HPA/Global",
-			"replicas", approvedReplicas)
 	}
+
+	// APLICAR APENAS O QUE ESTÁ NO MAPA NA REALIDADE
+	var totalRunningReplicas int32 = 0
+
+	if fp.Status.PlacementMap != nil {
+		for clusterName, allocatedReplicas := range fp.Status.PlacementMap {
+
+			totalRunningReplicas += allocatedReplicas
+
+			childName := fmt.Sprintf("%s-%s", deploy.Name, clusterName)
+			childDeploy := &appsv1.Deployment{
+				ObjectMeta: metav1.ObjectMeta{
+					Name:      childName,
+					Namespace: deploy.Namespace,
+				},
+			}
+
+			_, err := controllerutil.CreateOrUpdate(ctx, r.Client, childDeploy, func() error {
+				if childDeploy.CreationTimestamp.IsZero() {
+					childDeploy.Spec = *deploy.Spec.DeepCopy()
+				}
+
+				childDeploy.Spec.Replicas = &allocatedReplicas
+
+				if childDeploy.Spec.Template.Spec.NodeSelector == nil {
+					childDeploy.Spec.Template.Spec.NodeSelector = make(map[string]string)
+				}
+
+				if clusterName == "cmcworker" {
+					childDeploy.Spec.Template.Spec.NodeSelector["kubernetes.io/hostname"] = clusterName
+				} else {
+					childDeploy.Spec.Template.Spec.NodeSelector["liqo.io/remote-cluster-id"] = clusterName
+
+					hasToleration := false
+					for _, tol := range childDeploy.Spec.Template.Spec.Tolerations {
+						if tol.Key == "virtual-node.liqo.io/not-allowed" {
+							hasToleration = true
+							break
+						}
+					}
+					if !hasToleration {
+						childDeploy.Spec.Template.Spec.Tolerations = append(childDeploy.Spec.Template.Spec.Tolerations, corev1.Toleration{
+							Key:      "virtual-node.liqo.io/not-allowed",
+							Operator: corev1.TolerationOpExists,
+						})
+					}
+				}
+
+				return controllerutil.SetControllerReference(fp, childDeploy, r.Scheme)
+			})
+
+			if err != nil {
+				log.Error(err, "Failed to reconcile shadow deployment", "Child", childName)
+				return ctrl.Result{}, err
+			}
+		}
+	}
+
+	// ALIMENTAR O HPA COM A REALIDADE
+	// O HPA lê o somatório rigoroso do que o Gurobi ditou
+	fp.Status.Replicas = totalRunningReplicas
 
 	// Commit Status changes if any (DeepEqual prevents infinite reconciliation loops)
 	if !reflect.DeepEqual(oldStatus, &fp.Status) {
@@ -237,6 +288,7 @@ func (r *FederatedPlacementReconciler) SetupWithManager(mgr ctrl.Manager) error 
 	return ctrl.NewControllerManagedBy(mgr).
 		// Ignore status updates, only react to Spec changes
 		For(&optimizerv1.FederatedPlacement{}, builder.WithPredicates(predicate.GenerationChangedPredicate{})).
-		Owns(&autoscalingv2.HorizontalPodAutoscaler{}). // Watch HPA changes to react faster to scaling events
+		Owns(&autoscalingv2.HorizontalPodAutoscaler{}).
+		Owns(&appsv1.Deployment{}). // Vigia os Shadow Deployments
 		Complete(r)
 }
