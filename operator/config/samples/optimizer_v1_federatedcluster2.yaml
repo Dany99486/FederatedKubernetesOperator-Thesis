@@ -4,11 +4,11 @@ metadata:
   labels:
     app.kubernetes.io/name: federated-operator
     app.kubernetes.io/managed-by: kustomize
-  name: eu-membercluster  # <--- Must match the Node name in the CMC
+  name: membercluster2  # <--- Must match the Node name in the CMC
   namespace: federation-system      # <--- Where the operator resides
 spec:
   # zone: Geographic identifier matching the latencyZones in FederatedPlacement
-  zone: "Europe"
+  zone: "Pinhel"
   
-  # isOnPremise: If true, physical capacity constraints (Capacity_j) are strictly enforced
-  isOnPremise: false
+  # isOnPremise: If tr+ue, physical capacity constraints (Capacity_j) are strictly enforced
+  isOnPremise: true
