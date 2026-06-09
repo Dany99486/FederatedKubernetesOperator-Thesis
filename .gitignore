@@ -1,1 +1,6 @@
 .env
+/benchmarks/exports
+/benchmarks/instances
+/benchmarks/instances_pareto
+/benchmarks/results
+/benchmarks/results_pareto
