@@ -129,6 +129,21 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 				logger.Error(err, "Failed to persist Gurobi solution to FederatedPlacement", "name", p.Name)
 			}
 		}
+
+		errConfig := retry.RetryOnConflict(retry.DefaultRetry, func() error {
+			latestConfig := &optimizerv1.FederatedOperatorConfig{}
+			if err := r.Get(ctx, req.NamespacedName, latestConfig); err != nil {
+				return err
+			}
+
+			latestConfig.Status.TotalCurrentCost = config.Status.TotalCurrentCost
+			latestConfig.Status.GlobalMisalignmentScore = config.Status.GlobalMisalignmentScore
+			return r.Status().Update(ctx, latestConfig)
+		})
+
+		if errConfig != nil {
+			logger.Error(errConfig, "Failed to update FederatedOperatorConfig status metrics")
+		}
 	}
 
 	return ctrl.Result{RequeueAfter: 1 * time.Minute}, nil
@@ -200,7 +215,7 @@ func (r *FederatedOperatorConfigReconciler) calculatePlacement(config *optimizer
 	}
 
 	// Parse the .sol file and update the in-memory objects
-	return applySolutionToPlacements(solutionPath, placements, clusters)
+	return applySolutionToPlacements(solutionPath, placements, clusters, config)
 }
 
 // generateLPFileContent builds the ILP model using the thesis' formal notation
@@ -316,8 +331,8 @@ func generateLPFileContent(config *optimizerv1.FederatedOperatorConfig, clusters
 	return lp.String()
 }
 
-// applySolutionToPlacements parses the .sol file to extract x_ij values
-func applySolutionToPlacements(solutionPath string, placements []optimizerv1.FederatedPlacement, clusters []optimizerv1.FederatedCluster) error {
+// applySolutionToPlacements parses the .sol file to extract x_ij values and global objectives
+func applySolutionToPlacements(solutionPath string, placements []optimizerv1.FederatedPlacement, clusters []optimizerv1.FederatedCluster, config *optimizerv1.FederatedOperatorConfig) error {
 	content, err := os.ReadFile(solutionPath)
 	if err != nil {
 		return fmt.Errorf("failed to read solution file: %w", err)
@@ -328,7 +343,20 @@ func applySolutionToPlacements(solutionPath string, placements []optimizerv1.Fed
 
 	for _, line := range lines {
 		parts := strings.Fields(line)
-		if len(parts) < 2 || !strings.HasPrefix(parts[0], "x_") {
+		if len(parts) < 2 {
+			continue
+		}
+
+		if parts[0] == "TotalCost" {
+			config.Status.TotalCurrentCost = parts[1]
+			continue
+		}
+		if parts[0] == "TotalLatency" {
+			config.Status.GlobalMisalignmentScore = parts[1]
+			continue
+		}
+
+		if !strings.HasPrefix(parts[0], "x_") {
 			continue
 		}
 

@@ -18,5 +18,5 @@ spec:
   
   # latencyZones (hij): Traffic fraction targets per geographic zone
   latencyZones:
-    pinhel: "0.7"
-    coimbra: "0.3"
+    Pinhel: "0.7"
+    Coimbra: "0.3"
