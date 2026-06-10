@@ -23,6 +23,7 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
+	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -90,6 +91,10 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 		return ctrl.Result{}, client.IgnoreNotFound(err)
 	}
 
+	// Save previous macro metrics to evaluate the mathematical objective function delta
+	oldCostStr := config.Status.TotalCurrentCost
+	oldScoreStr := config.Status.GlobalMisalignmentScore
+
 	// FETCH ALL CLUSTERS (Infrastructure Capacity)
 	var clusterList optimizerv1.FederatedClusterList
 	if err := r.List(ctx, &clusterList); err != nil {
@@ -107,9 +112,44 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 	// DECISION LAYER: Execute the Gurobi ILP Solver
 	err := r.calculatePlacement(config, clusterList.Items, placementList.Items)
 	if err != nil {
-		// If solving fails (e.g., infeasible budget), we keep the "Last Known Good State"
 		logger.Info("Optimization failed or model is infeasible. Preserving current distribution.", "reason", err.Error())
 	} else {
+
+		// COMBINED MATHEMATICAL THRESHOLD CHECK (Z = alpha * C(x) + (1 - alpha) * k * L(x))
+		if oldCostStr != "" && oldScoreStr != "" {
+			alpha, _ := strconv.ParseFloat(config.Spec.OptimizationWeight, 64)
+			kConst, _ := strconv.ParseFloat(config.Spec.NormalizationConstant, 64)
+
+			oldCost, errOldC := strconv.ParseFloat(oldCostStr, 64)
+			newCost, errNewC := strconv.ParseFloat(config.Status.TotalCurrentCost, 64)
+
+			oldScore, errOldS := strconv.ParseFloat(oldScoreStr, 64)
+			newScore, errNewS := strconv.ParseFloat(config.Status.GlobalMisalignmentScore, 64)
+
+			if errOldC == nil && errNewC == nil && errOldS == nil && errNewS == nil {
+				// Compute the unified multi-objective score for both states
+				oldZ := (alpha * oldCost) + ((1.0 - alpha) * kConst * oldScore)
+				newZ := (alpha * newCost) + ((1.0 - alpha) * kConst * newScore)
+
+				// Define the sensitivity threshold for the global objective function evolution
+				const objectiveThreshold = 0.10
+
+				// Calculate the absolute delta of the mathematical objective function
+				deltaZ := math.Abs(newZ - oldZ)
+
+				// If the overall optimization gain is negligible, skip actuation to prevent flapping
+				if deltaZ < objectiveThreshold {
+					logger.Info("Global objective function change is below threshold. Skipping actuation to prevent flapping.",
+						"oldZ", oldZ,
+						"newZ", newZ,
+						"deltaZ", deltaZ,
+						"threshold", objectiveThreshold,
+					)
+					return ctrl.Result{RequeueAfter: 1 * time.Minute}, nil
+				}
+			}
+		}
+
 		// ACTUATION LAYER: Persist the calculated distribution to Kubernetes
 		for i := range placementList.Items {
 			p := &placementList.Items[i]
@@ -119,6 +159,10 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 				latest := &optimizerv1.FederatedPlacement{}
 				if err := r.Get(ctx, types.NamespacedName{Name: p.Name, Namespace: p.Namespace}, latest); err != nil {
 					return err
+				}
+
+				if reflect.DeepEqual(latest.Status.PlacementMap, p.Status.PlacementMap) {
+					return nil
 				}
 
 				latest.Status.PlacementMap = p.Status.PlacementMap
@@ -134,6 +178,11 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 			latestConfig := &optimizerv1.FederatedOperatorConfig{}
 			if err := r.Get(ctx, req.NamespacedName, latestConfig); err != nil {
 				return err
+			}
+
+			if latestConfig.Status.TotalCurrentCost == config.Status.TotalCurrentCost &&
+				latestConfig.Status.GlobalMisalignmentScore == config.Status.GlobalMisalignmentScore {
+				return nil
 			}
 
 			latestConfig.Status.TotalCurrentCost = config.Status.TotalCurrentCost
