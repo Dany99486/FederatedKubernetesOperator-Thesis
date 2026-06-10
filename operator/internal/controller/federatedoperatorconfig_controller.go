@@ -249,7 +249,6 @@ func (r *FederatedOperatorConfigReconciler) calculatePlacement(config *optimizer
 
 	// Invoke Gurobi CLI with a 50s TimeLimit (Best-effort solution if optimal is not reached)
 	cmd := exec.Command("gurobi_cl", "TimeLimit=50", "LogFile=", "ResultFile="+solutionPath, modelPath)
-	//_ = cmd.Run() // Exit code is ignored because Gurobi returns 1 on TimeLimit triggers
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		// Se o erro for apenas o código 1 (comum em TimeLimit), ignoramos se o ficheiro existir
