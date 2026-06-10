@@ -4,8 +4,8 @@ metadata:
   labels:
     app.kubernetes.io/name: federated-operator
     app.kubernetes.io/managed-by: kustomize
-  name: federatedplacement-sample
-  namespace: default
+  name: federatedplacement
+  namespace: federated-workloads
 spec:
   # targetWorkload: Name of the existing Deployment in the CMC (Approach A)
   targetWorkload: "nginx-deployment"
@@ -18,5 +18,5 @@ spec:
   
   # latencyZones (hij): Traffic fraction targets per geographic zone
   latencyZones:
-    aveiro: "0.7"
+    pinhel: "0.7"
     coimbra: "0.3"

@@ -29,6 +29,7 @@ import (
 
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
+	"k8s.io/client-go/util/retry"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -110,9 +111,22 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 		logger.Info("Optimization failed or model is infeasible. Preserving current distribution.", "reason", err.Error())
 	} else {
 		// ACTUATION LAYER: Persist the calculated distribution to Kubernetes
-		for _, p := range placementList.Items {
-			if err := r.Status().Update(ctx, &p); err != nil {
-				logger.Error(err, "Failed to update placement status for workload", "name", p.Name)
+		for i := range placementList.Items {
+			p := &placementList.Items[i]
+
+			err := retry.RetryOnConflict(retry.DefaultRetry, func() error {
+				// Searches for the latest version of the object in the cluster to avoid update conflicts
+				latest := &optimizerv1.FederatedPlacement{}
+				if err := r.Get(ctx, types.NamespacedName{Name: p.Name, Namespace: p.Namespace}, latest); err != nil {
+					return err
+				}
+
+				latest.Status.PlacementMap = p.Status.PlacementMap
+				return r.Status().Update(ctx, latest)
+			})
+
+			if err != nil {
+				logger.Error(err, "Failed to persist Gurobi solution to FederatedPlacement", "name", p.Name)
 			}
 		}
 	}
@@ -171,7 +185,14 @@ func (r *FederatedOperatorConfigReconciler) calculatePlacement(config *optimizer
 
 	// Invoke Gurobi CLI with a 50s TimeLimit (Best-effort solution if optimal is not reached)
 	cmd := exec.Command("gurobi_cl", "TimeLimit=50", "LogFile=", "ResultFile="+solutionPath, modelPath)
-	_ = cmd.Run() // Exit code is ignored because Gurobi returns 1 on TimeLimit triggers
+	//_ = cmd.Run() // Exit code is ignored because Gurobi returns 1 on TimeLimit triggers
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		// Se o erro for apenas o código 1 (comum em TimeLimit), ignoramos se o ficheiro existir
+		if _, statErr := os.Stat(solutionPath); os.IsNotExist(statErr) {
+			return fmt.Errorf("gurobi execution failed: %v. Output: %s", err, string(output))
+		}
+	}
 
 	// Verify if a feasible solution file was generated
 	if _, err := os.Stat(solutionPath); os.IsNotExist(err) {
@@ -230,8 +251,8 @@ func generateLPFileContent(config *optimizerv1.FederatedOperatorConfig, clusters
 		var xTerms []string
 		for _, c := range clusters {
 			cName := strings.ReplaceAll(c.Name, "-", "_")
-			xVar := fmt.Sprintf("x_%s_%s", wName, cName) // x_ij
-			yVar := fmt.Sprintf("y_%s_%s", wName, cName) // y_ij (unmet demand)
+			xVar := fmt.Sprintf("x_%s__%s", wName, cName) // x_ij
+			yVar := fmt.Sprintf("y_%s__%s", wName, cName) // y_ij (unmet demand)
 			allVars = append(allVars, xVar)
 			xTerms = append(xTerms, xVar)
 
@@ -265,7 +286,7 @@ func generateLPFileContent(config *optimizerv1.FederatedOperatorConfig, clusters
 			var memTerms []string
 
 			for _, p := range placements {
-				wVar := fmt.Sprintf("x_%s_%s", strings.ReplaceAll(p.Name, "-", "_"), cName)
+				wVar := fmt.Sprintf("x_%s__%s", strings.ReplaceAll(p.Name, "-", "_"), cName)
 				dCPU := p.Status.ResourceDemand.CPU.AsApproximateFloat64()
 				dMem := p.Status.ResourceDemand.Memory.AsApproximateFloat64()
 				if dCPU <= 0 {
@@ -297,13 +318,16 @@ func generateLPFileContent(config *optimizerv1.FederatedOperatorConfig, clusters
 
 // applySolutionToPlacements parses the .sol file to extract x_ij values
 func applySolutionToPlacements(solutionPath string, placements []optimizerv1.FederatedPlacement, clusters []optimizerv1.FederatedCluster) error {
-	content, _ := os.ReadFile(solutionPath)
+	content, err := os.ReadFile(solutionPath)
+	if err != nil {
+		return fmt.Errorf("failed to read solution file: %w", err)
+	}
+
 	lines := strings.Split(string(content), "\n")
 	resets := make(map[string]bool)
 
 	for _, line := range lines {
 		parts := strings.Fields(line)
-		// Only parse lines starting with the decision variable prefix 'x_'
 		if len(parts) < 2 || !strings.HasPrefix(parts[0], "x_") {
 			continue
 		}
@@ -311,22 +335,30 @@ func applySolutionToPlacements(solutionPath string, placements []optimizerv1.Fed
 		val, _ := strconv.ParseFloat(parts[1], 64)
 		if val < 0.5 {
 			continue
-		} // Variable was assigned 0 replicas
+		}
 
-		// Split variable name back into workload and cluster components
-		nameParts := strings.Split(parts[0], "_") // index 0='x', 1=workload, 2=cluster
-		wName, cName := nameParts[1], nameParts[2]
+		// Remove the 'x_' prefix to isolate the combined string (e.g., "federatedplacement1_clusterA")
+		varName := strings.TrimPrefix(parts[0], "x_")
+
+		// Divide a string based on the double underscore delimiter
+		// segments[0] = Placement name converted to underscores
+		// segments[1] = Cluster name converted to underscores
+		segments := strings.Split(varName, "__")
+		if len(segments) != 2 {
+			continue
+		}
+
+		pTarget := segments[0]
+		cTarget := segments[1]
 
 		for i := range placements {
-			if strings.ReplaceAll(placements[i].Name, "-", "_") == wName {
-				// Reset the placement map upon first discovery in the solution file
-				if !resets[wName] {
-					placements[i].Status.PlacementMap = make(map[string]int32)
-					resets[wName] = true
-				}
-				// Re-match underscored name to the actual Kubernetes cluster object
+			if strings.ReplaceAll(placements[i].Name, "-", "_") == pTarget {
 				for _, cl := range clusters {
-					if strings.ReplaceAll(cl.Name, "-", "_") == cName {
+					if strings.ReplaceAll(cl.Name, "-", "_") == cTarget {
+						if !resets[placements[i].Name] {
+							placements[i].Status.PlacementMap = make(map[string]int32)
+							resets[placements[i].Name] = true
+						}
 						placements[i].Status.PlacementMap[cl.Name] = int32(math.Round(val))
 					}
 				}
