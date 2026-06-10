@@ -197,6 +197,26 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 	}
 
 	// APLICAR APENAS O QUE ESTÁ NO MAPA NA REALIDADE
+	totalRunningReplicas, err := r.syncShadowPlacements(ctx, fp, &deploy)
+	if err != nil {
+		return ctrl.Result{}, err
+	}
+	fp.Status.Replicas = totalRunningReplicas
+
+	// Commit Status changes if any (DeepEqual prevents infinite reconciliation loops)
+	if !reflect.DeepEqual(oldStatus, &fp.Status) {
+		if err := r.Status().Update(ctx, fp); err != nil {
+			log.Error(err, "Failed to update status")
+			return ctrl.Result{}, err
+		}
+	}
+
+	return ctrl.Result{RequeueAfter: 30 * time.Second}, nil
+}
+
+// syncShadowPlacements abstracts the sub-loop execution to fulfill complexity requirements
+func (r *FederatedPlacementReconciler) syncShadowPlacements(ctx context.Context, fp *optimizerv1.FederatedPlacement, deploy *appsv1.Deployment) (int32, error) {
+	log := logf.FromContext(ctx)
 	var totalRunningReplicas int32 = 0
 
 	if fp.Status.PlacementMap != nil {
@@ -248,26 +268,11 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 
 			if err != nil {
 				log.Error(err, "Failed to reconcile shadow deployment", "Child", childName)
-				return ctrl.Result{}, err
+				return 0, err
 			}
 		}
 	}
-
-	// ALIMENTAR O HPA COM A REALIDADE
-	// O HPA lê o somatório rigoroso do que o Gurobi ditou
-	fp.Status.Replicas = totalRunningReplicas
-
-	// Commit Status changes if any (DeepEqual prevents infinite reconciliation loops)
-	if !reflect.DeepEqual(oldStatus, &fp.Status) {
-		if err := r.Status().Update(ctx, fp); err != nil {
-			log.Error(err, "Failed to update status")
-			return ctrl.Result{}, err
-		}
-	}
-
-	// SCHEDULE NEXT RECONCILIATION
-	// The operator sleeps for 30 seconds before fetching new metrics
-	return ctrl.Result{RequeueAfter: 30 * time.Second}, nil
+	return totalRunningReplicas, nil
 }
 
 // ensureHPA manages the lifecycle of the HPA targeting the Custom Resource
@@ -314,6 +319,6 @@ func (r *FederatedPlacementReconciler) SetupWithManager(mgr ctrl.Manager) error 
 		// Ignore status updates, only react to Spec changes
 		For(&optimizerv1.FederatedPlacement{}, builder.WithPredicates(predicate.GenerationChangedPredicate{})).
 		Owns(&autoscalingv2.HorizontalPodAutoscaler{}).
-		Owns(&appsv1.Deployment{}). // Vigia os Shadow Deployments
+		Owns(&appsv1.Deployment{}). // Watch Shadow Deployments
 		Complete(r)
 }
