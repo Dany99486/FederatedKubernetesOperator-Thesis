@@ -31,6 +31,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
+	"k8s.io/client-go/util/retry"
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -119,7 +120,16 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 				Message: fmt.Sprintf("Target deployment %s was deleted. All remote shadow workloads purged.", fp.Spec.TargetWorkload),
 			})
 
-			if errStatus := r.Status().Update(ctx, fp); errStatus != nil {
+			errStatus := retry.RetryOnConflict(retry.DefaultRetry, func() error {
+				latest := &optimizerv1.FederatedPlacement{}
+				if errGet := r.Get(ctx, req.NamespacedName, latest); errGet != nil {
+					return errGet
+				}
+				latest.Status = fp.Status
+				return r.Status().Update(ctx, latest)
+			})
+
+			if errStatus != nil {
 				log.Error(errStatus, "Failed to update FederatedPlacement status during cleanup execution")
 			}
 
@@ -205,9 +215,18 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 
 	// Commit Status changes if any (DeepEqual prevents infinite reconciliation loops)
 	if !reflect.DeepEqual(oldStatus, &fp.Status) {
-		if err := r.Status().Update(ctx, fp); err != nil {
-			log.Error(err, "Failed to update status")
-			return ctrl.Result{}, err
+		errUpdate := retry.RetryOnConflict(retry.DefaultRetry, func() error {
+			latest := &optimizerv1.FederatedPlacement{}
+			if errGet := r.Get(ctx, req.NamespacedName, latest); errGet != nil {
+				return errGet
+			}
+			latest.Status = fp.Status
+			return r.Status().Update(ctx, latest)
+		})
+
+		if errUpdate != nil {
+			log.Error(errUpdate, "Failed to update status")
+			return ctrl.Result{}, errUpdate
 		}
 	}
 
