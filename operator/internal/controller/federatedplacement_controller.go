@@ -87,19 +87,44 @@ func (r *FederatedPlacementReconciler) Reconcile(ctx context.Context, req ctrl.R
 
 	if err != nil {
 		if errors.IsNotFound(err) {
-			log.Info("Target deployment not found. Waiting...", "target", fp.Spec.TargetWorkload)
+			log.Info("Target deployment deleted by user. Purging remote shadow infrastructure...", "target", fp.Spec.TargetWorkload)
 
-			// Update status to reflect missing deployment
+			// Cascade deletion to shadow deployments since the original template is gone
+			if fp.Status.PlacementMap != nil {
+				for clusterName := range fp.Status.PlacementMap {
+					childName := fmt.Sprintf("%s-%s", fp.Spec.TargetWorkload, clusterName)
+					childDeploy := &appsv1.Deployment{
+						ObjectMeta: metav1.ObjectMeta{
+							Name:      childName,
+							Namespace: fp.Namespace,
+						},
+					}
+
+					// Force the deletion of the shadow deployment
+					if errDel := r.Delete(ctx, childDeploy); errDel != nil && !errors.IsNotFound(errDel) {
+						log.Error(errDel, "Failed to purge orphaned shadow deployment", "Child", childName)
+					}
+				}
+
+				// Clear the placement map and counter to reflect the absolute shutdown
+				fp.Status.PlacementMap = nil
+				fp.Status.Replicas = 0
+			}
+
+			// Update status to document the missing template and successful purge
 			meta.SetStatusCondition(&fp.Status.Conditions, metav1.Condition{
 				Type:    "Ready",
 				Status:  metav1.ConditionFalse,
 				Reason:  "DeploymentNotFound",
-				Message: fmt.Sprintf("Waiting for deployment %s", fp.Spec.TargetWorkload),
+				Message: fmt.Sprintf("Target deployment %s was deleted. All remote shadow workloads purged.", fp.Spec.TargetWorkload),
 			})
-			_ = r.Status().Update(ctx, fp)
 
-			// Requeue shortly to check again
-			return ctrl.Result{RequeueAfter: time.Second * 15}, nil
+			if errStatus := r.Status().Update(ctx, fp); errStatus != nil {
+				log.Error(errStatus, "Failed to update FederatedPlacement status during cleanup execution")
+			}
+
+			// Requeue later to watch if the user recreates the core deployment template
+			return ctrl.Result{RequeueAfter: time.Second * 30}, nil
 		}
 		log.Error(err, "Failed to fetch target deployment for unknown reason", "target", fp.Spec.TargetWorkload)
 		return ctrl.Result{}, err
