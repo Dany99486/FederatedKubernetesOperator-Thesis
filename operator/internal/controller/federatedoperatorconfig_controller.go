@@ -144,8 +144,11 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 			// Calculate the absolute delta of the mathematical objective function
 			deltaZ := math.Abs(newZ - oldZ)
 
-			// If the overall optimization gain is negligible, skip actuation to prevent flapping
-			if deltaZ < objectiveThreshold {
+			// Calculate the relative threshold based on the previous score (e.g., 10% of oldZ)
+			calculatedThreshold := objectiveThreshold * oldZ
+
+			// If the overall optimization gain is negligible (below 10%), skip actuation to prevent flapping
+			if deltaZ < calculatedThreshold {
 				logger.Info("Global objective function change is below threshold. Skipping actuation to prevent flapping.",
 					"oldZ", oldZ,
 					"newZ", newZ,
