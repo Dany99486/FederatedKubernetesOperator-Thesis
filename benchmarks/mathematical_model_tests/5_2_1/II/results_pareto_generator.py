@@ -92,11 +92,10 @@ def desenhar_frente_pareto(df):
                 expand_points=(1.5, 1.5),
                 expand_text=(1.2, 1.2))
 
-    plt.title('Trade-off entre Custo de Infraestrutura e Latência da Federação\n(Média de 3 Execuções - 20 Clusters)', 
-              fontsize=13, fontweight='bold', pad=15)
-    plt.xlabel('Custo Total Médio da Infraestrutura ($ / Unidade)', fontsize=11)
-    plt.ylabel('Latência Total Média da Federação (ms)', fontsize=11)
-    
+    plt.title('Scenario II: Evaluation of the Optimization Trade-off (Pareto Frontier)\nCalculated Averaged Metrics across 4-Cluster Topology (100 Replicas)', 
+              fontsize=12, fontweight='bold', pad=15)
+    plt.xlabel('Total Financial Expenditure C(x) ($)', fontsize=11)
+    plt.ylabel('Global Network Misalignment Score L(x)', fontsize=11)    
     plt.grid(True, linestyle='--', alpha=0.7, zorder=0)
     plt.legend(loc='upper right', frameon=True, fontsize=10)
     

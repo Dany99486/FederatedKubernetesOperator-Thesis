@@ -4,3 +4,6 @@
 /benchmarks/instances_pareto
 /benchmarks/results
 /benchmarks/results_pareto
+/benchmarks/mathematical_model_tests/5_2_1/II/instances_pareto
+/benchmarks/mathematical_model_tests/5_2_1/II/exports
+benchmarks/mathematical_model_tests/5_2_1/II/results_pareto
