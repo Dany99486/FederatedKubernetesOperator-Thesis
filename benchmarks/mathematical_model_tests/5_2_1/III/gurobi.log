@@ -1,0 +1,141 @@
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Sun Jun 21 16:25:26 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file k_calibration_1.lp
+Reading time = 0.00 seconds
+obj: 10 rows, 8 columns, 19 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 10 rows, 8 columns and 19 nonzeros (Min)
+Model fingerprint: 0x548374a0
+Model has 2 linear objective coefficients
+Variable types: 6 continuous, 2 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [5e-01, 2e+03]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+01, 3e+04]
+
+Presolve removed 10 rows and 8 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 2 available processors)
+
+Solution count 1: 10005 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.000500000000e+04, best bound 1.000500000000e+04, gap 0.0000%
+
+Wrote result file 'sol_k1.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Sun Jun 21 16:26:00 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file k_calibration_1000.lp
+Reading time = 0.00 seconds
+obj: 10 rows, 8 columns, 19 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 10 rows, 8 columns and 19 nonzeros (Min)
+Model fingerprint: 0x0c0e026d
+Model has 2 linear objective coefficients
+Variable types: 6 continuous, 2 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [5e-01, 2e+03]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+01, 3e+04]
+
+Presolve removed 10 rows and 8 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 2 available processors)
+
+Solution count 1: 12500 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.250000000000e+04, best bound 1.250000000000e+04, gap 0.0000%
+
+Wrote result file 'sol_k1000.sol'
+
+
+Gurobi 13.0.1 (linux64, gurobi_cl) logging started Sun Jun 21 16:26:24 2026
+
+Set parameter WLSAccessID
+Set parameter WLSSecret
+Set parameter LicenseID to value 2808396
+Set parameter LogFile to value "gurobi.log"
+Using license file /home/admin/k8s-secrets/gurobi.lic
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (linux64 - "Ubuntu 22.04.5 LTS")
+Copyright (c) 2026, Gurobi Optimization, LLC
+
+Read LP format model from file k_calibration_1000.lp
+Reading time = 0.00 seconds
+obj: 10 rows, 8 columns, 19 nonzeros
+
+Using Gurobi shared library /home/admin/gurobi1301/linux64/lib/libgurobi.so.13.0.1
+
+CPU model: Intel(R) Xeon(R) Gold 6326 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2|AVX512]
+Thread count: 2 physical cores, 2 logical processors, using up to 2 threads
+
+Academic license 2808396 - for non-commercial use only - registered to uc___@student.uc.pt
+Optimize a model with 10 rows, 8 columns and 19 nonzeros (Min)
+Model fingerprint: 0x0c0e026d
+Model has 2 linear objective coefficients
+Variable types: 6 continuous, 2 integer (0 binary)
+Coefficient statistics:
+  Matrix range     [5e-01, 2e+03]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [1e+01, 3e+04]
+
+Presolve removed 10 rows and 8 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+
+Explored 0 nodes (0 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 1 (of 2 available processors)
+
+Solution count 1: 12500 
+
+Optimal solution found (tolerance 1.00e-04)
+Best objective 1.250000000000e+04, best bound 1.250000000000e+04, gap 0.0000%
+
+Wrote result file 'sol_k1000.sol'
+
