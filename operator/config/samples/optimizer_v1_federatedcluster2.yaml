@@ -10,5 +10,5 @@ spec:
   # zone: Geographic identifier matching the latencyZones in FederatedPlacement
   zone: "Pinhel"
   
-  # isOnPremise: If tr+ue, physical capacity constraints (Capacity_j) are strictly enforced
+  # isOnPremise: If true, physical capacity constraints (Capacity_j) are strictly enforced
   isOnPremise: true
