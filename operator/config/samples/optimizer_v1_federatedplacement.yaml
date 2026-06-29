@@ -12,11 +12,11 @@ spec:
 
   # autoScaling: Parameters to manage the lifecycle of the native HPA
   autoScaling:
-    minReplicas: 2
-    maxReplicas: 20
+    minReplicas: 10
+    maxReplicas: 10
     targetCPUUtilization: 75
   
   # latencyZones (hij): Traffic fraction targets per geographic zone
   latencyZones:
-    Pinhel: "0.7"
-    Coimbra: "0.3"
+    Pinhel: "0.5"
+    Coimbra: "0.5"

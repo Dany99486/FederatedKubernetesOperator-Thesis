@@ -61,7 +61,7 @@ nano ~/member-kubeconfig.yaml
 In the **CMCcluster** terminal, run the join command pointing to the created file:
 
 ```bash
-liqoctl peer --remote-kubeconfig ~/member-kubeconfig.yaml --gw-server-service-type NodePort
+liqoctl peer --remote-kubeconfig ~/member-kubeconfig.yaml --gw-server-service-type NodePort --cpu="1000m" --memory="2Gi"
 
 ```
 

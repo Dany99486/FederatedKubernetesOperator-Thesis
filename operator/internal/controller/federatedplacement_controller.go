@@ -254,6 +254,8 @@ func (r *FederatedPlacementReconciler) syncShadowPlacements(ctx context.Context,
 			_, err := controllerutil.CreateOrUpdate(ctx, r.Client, childDeploy, func() error {
 				if childDeploy.CreationTimestamp.IsZero() {
 					childDeploy.Spec = *deploy.Spec.DeepCopy()
+				} else {
+					childDeploy.Spec.Template.Spec.Containers = deploy.Spec.Template.Spec.Containers
 				}
 
 				childDeploy.Spec.Replicas = &allocatedReplicas

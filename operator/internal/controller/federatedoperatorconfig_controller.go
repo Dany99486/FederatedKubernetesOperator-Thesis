@@ -118,14 +118,45 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 		}
 	}
 
+	// --- NEW COMPONENT: COMPREHENSIVE MATHEMATICAL PROBLEM SIGNATURE ---
+	// Creates a unique string encapsulating ALL variables that define the Gurobi equation
+	problemSignature := fmt.Sprintf("W:%s-K:%s-B:%s|",
+		config.Spec.OptimizationWeight,
+		config.Spec.NormalizationConstant,
+		config.Spec.TotalBudget)
+
+	// 1. Add the financial costs of the clusters to the signature
+	for _, c := range clusterList.Items {
+		problemSignature += fmt.Sprintf("C:%s-CPU:%s-Mem:%s|",
+			c.Name, c.Status.UnitCosts.CPU, c.Status.UnitCosts.Memory)
+	}
+
+	// 2. Add the SLAs (Latency Zones) to the signature
+	for _, p := range placementList.Items {
+		problemSignature += fmt.Sprintf("P:%s-", p.Name)
+		for zone, val := range p.Spec.LatencyZones {
+			problemSignature += fmt.Sprintf("%s:%s-", zone, val)
+		}
+		problemSignature += "|"
+	}
+
+	oldSignature := ""
+	if config.Annotations != nil {
+		oldSignature = config.Annotations["optimizer.uc.pt/last-problem-signature"]
+	}
+
+	// If any parameter (Latency, Costs, Weights, or Budget) changed, it is a new scenario!
+	isNewProblem := (oldSignature != problemSignature)
+
 	// DECISION LAYER: Execute the Gurobi ILP Solver (mutates placementList in-memory)
 	err := r.calculatePlacement(config, clusterList.Items, placementList.Items)
 	if err != nil {
 		logger.Info("Optimization failed or model is infeasible. Preserving current distribution.", "reason", err.Error())
 	} else {
 
-		// COMBINED MATHEMATICAL THRESHOLD CHECK (Z = alpha * C(x) + (1 - alpha) * k * L(x))
-		if !isScalingEvent && oldCostStr != "" && oldScoreStr != "" {
+		// COMBINED MATHEMATICAL THRESHOLD CHECK
+		// Ensure we do not compare Z values from fundamentally different mathematical problems
+		if !isScalingEvent && !isNewProblem && oldCostStr != "" && oldScoreStr != "" {
 			alpha, _ := strconv.ParseFloat(config.Spec.OptimizationWeight, 64)
 			kConst, _ := strconv.ParseFloat(config.Spec.NormalizationConstant, 64)
 
@@ -150,17 +181,15 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 			// If the overall optimization gain is negligible (below 10%), skip actuation to prevent flapping
 			if deltaZ < calculatedThreshold {
 				logger.Info("Global objective function change is below threshold. Skipping actuation to prevent flapping.",
-					"oldZ", oldZ,
-					"newZ", newZ,
-					"deltaZ", deltaZ,
-					"threshold", objectiveThreshold,
-				)
+					"oldZ", oldZ, "newZ", newZ, "deltaZ", deltaZ)
 				return ctrl.Result{RequeueAfter: 1 * time.Minute}, nil
 			}
 		}
 
 		if isScalingEvent {
-			logger.Info("Scaling event detected via HPA recommendation mismatch. Bypassing threshold safety rules.")
+			logger.Info("Scaling event detected. Bypassing threshold safety rules.")
+		} else if isNewProblem {
+			logger.Info("New mathematical landscape detected (Costs, Weights or SLA changed). Bypassing threshold.", "newSignature", problemSignature)
 		}
 
 		// ACTUATION LAYER: Persist the calculated distribution to Kubernetes
@@ -168,7 +197,6 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 			p := &placementList.Items[i]
 
 			err := retry.RetryOnConflict(retry.DefaultRetry, func() error {
-				// Searches for the latest version of the object in the cluster to avoid update conflicts
 				latest := &optimizerv1.FederatedPlacement{}
 				if err := r.Get(ctx, types.NamespacedName{Name: p.Name, Namespace: p.Namespace}, latest); err != nil {
 					return err
@@ -193,11 +221,16 @@ func (r *FederatedOperatorConfigReconciler) Reconcile(ctx context.Context, req c
 				return err
 			}
 
-			if latestConfig.Status.TotalCurrentCost == config.Status.TotalCurrentCost &&
-				latestConfig.Status.GlobalMisalignmentScore == config.Status.GlobalMisalignmentScore {
-				return nil
+			// 1. Save the new comprehensive problem signature in the Annotations
+			if latestConfig.Annotations == nil {
+				latestConfig.Annotations = make(map[string]string)
+			}
+			latestConfig.Annotations["optimizer.uc.pt/last-problem-signature"] = problemSignature
+			if err := r.Update(ctx, latestConfig); err != nil {
+				return err
 			}
 
+			// 2. Save the new mathematical results in the Status
 			latestConfig.Status.TotalCurrentCost = config.Status.TotalCurrentCost
 			latestConfig.Status.GlobalMisalignmentScore = config.Status.GlobalMisalignmentScore
 			return r.Status().Update(ctx, latestConfig)

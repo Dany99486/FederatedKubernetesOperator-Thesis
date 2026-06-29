@@ -9,15 +9,15 @@ metadata:
 
 spec:
   # totalBudget (B): The maximum financial limit for all federated workloads
-  totalBudget: "1000.00"
+  totalBudget: "0.06"
   
   # optimizationWeight (alpha): Balance between cost (1) and latency (0)
-  optimizationWeight: "0.5"
+  optimizationWeight: "0.1"
 
   # Baseline cost and latency estimates for new clusters
   defaultEstimates:
-    cpu: "0.0001"  # Default cost per replica per hour (in dollars)
+    cpu: "100m"  
     memory: "3384Ki"
 
   # normalizationConstant (k): Scale used to normalize latency against cost
-  normalizationConstant: "1"
+  normalizationConstant: "0.001"
